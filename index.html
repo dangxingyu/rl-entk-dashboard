@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en" data-lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
@@ -542,8 +542,8 @@ details.live-group[open] > summary { margin-bottom: 6px; }
   <div class="topbar">
     <div class="crumb">rl-entk<span class="sep" aria-hidden="true">›</span><span lang="zh">分析</span><span lang="en">Analysis</span></div>
     <div class="lang" role="group" aria-label="Language / 语言">
-      <button type="button" class="lang-btn" data-lang-v="zh" aria-pressed="true">中文</button>
-      <button type="button" class="lang-btn" data-lang-v="en" aria-pressed="false">EN</button>
+      <button type="button" class="lang-btn" data-lang-v="zh" aria-pressed="false">中文</button>
+      <button type="button" class="lang-btn" data-lang-v="en" aria-pressed="true">EN</button>
     </div>
   </div>
   <h1><span lang="zh">RL 为什么是 lazy 的？</span><span lang="en">Why is RL lazy?</span></h1>
@@ -1011,8 +1011,8 @@ var C = D.curves.charts, I = D.interp.charts, TT = D.temp_tokens.charts,
     LV = D.levers_rft.charts, RF = D.refresh_gpu_noise.charts;
 
 /* ------------------------------------------------------------ language */
-var state = { lang: 'zh' };
-try { var saved = window.localStorage.getItem('rl-laziness-lang'); if (saved === 'en' || saved === 'zh') state.lang = saved; } catch (e) { /* storage blocked */ }
+var state = { lang: 'en' };
+try { var saved = window.localStorage.getItem('rl-laziness-lang-v2'); if (saved === 'en' || saved === 'zh') state.lang = saved; } catch (e) { /* storage blocked */ }
 function L() { return state.lang; }
 /* zh strings from the data use translated terms (真实, 线性, 起飞, 种子, 密钥 ...); show them in the page's register
    (real / linear / takeoff / seed / key in Latin). Display only: the embedded JSON stays verbatim.
@@ -2898,7 +2898,7 @@ function applyLang(l, save) {
   R.state.lang = l;
   document.documentElement.setAttribute('data-lang', l);
   document.documentElement.setAttribute('lang', l === 'zh' ? 'zh-CN' : 'en');
-  if (save) { try { window.localStorage.setItem('rl-laziness-lang', l); } catch (e) { /* storage blocked */ } }
+  if (save) { try { window.localStorage.setItem('rl-laziness-lang-v2', l); } catch (e) { /* storage blocked */ } }
   Array.prototype.forEach.call(document.querySelectorAll('.lang-btn'), function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang-v') === l)); });
   FIGS.forEach(buildControls);
   RERENDER.forEach(function (fn) { fn(); });
