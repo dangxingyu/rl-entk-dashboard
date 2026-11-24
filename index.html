@@ -587,7 +587,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 06:37 PST</span><span lang="en">Numbers read 11-24 06:37 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 08:00 PST</span><span lang="en">Numbers read 11-24 08:00 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -601,15 +601,15 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <li><a href="#c5"><span lang="zh">eNTK 对 real update 的预测：方向大体对、大小偏小，误差在 run 起飞时跳上去。</span><span lang="en">The eNTK's prediction of the real update: mostly the right direction, too small; the error jumps when the run takes off.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">相对误差 update 5 时 0.02–0.11，起飞后 0.62–0.95；准确率保留 0.71–0.89。</span><span lang="en">Relative error 0.02–0.11 at update 5, 0.62–0.95 after takeoff; accuracy gain kept 0.71–0.89.</span></li>
 <li><a href="#c6"><span lang="zh">缩放 update：real 在 α ≈ ¾ 最好，linear 到 1.5 还在上升。</span><span lang="en">Scaling: real is best near α = ¾, linear keeps rising to 1.5.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
 <li><a href="#c7"><span lang="zh">两个 seed 的 update 取平均，不比任何一个差。</span><span lang="en">Averaging two seeds' updates is no worse than either.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
-<li><a href="#c8"><span lang="zh">失败的预测：函数相似度不比权重 cosine 更能预测迁移。</span><span lang="en">Failed prediction: function similarity does not predict transfer better than weight cosine.</span></a><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></li>
-<li><a href="#c9"><span lang="zh">混合数据训练 vs 分开训练再相加：函数上像两个 seed 一样接近。</span><span lang="en">Mixed-data training vs adding separate updates: as alike as two seeds in function space.</span></a><span class="chip s-interim"><span lang="zh">中期</span><span lang="en">interim</span></span></li>
+<li><a href="#c8"><span lang="zh">混合数据训练 t 步 ≈ 两个任务各训练 t/2 步再相加。</span><span lang="en">Mixed-data training for t updates ≈ each task for t/2 updates, then added.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">update 500 时函数 cosine 0.87/0.83，两个 seed 之间 0.81；大小是 t/2 的和的 0.72–0.95。</span><span lang="en">Function cosine 0.87/0.83 at update 500 against 0.81 between seeds; size 0.72–0.95 of the t/2 sum.</span></li>
+<li><a href="#c9"><span lang="zh">失败的预测：函数相似度不比权重 cosine 更能预测迁移。</span><span lang="en">Failed prediction: function similarity does not predict transfer better than weight cosine.</span></a><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></li>
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 06:37 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 08:00 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 06:37 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 08:00 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
@@ -4129,8 +4129,373 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>Outside these two cases the differences are within 2 s.e.; with only two seeds the claim is “the average is no worse”, not “the average is better”.</p>
 </section>
 <section class="finding" id="c8" aria-labelledby="c8-h">
-<div class="fhead"><span class="fn">C8</span><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></div>
-<h3 id="c8-h"><span lang="zh">失败的预测：函数空间（eNTK 度量下）的相似度并不比权重 cosine 更能预测迁移</span><span lang="en">Failed prediction: similarity in function space (the eNTK's metric) does not predict transfer better than weight cosine</span></h3>
+<div class="fhead"><span class="fn">C8</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c8-h"><span lang="zh">在混合数据上训练 t 步，约等于两个任务各自训练 t/2 步再把 update 相加；函数上和两个 seed 一样接近</span><span lang="en">Training on mixed data for t updates is about each task trained for t/2 updates, then added; in function space the two are as alike as two seeds</span></h3>
+<p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>混合 run：同一个 Base 0.6B 在 DAPO 和 KodCode 交替的数据上做 real RL（H100，seed 0）。和它比的是 DAPO run 和 KodCode run 的 update 之和，取同一步数 t 和 t/2（混合 run 每步只有一半数据来自每个任务）。每条“和”的线是两个 seed 的平均。</p>
+<p class="f-what" lang="en"><b class="f-k">What it means</b>Mixed run: the same Base 0.6B trained with real RL on interleaved DAPO and KodCode data (H100, seed 0). It is compared with the sum of the DAPO run's and the KodCode run's updates at the same update t and at t/2 (each update of the mixed run takes half its data from each task). Each sum line is the mean over the two seeds.</p>
+<p class="f-data" lang="zh"><b class="f-k">数据</b>函数上，update 500 时混合 run 和同步数的和的 cosine 是 0.87（seed 0）和 0.83（seed 1），两个 seed 的和之间是 0.81；从 update 250 起一直如此。大小上，混合 run 的函数变化是同步数的和的 0.52–0.73，是 t/2 的和的 0.72–0.95：混合 run 每个任务走了大约一半的路。准确率上，KodCode 在 t ≤ 200 时混合 run 比同步数的和低 2.4–8.0 点，和 t/2 的和一样；t ≥ 250 时差在 −1.1 到 +1.4 点之间，追上了。MATH-500 上它在两个 seed 的和之间。</p>
+<p class="f-data" lang="en"><b class="f-k">Data</b>In function space, at update 500 the cosine between the mixed run and the same-t sum is 0.87 (seed 0) and 0.83 (seed 1), against 0.81 between the two seeds' sums; this holds from update 250 on. In size, the mixed run's function change is 0.52–0.73 of the same-t sum and 0.72–0.95 of the t/2 sum: the mixed run goes about half as far on each task. In accuracy, on KodCode the mixed run is 2.4–8.0 points below the same-t sum up to t = 200, level with the t/2 sum; from t = 250 the gap is between −1.1 and +1.4 points, so it has caught up. On MATH-500 it lies between the two seeds' sums.</p>
+<figure class="fig" id="fig-joint" aria-labelledby="figt-joint"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C8</span><span lang="en">Figure C8</span></div><h4 class="fig-title" id="figt-joint"><span lang="zh">混合训练 vs 分开训练再相加</span><span lang="en">Joint training vs separate training then adding</span></h4><p class="fig-q"><span lang="zh">并行地分开训练再相加，能代替联合训练吗？</span><span lang="en">Can separate training then adding replace joint training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1128 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">混合数据 run</text>
+<line x1="109.6" x2="131.6" y1="12" y2="12" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3"/><rect x="116.6" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="137.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">同一步数 t 的 Δ_DAPO + Δ_KodCode</text>
+<line x1="348.0" x2="370.0" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3"/><path d="M359.0,7 L364.0,12 L359.0,17 L354.0,12 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="376.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">t/2 时的同样的和</text>
+<line x1="464.0" x2="486.0" y1="12" y2="12" stroke="var(--ink-3)" stroke-width="2"/><path d="M471.0,8 L479.0,16 M471.0,16 L479.0,8" stroke="var(--ink-3)" stroke-width="2"/><text x="492.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">两个 seed 的和之间的 cosine</text>
+<line x1="62" x2="277" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
+<line x1="62" x2="277" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
+<line x1="62" x2="277" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="62" x2="277" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">65</text>
+<line x1="62" x2="277" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">70</text>
+<line x1="62" x2="277" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">75</text>
+<line x1="73.9" x2="73.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="73.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="121.7" x2="121.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="121.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="169.5" x2="169.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="169.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="217.3" x2="217.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="217.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="265.1" x2="265.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="265.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="62" x2="277" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<text x="169.5" y="228" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">步数 t</text>
+<text transform="translate(24,121.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">准确率 (%)</text>
+<path d="M73.9,142.0 L97.8,155.2 L121.7,124.6 L145.6,106.0 L169.5,106.0 L217.3,104.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="73.9" cy="142.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 59.0</title></circle>
+<circle cx="97.8" cy="155.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 56.8</title></circle>
+<circle cx="121.7" cy="124.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 61.9</title></circle>
+<circle cx="145.6" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 65.0</title></circle>
+<circle cx="169.5" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 65.0</title></circle>
+<circle cx="217.3" cy="104.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 65.2</title></circle>
+<path d="M73.9,124.0 L97.8,107.5 L121.7,109.9 L145.6,114.4 L169.5,103.3 L217.3,98.2" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="69.9" y="120.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 62.0</title></rect>
+<rect x="93.8" y="103.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 64.8</title></rect>
+<rect x="117.7" y="105.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 64.3</title></rect>
+<rect x="141.6" y="110.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 63.6</title></rect>
+<rect x="165.4" y="99.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 65.4</title></rect>
+<rect x="213.2" y="94.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 66.3</title></rect>
+<path d="M73.9,140.2 L121.7,124.0 L169.5,107.5 L217.3,109.9 L265.1,114.4" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M73.9,135.0 L79.1,140.2 L73.9,145.4 L68.8,140.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 59.3</title></path>
+<path d="M121.7,118.8 L126.9,124.0 L121.7,129.2 L116.5,124.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 62.0</title></path>
+<path d="M169.5,102.3 L174.7,107.5 L169.5,112.7 L164.3,107.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 300 → 64.8</title></path>
+<path d="M217.3,104.7 L222.5,109.9 L217.3,115.1 L212.1,109.9 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 400 → 64.3</title></path>
+<path d="M265.1,109.2 L270.2,114.4 L265.1,119.6 L259.9,114.4 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 500 → 63.6</title></path>
+<line x1="339" x2="554" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">30</text>
+<line x1="339" x2="554" y1="146.0" y2="146.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="149.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="339" x2="554" y1="96.0" y2="96.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="99.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
+<line x1="339" x2="554" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="350.9" x2="350.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="350.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="398.7" x2="398.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="398.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="446.5" x2="446.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="446.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="494.3" x2="494.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="494.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="542.1" x2="542.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="542.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="339" x2="554" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="339" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
+<path d="M350.9,143.0 L374.8,157.5 L398.7,122.5 L422.6,95.0 L446.5,98.0 L494.3,97.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="350.9" cy="143.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 40.6</title></circle>
+<circle cx="374.8" cy="157.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 37.7</title></circle>
+<circle cx="398.7" cy="122.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 44.7</title></circle>
+<circle cx="422.6" cy="95.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 50.2</title></circle>
+<circle cx="446.5" cy="98.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
+<circle cx="494.3" cy="97.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 49.8</title></circle>
+<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="346.9" y="123.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 43.8</title></rect>
+<rect x="370.8" y="134.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 41.4</title></rect>
+<rect x="394.7" y="117.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 44.9</title></rect>
+<rect x="418.6" y="89.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 50.6</title></rect>
+<rect x="442.4" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 49.9</title></rect>
+<rect x="490.2" y="75.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 53.3</title></rect>
+<path d="M350.9,152.0 L398.7,127.2 L446.5,139.0 L494.3,121.5 L542.1,93.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M350.9,146.8 L356.1,152.0 L350.9,157.2 L345.8,152.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 38.8</title></path>
+<path d="M398.7,122.1 L403.9,127.2 L398.7,132.4 L393.5,127.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 43.8</title></path>
+<path d="M446.5,133.8 L451.7,139.0 L446.5,144.2 L441.3,139.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 300 → 41.4</title></path>
+<path d="M494.3,116.3 L499.5,121.5 L494.3,126.7 L489.1,121.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 400 → 44.9</title></path>
+<path d="M542.1,87.8 L547.2,93.0 L542.1,98.2 L536.9,93.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 500 → 50.6</title></path>
+<line x1="616" x2="831" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="831" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="616" x2="831" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="616" x2="831" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="616" x2="831" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="616" x2="831" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="627.9" x2="627.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="627.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="675.7" x2="675.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="675.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="723.5" x2="723.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="723.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="771.3" x2="771.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="771.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="819.1" x2="819.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="819.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="616" x2="831" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">函数 cosine</text>
+<path d="M627.9,87.7 L651.8,109.3 L675.7,88.7 L699.6,74.9 L723.5,72.5 L747.4,69.5 L771.3,69.4 L795.2,69.6 L819.1,68.3" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="623.9" y="83.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 100 → 0.72</title></rect>
+<rect x="647.8" y="105.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 150 → 0.58</title></rect>
+<rect x="671.7" y="84.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 200 → 0.72</title></rect>
+<rect x="695.6" y="70.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 250 → 0.81</title></rect>
+<rect x="719.5" y="68.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 300 → 0.82</title></rect>
+<rect x="743.3" y="65.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 350 → 0.84</title></rect>
+<rect x="767.2" y="65.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 400 → 0.84</title></rect>
+<rect x="791.1" y="65.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 450 → 0.84</title></rect>
+<rect x="815.0" y="64.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 500 → 0.85</title></rect>
+<path d="M627.9,72.0 L675.7,93.7 L723.5,91.1 L771.3,79.5 L819.1,71.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M627.9,66.8 L633.1,72.0 L627.9,77.2 L622.8,72.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 100 → 0.83</title></path>
+<path d="M675.7,88.5 L680.9,93.7 L675.7,98.9 L670.5,93.7 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 200 → 0.68</title></path>
+<path d="M723.5,86.0 L728.7,91.1 L723.5,96.3 L718.3,91.1 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 300 → 0.70</title></path>
+<path d="M771.3,74.4 L776.5,79.5 L771.3,84.7 L766.1,79.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 400 → 0.78</title></path>
+<path d="M819.1,66.1 L824.2,71.2 L819.1,76.4 L813.9,71.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 500 → 0.83</title></path>
+<path d="M627.9,114.3 L651.8,117.6 L675.7,103.6 L699.6,89.1 L723.5,80.4 L747.4,69.3 L771.3,69.4 L795.2,74.3 L819.1,73.9" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M623.4,109.8 L632.4,118.8 M623.4,118.8 L632.4,109.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 100 → 0.54</title></path>
+<path d="M647.3,113.1 L656.3,122.1 M647.3,122.1 L656.3,113.1" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 150 → 0.52</title></path>
+<path d="M671.2,99.1 L680.2,108.1 M671.2,108.1 L680.2,99.1" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 200 → 0.62</title></path>
+<path d="M695.1,84.6 L704.1,93.6 M695.1,93.6 L704.1,84.6" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 250 → 0.71</title></path>
+<path d="M719.0,75.9 L728.0,84.9 M719.0,84.9 L728.0,75.9" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 300 → 0.77</title></path>
+<path d="M742.9,64.8 L751.9,73.8 M742.9,73.8 L751.9,64.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 350 → 0.84</title></path>
+<path d="M766.8,64.9 L775.8,73.9 M766.8,73.9 L775.8,64.9" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 400 → 0.84</title></path>
+<path d="M790.7,69.8 L799.7,78.8 M790.7,78.8 L799.7,69.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 450 → 0.81</title></path>
+<path d="M814.6,69.4 L823.6,78.4 M814.6,78.4 L823.6,69.4" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 500 → 0.81</title></path>
+<line x1="893" x2="1108" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="893" x2="1108" y1="149.1" y2="149.1" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="152.6" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="893" x2="1108" y1="102.2" y2="102.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="105.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="893" x2="1108" y1="55.4" y2="55.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="58.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="904.9" x2="904.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="904.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="952.7" x2="952.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="952.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="1000.5" x2="1000.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1000.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="1048.3" x2="1048.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1048.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="1096.1" x2="1096.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1096.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="893" x2="1108" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="893" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">函数大小：混合 / 和</text>
+<line x1="893" x2="1108" y1="102.2" y2="102.2" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M904.9,128.3 L928.8,140.8 L952.7,139.6 L976.6,132.5 L1000.5,137.3 L1024.4,143.6 L1048.3,142.0 L1072.2,138.2 L1096.1,137.8" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="900.9" y="124.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 100 → 0.72</title></rect>
+<rect x="924.8" y="136.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 150 → 0.59</title></rect>
+<rect x="948.7" y="135.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 200 → 0.60</title></rect>
+<rect x="972.6" y="128.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 250 → 0.68</title></rect>
+<rect x="996.5" y="133.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 300 → 0.63</title></rect>
+<rect x="1020.3" y="139.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 350 → 0.56</title></rect>
+<rect x="1044.2" y="137.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 400 → 0.58</title></rect>
+<rect x="1068.1" y="134.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 450 → 0.62</title></rect>
+<rect x="1092.0" y="133.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 500 → 0.62</title></rect>
+<path d="M904.9,64.0 L952.7,123.3 L1000.5,117.0 L1048.3,116.7 L1096.1,110.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M904.9,58.8 L910.1,64.0 L904.9,69.2 L899.8,64.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 100 → 1.41</title></path>
+<path d="M952.7,118.1 L957.9,123.3 L952.7,128.5 L947.5,123.3 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 200 → 0.78</title></path>
+<path d="M1000.5,111.8 L1005.7,117.0 L1000.5,122.2 L995.3,117.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 300 → 0.84</title></path>
+<path d="M1048.3,111.5 L1053.5,116.7 L1048.3,121.8 L1043.1,116.7 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 400 → 0.85</title></path>
+<path d="M1096.1,105.1 L1101.2,110.2 L1096.1,115.4 L1090.9,110.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 500 → 0.91</title></path></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1128 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">mixed-data run</text>
+<line x1="152.8" x2="174.8" y1="12" y2="12" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3"/><rect x="159.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="180.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">Δ_DAPO + Δ_KodCode at the same t</text>
+<line x1="427.2" x2="449.2" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3"/><path d="M438.2,7 L443.2,12 L438.2,17 L433.2,12 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="455.2" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">the same sum at t/2</text>
+<line x1="608.0" x2="630.0" y1="12" y2="12" stroke="var(--ink-3)" stroke-width="2"/><path d="M615.0,8 L623.0,16 M615.0,16 L623.0,8" stroke="var(--ink-3)" stroke-width="2"/><text x="636.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">cosine between the two seeds' sums</text>
+<line x1="62" x2="277" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
+<line x1="62" x2="277" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
+<line x1="62" x2="277" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="62" x2="277" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">65</text>
+<line x1="62" x2="277" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">70</text>
+<line x1="62" x2="277" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">75</text>
+<line x1="73.9" x2="73.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="73.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="121.7" x2="121.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="121.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="169.5" x2="169.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="169.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="217.3" x2="217.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="217.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="265.1" x2="265.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="265.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="62" x2="277" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<text x="169.5" y="228" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">update t</text>
+<text transform="translate(24,121.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">accuracy (%)</text>
+<path d="M73.9,142.0 L97.8,155.2 L121.7,124.6 L145.6,106.0 L169.5,106.0 L217.3,104.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="73.9" cy="142.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 59.0</title></circle>
+<circle cx="97.8" cy="155.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 56.8</title></circle>
+<circle cx="121.7" cy="124.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 61.9</title></circle>
+<circle cx="145.6" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 65.0</title></circle>
+<circle cx="169.5" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 65.0</title></circle>
+<circle cx="217.3" cy="104.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 65.2</title></circle>
+<path d="M73.9,124.0 L97.8,107.5 L121.7,109.9 L145.6,114.4 L169.5,103.3 L217.3,98.2" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="69.9" y="120.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 62.0</title></rect>
+<rect x="93.8" y="103.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 64.8</title></rect>
+<rect x="117.7" y="105.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 64.3</title></rect>
+<rect x="141.6" y="110.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 63.6</title></rect>
+<rect x="165.4" y="99.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 65.4</title></rect>
+<rect x="213.2" y="94.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 66.3</title></rect>
+<path d="M73.9,140.2 L121.7,124.0 L169.5,107.5 L217.3,109.9 L265.1,114.4" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M73.9,135.0 L79.1,140.2 L73.9,145.4 L68.8,140.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 59.3</title></path>
+<path d="M121.7,118.8 L126.9,124.0 L121.7,129.2 L116.5,124.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 62.0</title></path>
+<path d="M169.5,102.3 L174.7,107.5 L169.5,112.7 L164.3,107.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 300 → 64.8</title></path>
+<path d="M217.3,104.7 L222.5,109.9 L217.3,115.1 L212.1,109.9 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 400 → 64.3</title></path>
+<path d="M265.1,109.2 L270.2,114.4 L265.1,119.6 L259.9,114.4 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 500 → 63.6</title></path>
+<line x1="339" x2="554" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">30</text>
+<line x1="339" x2="554" y1="146.0" y2="146.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="149.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="339" x2="554" y1="96.0" y2="96.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="99.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
+<line x1="339" x2="554" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="333" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="350.9" x2="350.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="350.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="398.7" x2="398.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="398.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="446.5" x2="446.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="446.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="494.3" x2="494.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="494.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="542.1" x2="542.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="542.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="339" x2="554" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="339" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
+<path d="M350.9,143.0 L374.8,157.5 L398.7,122.5 L422.6,95.0 L446.5,98.0 L494.3,97.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="350.9" cy="143.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 40.6</title></circle>
+<circle cx="374.8" cy="157.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 37.7</title></circle>
+<circle cx="398.7" cy="122.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 44.7</title></circle>
+<circle cx="422.6" cy="95.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 50.2</title></circle>
+<circle cx="446.5" cy="98.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
+<circle cx="494.3" cy="97.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 49.8</title></circle>
+<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="346.9" y="123.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 43.8</title></rect>
+<rect x="370.8" y="134.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 41.4</title></rect>
+<rect x="394.7" y="117.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 44.9</title></rect>
+<rect x="418.6" y="89.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 50.6</title></rect>
+<rect x="442.4" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 49.9</title></rect>
+<rect x="490.2" y="75.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 53.3</title></rect>
+<path d="M350.9,152.0 L398.7,127.2 L446.5,139.0 L494.3,121.5 L542.1,93.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M350.9,146.8 L356.1,152.0 L350.9,157.2 L345.8,152.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 38.8</title></path>
+<path d="M398.7,122.1 L403.9,127.2 L398.7,132.4 L393.5,127.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 43.8</title></path>
+<path d="M446.5,133.8 L451.7,139.0 L446.5,144.2 L441.3,139.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 300 → 41.4</title></path>
+<path d="M494.3,116.3 L499.5,121.5 L494.3,126.7 L489.1,121.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 400 → 44.9</title></path>
+<path d="M542.1,87.8 L547.2,93.0 L542.1,98.2 L536.9,93.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 500 → 50.6</title></path>
+<line x1="616" x2="831" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="831" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="616" x2="831" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="616" x2="831" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="616" x2="831" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="616" x2="831" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="627.9" x2="627.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="627.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="675.7" x2="675.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="675.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="723.5" x2="723.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="723.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="771.3" x2="771.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="771.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="819.1" x2="819.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="819.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="616" x2="831" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">function cosine</text>
+<path d="M627.9,87.7 L651.8,109.3 L675.7,88.7 L699.6,74.9 L723.5,72.5 L747.4,69.5 L771.3,69.4 L795.2,69.6 L819.1,68.3" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="623.9" y="83.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 100 → 0.72</title></rect>
+<rect x="647.8" y="105.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 150 → 0.58</title></rect>
+<rect x="671.7" y="84.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 200 → 0.72</title></rect>
+<rect x="695.6" y="70.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 250 → 0.81</title></rect>
+<rect x="719.5" y="68.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 300 → 0.82</title></rect>
+<rect x="743.3" y="65.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 350 → 0.84</title></rect>
+<rect x="767.2" y="65.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 400 → 0.84</title></rect>
+<rect x="791.1" y="65.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 450 → 0.84</title></rect>
+<rect x="815.0" y="64.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 500 → 0.85</title></rect>
+<path d="M627.9,72.0 L675.7,93.7 L723.5,91.1 L771.3,79.5 L819.1,71.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M627.9,66.8 L633.1,72.0 L627.9,77.2 L622.8,72.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 100 → 0.83</title></path>
+<path d="M675.7,88.5 L680.9,93.7 L675.7,98.9 L670.5,93.7 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 200 → 0.68</title></path>
+<path d="M723.5,86.0 L728.7,91.1 L723.5,96.3 L718.3,91.1 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 300 → 0.70</title></path>
+<path d="M771.3,74.4 L776.5,79.5 L771.3,84.7 L766.1,79.5 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 400 → 0.78</title></path>
+<path d="M819.1,66.1 L824.2,71.2 L819.1,76.4 L813.9,71.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 500 → 0.83</title></path>
+<path d="M627.9,114.3 L651.8,117.6 L675.7,103.6 L699.6,89.1 L723.5,80.4 L747.4,69.3 L771.3,69.4 L795.2,74.3 L819.1,73.9" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M623.4,109.8 L632.4,118.8 M623.4,118.8 L632.4,109.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 100 → 0.54</title></path>
+<path d="M647.3,113.1 L656.3,122.1 M647.3,122.1 L656.3,113.1" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 150 → 0.52</title></path>
+<path d="M671.2,99.1 L680.2,108.1 M671.2,108.1 L680.2,99.1" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 200 → 0.62</title></path>
+<path d="M695.1,84.6 L704.1,93.6 M695.1,93.6 L704.1,84.6" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 250 → 0.71</title></path>
+<path d="M719.0,75.9 L728.0,84.9 M719.0,84.9 L728.0,75.9" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 300 → 0.77</title></path>
+<path d="M742.9,64.8 L751.9,73.8 M742.9,73.8 L751.9,64.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 350 → 0.84</title></path>
+<path d="M766.8,64.9 L775.8,73.9 M766.8,73.9 L775.8,64.9" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 400 → 0.84</title></path>
+<path d="M790.7,69.8 L799.7,78.8 M790.7,78.8 L799.7,69.8" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 450 → 0.81</title></path>
+<path d="M814.6,69.4 L823.6,78.4 M814.6,78.4 L823.6,69.4" stroke="var(--ink-3)" stroke-width="2"><title>seed ceiling: 500 → 0.81</title></path>
+<line x1="893" x2="1108" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="893" x2="1108" y1="149.1" y2="149.1" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="152.6" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="893" x2="1108" y1="102.2" y2="102.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="105.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="893" x2="1108" y1="55.4" y2="55.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="887" y="58.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="904.9" x2="904.9" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="904.9" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="952.7" x2="952.7" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="952.7" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
+<line x1="1000.5" x2="1000.5" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1000.5" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
+<line x1="1048.3" x2="1048.3" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1048.3" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="1096.1" x2="1096.1" y1="196" y2="200" stroke="var(--axis)"/>
+<text x="1096.1" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">500</text>
+<line x1="893" x2="1108" y1="196" y2="196" stroke="var(--axis)"/>
+<text x="893" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">function size, joint / sum</text>
+<line x1="893" x2="1108" y1="102.2" y2="102.2" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M904.9,128.3 L928.8,140.8 L952.7,139.6 L976.6,132.5 L1000.5,137.3 L1024.4,143.6 L1048.3,142.0 L1072.2,138.2 L1096.1,137.8" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="900.9" y="124.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 100 → 0.72</title></rect>
+<rect x="924.8" y="136.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 150 → 0.59</title></rect>
+<rect x="948.7" y="135.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 200 → 0.60</title></rect>
+<rect x="972.6" y="128.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 250 → 0.68</title></rect>
+<rect x="996.5" y="133.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 300 → 0.63</title></rect>
+<rect x="1020.3" y="139.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 350 → 0.56</title></rect>
+<rect x="1044.2" y="137.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 400 → 0.58</title></rect>
+<rect x="1068.1" y="134.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 450 → 0.62</title></rect>
+<rect x="1092.0" y="133.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_t: 500 → 0.62</title></rect>
+<path d="M904.9,64.0 L952.7,123.3 L1000.5,117.0 L1048.3,116.7 L1096.1,110.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
+<path d="M904.9,58.8 L910.1,64.0 L904.9,69.2 L899.8,64.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 100 → 1.41</title></path>
+<path d="M952.7,118.1 L957.9,123.3 L952.7,128.5 L947.5,123.3 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 200 → 0.78</title></path>
+<path d="M1000.5,111.8 L1005.7,117.0 L1000.5,122.2 L995.3,117.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 300 → 0.84</title></path>
+<path d="M1048.3,111.5 L1053.5,116.7 L1048.3,121.8 L1043.1,116.7 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 400 → 0.85</title></path>
+<path d="M1096.1,105.1 L1101.2,110.2 L1096.1,115.4 L1090.9,110.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>sum_half: 500 → 0.91</title></path></svg></div></div><figcaption class="fig-cap"><p lang="zh">前两个 panel：准确率（128 题 × 4 个样本）；后两个：固定文本上的函数向量，混合 run 和两种和之间的 cosine 与大小之比，叉 = 两个 seed 的和之间的 cosine（参照）。“和”的线都是两个 seed 的平均。全部是 real。</p><p lang="en">First two panels: accuracy (128 problems × 4 samples); last two: function vectors on the fixed text, the cosine and size ratio between the mixed run and each sum; crosses = the cosine between the two seeds' sums (the reference). Each sum line is the mean over the two seeds. All real.</p></figcaption></figure>
+<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这对应 11-18 的“并行 RL”问题：如果多任务 RL 的 update 近似是各任务 update 之和（C2 的可加性），那就可以各自独立训练再相加。这里的混合 run 说明相加的结果和联合训练在函数上一样接近两个 seed，代价是同样步数下每个任务只走一半。</p>
+<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This bears on the “parallel RL” question of 11-18: if a multi-task RL update is roughly the sum of per-task updates (the additivity of C2), tasks can be trained apart and added. The mixed run shows that the sum is as close to joint training in function space as two seeds are, with each task going half as far for the same number of updates.</p>
+<p class="f-bound" lang="zh"><b class="f-k">边界</b>只有一个混合 run（seed 0），real 到 update 400。linear 的混合 run 慢（到 update 300 左右），它和和之间的 cosine 只有 0.2–0.6，而 linear 两个 seed 的和之间也只有 0.2–0.6，所以 linear 这边还说不了什么。</p>
+<p class="f-bound" lang="en"><b class="f-k">Boundary</b>One mixed run (seed 0); real to update 400. The linear mixed run is slower (about update 300); its cosine with the sums is only 0.2–0.6, but so is the cosine between the linear seeds' sums, so the linear side says little yet.</p>
+</section>
+<section class="finding" id="c9" aria-labelledby="c9-h">
+<div class="fhead"><span class="fn">C9</span><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></div>
+<h3 id="c9-h"><span lang="zh">失败的预测：函数空间（eNTK 度量下）的相似度并不比权重 cosine 更能预测迁移</span><span lang="en">Failed prediction: similarity in function space (the eNTK's metric) does not predict transfer better than weight cosine</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>迁移 = 任务 A 的 update 在任务 B 题集上的提升 / B 自己的 update 的提升（都相对 θ₀）。预测量是 A 和 B 的 update 之间的函数 cosine 或权重 cosine。B 取 GSM8K、NuminaMath、KodCode。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>Transfer = the gain of task A's update on task B's set divided by the gain of B's own update (both over θ₀). The predictors are the function cosine or the weight cosine between A's and B's updates. B is GSM8K, NuminaMath or KodCode.</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>42 个 (A, B, arm, seed) 上，两者的 Spearman 相关都是 0.72：都只是在区分“数学 vs 代码”。只看数学到数学（22 个），函数 cosine 是 −0.03，权重 cosine 是 0.44。</p>
@@ -4138,289 +4503,6 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>单个迁移比例的噪声大（分母是 15–27 点的提升，s.e. 约 2–3 点）；固定文本只有数学和代码两类，细分任务之间的差别可能不在这段文本上。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>A single transfer ratio is noisy (its denominator is a 15–27 point gain with an s.e. of 2–3 points), and the fixed text has only math and code, so finer differences between math tasks may not show on it.</p>
-</section>
-<section class="finding" id="c9" aria-labelledby="c9-h">
-<div class="fhead"><span class="fn">C9</span><span class="chip s-interim"><span lang="zh">中期</span><span lang="en">interim</span></span></div>
-<h3 id="c9-h"><span lang="zh">在混合数据上训练一个 run，和两个分开训练的 update 相加，函数上差不多</span><span lang="en">One run on mixed data and the sum of two separately trained updates are about as alike as two seeds</span></h3>
-<p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>混合 run：同一个 Base 0.6B 在 DAPO 和 KodCode 交替的数据上做 real RL（H100）。和它比的是同一步数 t 时 DAPO run 和 KodCode run 的 update 之和。</p>
-<p class="f-what" lang="en"><b class="f-k">What it means</b>Mixed run: the same Base 0.6B trained with real RL on interleaved DAPO and KodCode data (H100). It is compared with the sum of the DAPO run's and the KodCode run's updates at the same update t.</p>
-<p class="f-data" lang="zh"><b class="f-k">数据</b>准确率：KodCode 上混合 run 比同步数的和低 3–7 点（每步只有一半数据来自 KodCode）；MATH-500 上它落在两个 seed 的和之间。函数上，混合 run 和相加之间的 cosine 与两个 seed 的和之间相当。</p>
-<p class="f-data" lang="en"><b class="f-k">Data</b>Accuracy: on KodCode the mixed run is 3–7 points below the same-t sum (only half of each update's data is KodCode); on MATH-500 it lies between the two seeds' sums. In function space, the cosine between the mixed run and the sum is about that between the two seeds' sums.</p>
-<figure class="fig" id="fig-joint" aria-labelledby="figt-joint"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C9</span><span lang="en">Figure C9</span></div><h4 class="fig-title" id="figt-joint"><span lang="zh">混合训练 vs 分开训练再相加</span><span lang="en">Joint training vs separate training then adding</span></h4><p class="fig-q"><span lang="zh">并行地分开训练再相加，能代替联合训练吗？</span><span lang="en">Can separate training then adding replace joint training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1002 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">混合数据 run</text>
-<line x1="109.6" x2="131.6" y1="12" y2="12" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3"/><rect x="116.6" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="137.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">Δ_DAPO + Δ_KodCode，seed 0（细线：seed 1）</text>
-<line x1="412.79999999999995" x2="434.79999999999995" y1="12" y2="12" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="2 3"/><path d="M419.79999999999995,8 L427.79999999999995,16 M419.79999999999995,16 L427.79999999999995,8" stroke="var(--ink-3)" stroke-width="2"/><text x="440.79999999999995" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">两个 seed 的和之间的 cosine</text>
-<line x1="62" x2="312" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
-<line x1="62" x2="312" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
-<line x1="62" x2="312" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
-<line x1="62" x2="312" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">65</text>
-<line x1="62" x2="312" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">70</text>
-<line x1="62" x2="312" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">75</text>
-<line x1="87.0" x2="87.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="87.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="137.0" x2="137.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="137.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="187.0" x2="187.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="187.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="237.0" x2="237.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="237.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="287.0" x2="287.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="287.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="62" x2="312" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
-<text x="187.0" y="228" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">步数 t</text>
-<text transform="translate(24,121.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">准确率 (%)</text>
-<path d="M87.0,142.0 L137.0,155.2 L187.0,124.6 L237.0,106.0 L287.0,106.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="87.0" cy="142.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 59.0</title></circle>
-<circle cx="137.0" cy="155.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 56.8</title></circle>
-<circle cx="187.0" cy="124.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 61.9</title></circle>
-<circle cx="237.0" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 65.0</title></circle>
-<circle cx="287.0" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 65.0</title></circle>
-<path d="M87.0,125.8 L137.0,111.4 L187.0,102.4 L237.0,109.0 L287.0,95.2" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<rect x="83.0" y="121.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 100 → 61.7</title></rect>
-<rect x="132.9" y="107.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 150 → 64.1</title></rect>
-<rect x="182.9" y="98.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 200 → 65.6</title></rect>
-<rect x="232.9" y="105.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 250 → 64.5</title></rect>
-<rect x="282.9" y="91.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 300 → 66.8</title></rect>
-<path d="M87.0,122.2 L137.0,103.6 L187.0,117.4 L237.0,119.8 L287.0,111.4" fill="none" stroke="var(--c-third)" stroke-width="1" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<circle cx="87.0" cy="122.2" r="5" fill="transparent"><title>sum_s1: 100 → 62.3</title></circle>
-<circle cx="137.0" cy="103.6" r="5" fill="transparent"><title>sum_s1: 150 → 65.4</title></circle>
-<circle cx="187.0" cy="117.4" r="5" fill="transparent"><title>sum_s1: 200 → 63.1</title></circle>
-<circle cx="237.0" cy="119.8" r="5" fill="transparent"><title>sum_s1: 250 → 62.7</title></circle>
-<circle cx="287.0" cy="111.4" r="5" fill="transparent"><title>sum_s1: 300 → 64.1</title></circle>
-<line x1="392" x2="642" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">30</text>
-<line x1="392" x2="642" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">35</text>
-<line x1="392" x2="642" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
-<line x1="392" x2="642" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">45</text>
-<line x1="392" x2="642" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
-<line x1="392" x2="642" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
-<line x1="417.0" x2="417.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="417.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="467.0" x2="467.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="467.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="517.0" x2="517.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="517.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="567.0" x2="567.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="567.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="617.0" x2="617.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="617.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="392" x2="642" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="392" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
-<path d="M417.0,132.4 L467.0,149.8 L517.0,107.8 L567.0,74.8 L617.0,78.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="417.0" cy="132.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 40.6</title></circle>
-<circle cx="467.0" cy="149.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 37.7</title></circle>
-<circle cx="517.0" cy="107.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 44.7</title></circle>
-<circle cx="567.0" cy="74.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 50.2</title></circle>
-<circle cx="617.0" cy="78.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
-<path d="M417.0,155.8 L467.0,178.0 L517.0,127.6 L567.0,79.6 L617.0,99.4" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<rect x="412.9" y="151.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 100 → 36.7</title></rect>
-<rect x="462.9" y="173.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 150 → 33.0</title></rect>
-<rect x="513.0" y="123.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 200 → 41.4</title></rect>
-<rect x="563.0" y="75.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 250 → 49.4</title></rect>
-<rect x="613.0" y="95.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 300 → 46.1</title></rect>
-<path d="M417.0,71.2 L467.0,77.2 L517.0,85.6 L567.0,65.2 L617.0,53.8" fill="none" stroke="var(--c-third)" stroke-width="1" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<circle cx="417.0" cy="71.2" r="5" fill="transparent"><title>sum_s1: 100 → 50.8</title></circle>
-<circle cx="467.0" cy="77.2" r="5" fill="transparent"><title>sum_s1: 150 → 49.8</title></circle>
-<circle cx="517.0" cy="85.6" r="5" fill="transparent"><title>sum_s1: 200 → 48.4</title></circle>
-<circle cx="567.0" cy="65.2" r="5" fill="transparent"><title>sum_s1: 250 → 51.8</title></circle>
-<circle cx="617.0" cy="53.8" r="5" fill="transparent"><title>sum_s1: 300 → 53.7</title></circle>
-<line x1="722" x2="972" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
-<line x1="722" x2="972" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
-<line x1="722" x2="972" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
-<line x1="722" x2="972" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
-<line x1="722" x2="972" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
-<line x1="722" x2="972" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
-<line x1="747.0" x2="747.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="747.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="797.0" x2="797.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="797.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="847.0" x2="847.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="847.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="897.0" x2="897.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="897.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="947.0" x2="947.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="947.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="722" x2="972" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="722" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">函数 cosine</text>
-<path d="M747.0,77.5 L797.0,116.2 L847.0,88.6 L897.0,68.1 L947.0,68.0 L997.0,67.4 L1047.0,69.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="747.0" cy="77.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 100 → 0.79</title></circle>
-<circle cx="797.0" cy="116.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 150 → 0.53</title></circle>
-<circle cx="847.0" cy="88.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 200 → 0.72</title></circle>
-<circle cx="897.0" cy="68.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 250 → 0.85</title></circle>
-<circle cx="947.0" cy="68.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 300 → 0.85</title></circle>
-<circle cx="997.0" cy="67.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 350 → 0.86</title></circle>
-<circle cx="1047.0" cy="69.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 400 → 0.84</title></circle>
-<path d="M747.0,97.9 L797.0,102.3 L847.0,88.9 L897.0,81.8 L947.0,77.0 L997.0,71.5 L1047.0,69.3" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
-<circle cx="747.0" cy="97.9" r="5" fill="transparent"><title>sum_t_s1: 100 → 0.65</title></circle>
-<circle cx="797.0" cy="102.3" r="5" fill="transparent"><title>sum_t_s1: 150 → 0.62</title></circle>
-<circle cx="847.0" cy="88.9" r="5" fill="transparent"><title>sum_t_s1: 200 → 0.71</title></circle>
-<circle cx="897.0" cy="81.8" r="5" fill="transparent"><title>sum_t_s1: 250 → 0.76</title></circle>
-<circle cx="947.0" cy="77.0" r="5" fill="transparent"><title>sum_t_s1: 300 → 0.79</title></circle>
-<circle cx="997.0" cy="71.5" r="5" fill="transparent"><title>sum_t_s1: 350 → 0.83</title></circle>
-<circle cx="1047.0" cy="69.3" r="5" fill="transparent"><title>sum_t_s1: 400 → 0.84</title></circle>
-<path d="M747.0,114.3 L797.0,117.6 L847.0,103.6 L897.0,89.1 L947.0,80.4 L997.0,69.3 L1047.0,69.4" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
-<path d="M742.5,109.8 L751.5,118.8 M742.5,118.8 L751.5,109.8" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 100 → 0.54</title></path>
-<path d="M792.5,113.1 L801.5,122.1 M792.5,122.1 L801.5,113.1" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 150 → 0.52</title></path>
-<path d="M842.5,99.1 L851.5,108.1 M842.5,108.1 L851.5,99.1" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 200 → 0.62</title></path>
-<path d="M892.5,84.6 L901.5,93.6 M892.5,93.6 L901.5,84.6" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 250 → 0.71</title></path>
-<path d="M942.5,75.9 L951.5,84.9 M942.5,84.9 L951.5,75.9" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 300 → 0.77</title></path>
-<path d="M992.5,64.8 L1001.5,73.8 M992.5,73.8 L1001.5,64.8" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 350 → 0.84</title></path>
-<path d="M1042.5,64.9 L1051.5,73.9 M1042.5,73.9 L1051.5,64.9" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 400 → 0.84</title></path></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1002 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">mixed-data run</text>
-<line x1="152.8" x2="174.8" y1="12" y2="12" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3"/><rect x="159.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="180.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">Δ_DAPO + Δ_KodCode, seed 0 (thin: seed 1)</text>
-<line x1="492.0" x2="514.0" y1="12" y2="12" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="2 3"/><path d="M499.0,8 L507.0,16 M499.0,16 L507.0,8" stroke="var(--ink-3)" stroke-width="2"/><text x="520.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">cosine of the two seeds' sums</text>
-<line x1="62" x2="312" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
-<line x1="62" x2="312" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
-<line x1="62" x2="312" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
-<line x1="62" x2="312" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">65</text>
-<line x1="62" x2="312" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">70</text>
-<line x1="62" x2="312" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="56" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">75</text>
-<line x1="87.0" x2="87.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="87.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="137.0" x2="137.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="137.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="187.0" x2="187.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="187.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="237.0" x2="237.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="237.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="287.0" x2="287.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="287.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="62" x2="312" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
-<text x="187.0" y="228" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">update t</text>
-<text transform="translate(24,121.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">accuracy (%)</text>
-<path d="M87.0,142.0 L137.0,155.2 L187.0,124.6 L237.0,106.0 L287.0,106.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="87.0" cy="142.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 59.0</title></circle>
-<circle cx="137.0" cy="155.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 56.8</title></circle>
-<circle cx="187.0" cy="124.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 61.9</title></circle>
-<circle cx="237.0" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 65.0</title></circle>
-<circle cx="287.0" cy="106.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 65.0</title></circle>
-<path d="M87.0,125.8 L137.0,111.4 L187.0,102.4 L237.0,109.0 L287.0,95.2" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<rect x="83.0" y="121.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 100 → 61.7</title></rect>
-<rect x="132.9" y="107.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 150 → 64.1</title></rect>
-<rect x="182.9" y="98.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 200 → 65.6</title></rect>
-<rect x="232.9" y="105.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 250 → 64.5</title></rect>
-<rect x="282.9" y="91.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 300 → 66.8</title></rect>
-<path d="M87.0,122.2 L137.0,103.6 L187.0,117.4 L237.0,119.8 L287.0,111.4" fill="none" stroke="var(--c-third)" stroke-width="1" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<circle cx="87.0" cy="122.2" r="5" fill="transparent"><title>sum_s1: 100 → 62.3</title></circle>
-<circle cx="137.0" cy="103.6" r="5" fill="transparent"><title>sum_s1: 150 → 65.4</title></circle>
-<circle cx="187.0" cy="117.4" r="5" fill="transparent"><title>sum_s1: 200 → 63.1</title></circle>
-<circle cx="237.0" cy="119.8" r="5" fill="transparent"><title>sum_s1: 250 → 62.7</title></circle>
-<circle cx="287.0" cy="111.4" r="5" fill="transparent"><title>sum_s1: 300 → 64.1</title></circle>
-<line x1="392" x2="642" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">30</text>
-<line x1="392" x2="642" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">35</text>
-<line x1="392" x2="642" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
-<line x1="392" x2="642" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">45</text>
-<line x1="392" x2="642" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">50</text>
-<line x1="392" x2="642" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="386" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">55</text>
-<line x1="417.0" x2="417.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="417.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="467.0" x2="467.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="467.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="517.0" x2="517.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="517.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="567.0" x2="567.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="567.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="617.0" x2="617.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="617.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="392" x2="642" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="392" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
-<path d="M417.0,132.4 L467.0,149.8 L517.0,107.8 L567.0,74.8 L617.0,78.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="417.0" cy="132.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 100 → 40.6</title></circle>
-<circle cx="467.0" cy="149.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 150 → 37.7</title></circle>
-<circle cx="517.0" cy="107.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 200 → 44.7</title></circle>
-<circle cx="567.0" cy="74.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 250 → 50.2</title></circle>
-<circle cx="617.0" cy="78.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
-<path d="M417.0,155.8 L467.0,178.0 L517.0,127.6 L567.0,79.6 L617.0,99.4" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<rect x="412.9" y="151.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 100 → 36.7</title></rect>
-<rect x="462.9" y="173.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 150 → 33.0</title></rect>
-<rect x="513.0" y="123.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 200 → 41.4</title></rect>
-<rect x="563.0" y="75.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 250 → 49.4</title></rect>
-<rect x="613.0" y="95.3" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum_s0: 300 → 46.1</title></rect>
-<path d="M417.0,71.2 L467.0,77.2 L517.0,85.6 L567.0,65.2 L617.0,53.8" fill="none" stroke="var(--c-third)" stroke-width="1" stroke-dasharray="5 3" stroke-linejoin="round"/>
-<circle cx="417.0" cy="71.2" r="5" fill="transparent"><title>sum_s1: 100 → 50.8</title></circle>
-<circle cx="467.0" cy="77.2" r="5" fill="transparent"><title>sum_s1: 150 → 49.8</title></circle>
-<circle cx="517.0" cy="85.6" r="5" fill="transparent"><title>sum_s1: 200 → 48.4</title></circle>
-<circle cx="567.0" cy="65.2" r="5" fill="transparent"><title>sum_s1: 250 → 51.8</title></circle>
-<circle cx="617.0" cy="53.8" r="5" fill="transparent"><title>sum_s1: 300 → 53.7</title></circle>
-<line x1="722" x2="972" y1="196.0" y2="196.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="199.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
-<line x1="722" x2="972" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
-<line x1="722" x2="972" y1="136.0" y2="136.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="139.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
-<line x1="722" x2="972" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
-<line x1="722" x2="972" y1="76.0" y2="76.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="79.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
-<line x1="722" x2="972" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
-<text x="716" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
-<line x1="747.0" x2="747.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="747.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
-<line x1="797.0" x2="797.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="797.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">150</text>
-<line x1="847.0" x2="847.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="847.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">200</text>
-<line x1="897.0" x2="897.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="897.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">250</text>
-<line x1="947.0" x2="947.0" y1="196" y2="200" stroke="var(--axis)"/>
-<text x="947.0" y="212" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">300</text>
-<line x1="722" x2="972" y1="196" y2="196" stroke="var(--axis)"/>
-<text x="722" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">function cosine</text>
-<path d="M747.0,77.5 L797.0,116.2 L847.0,88.6 L897.0,68.1 L947.0,68.0 L997.0,67.4 L1047.0,69.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
-<circle cx="747.0" cy="77.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 100 → 0.79</title></circle>
-<circle cx="797.0" cy="116.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 150 → 0.53</title></circle>
-<circle cx="847.0" cy="88.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 200 → 0.72</title></circle>
-<circle cx="897.0" cy="68.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 250 → 0.85</title></circle>
-<circle cx="947.0" cy="68.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 300 → 0.85</title></circle>
-<circle cx="997.0" cy="67.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 350 → 0.86</title></circle>
-<circle cx="1047.0" cy="69.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>sum_t_s0: 400 → 0.84</title></circle>
-<path d="M747.0,97.9 L797.0,102.3 L847.0,88.9 L897.0,81.8 L947.0,77.0 L997.0,71.5 L1047.0,69.3" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
-<circle cx="747.0" cy="97.9" r="5" fill="transparent"><title>sum_t_s1: 100 → 0.65</title></circle>
-<circle cx="797.0" cy="102.3" r="5" fill="transparent"><title>sum_t_s1: 150 → 0.62</title></circle>
-<circle cx="847.0" cy="88.9" r="5" fill="transparent"><title>sum_t_s1: 200 → 0.71</title></circle>
-<circle cx="897.0" cy="81.8" r="5" fill="transparent"><title>sum_t_s1: 250 → 0.76</title></circle>
-<circle cx="947.0" cy="77.0" r="5" fill="transparent"><title>sum_t_s1: 300 → 0.79</title></circle>
-<circle cx="997.0" cy="71.5" r="5" fill="transparent"><title>sum_t_s1: 350 → 0.83</title></circle>
-<circle cx="1047.0" cy="69.3" r="5" fill="transparent"><title>sum_t_s1: 400 → 0.84</title></circle>
-<path d="M747.0,114.3 L797.0,117.6 L847.0,103.6 L897.0,89.1 L947.0,80.4 L997.0,69.3 L1047.0,69.4" fill="none" stroke="var(--ink-3)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
-<path d="M742.5,109.8 L751.5,118.8 M742.5,118.8 L751.5,109.8" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 100 → 0.54</title></path>
-<path d="M792.5,113.1 L801.5,122.1 M792.5,122.1 L801.5,113.1" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 150 → 0.52</title></path>
-<path d="M842.5,99.1 L851.5,108.1 M842.5,108.1 L851.5,99.1" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 200 → 0.62</title></path>
-<path d="M892.5,84.6 L901.5,93.6 M892.5,93.6 L901.5,84.6" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 250 → 0.71</title></path>
-<path d="M942.5,75.9 L951.5,84.9 M942.5,84.9 L951.5,75.9" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 300 → 0.77</title></path>
-<path d="M992.5,64.8 L1001.5,73.8 M992.5,73.8 L1001.5,64.8" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 350 → 0.84</title></path>
-<path d="M1042.5,64.9 L1051.5,73.9 M1042.5,73.9 L1051.5,64.9" stroke="var(--ink-3)" stroke-width="2"><title>sum_seed_ceiling: 400 → 0.84</title></path></svg></div></div><figcaption class="fig-cap"><p lang="zh">前两个 panel：准确率（128 题 × 4 个样本）；第三个：固定文本上函数向量的 cosine，蓝 = 混合 run 和相加，灰 = 两个 seed 的和之间（参照）。全部是 real。</p><p lang="en">First two panels: accuracy (128 problems × 4 samples); third: cosine of function vectors on the fixed text, blue = mixed run vs the sum, grey = between the two seeds' sums (the reference). All real.</p></figcaption></figure>
-<p class="f-bound" lang="zh"><b class="f-k">边界</b>只有一个混合 run（seed 0），real 到 update 300，linear 还在早期。混合 run 每步只有一半数据来自每个任务，所以和“同步数的和”比并不完全公平；t/2 的和也在算。</p>
-<p class="f-bound" lang="en"><b class="f-k">Boundary</b>One mixed run (seed 0); real is at update 300 and linear is early. Each update of the mixed run takes half its data from each task, so the same-t sum is not an exact match; sums at t/2 are being computed too.</p>
 </section>
 </section>
 </div>
