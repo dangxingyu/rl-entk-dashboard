@@ -593,7 +593,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 09:53 PST</span><span lang="en">Numbers read 11-24 09:53 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 10:23 PST</span><span lang="en">Numbers read 11-24 10:23 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -623,10 +623,10 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 09:53 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 10:23 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 09:53 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 10:23 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
@@ -2810,9 +2810,95 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <h3 id="c5-h"><span lang="zh">并行 RL：同一个任务分给 4 个 worker 各自训练再合并（进行中）</span><span lang="en">Parallel RL: one task split over 4 workers trained apart, then merged (running)</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>同一个任务（GSM8K、KodCode），从同一个 <span class="tex" data-tex="\theta _{0}">θ₀</span> 出发，4 个 worker 各用四分之一的 batch（每步 8 题 × 4 个样本，完整是 32 × 4）、各自的数据顺序和采样随机数独立训练，学习率日程和完整的 run 一样。合并成 <span class="tex" data-tex="\theta _{0} + w\,\textstyle\sum\,\Delta _{k}">θ₀ + w Σ Δₖ</span>（real）或 <span class="tex" data-tex="w\,\textstyle\sum\,\Delta _{k}">w Σ Δₖ</span>（linear）：w = ¼ 是平均，w = 1 是相加。对照是用完整 batch 训练同样步数的一个 run（gb200-tasks seed 0）。问题：合并损失（合并 − 完整 batch）在 linear 上是不是比 real 小。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>One task (GSM8K, KodCode), one <span class="tex" data-tex="\theta _{0}">θ₀</span>, 4 workers trained independently, each with a quarter of the batch (8 problems × 4 samples per update, against 32 × 4), its own data order and sampling seed, and the full run's lr schedule. They are merged as <span class="tex" data-tex="\theta _{0} + w\,\textstyle\sum\,\Delta _{k}">θ₀ + w Σ Δₖ</span> (real) or <span class="tex" data-tex="w\,\textstyle\sum\,\Delta _{k}">w Σ Δₖ</span> (linear): w = ¼ is the average, w = 1 the sum. The reference is one run trained on the full batch for the same number of updates (gb200-tasks seed 0). The question: is the merge loss (merged minus full batch) smaller for linear than for real?</p>
-<p class="f-data" lang="zh"><b class="f-k">数据</b>worker 在训练中（H100，每个 worker 一张卡），合并点在 update 50 和 100 时自动提交。</p>
-<p class="f-data" lang="en"><b class="f-k">Data</b>The workers are training (H100, one card each); the merges are submitted automatically at updates 50 and 100.</p>
-
+<p class="f-data" lang="zh"><b class="f-k">数据</b>GSM8K real（update 100）：单个 worker 平均 61.2%，平均 63.9%，w = ½ 64.8%，相加 61.3%，完整 batch 的一个 run 65.6%，函数上平均和完整 batch 的 cosine 0.59、大小之比 0.36。KodCode real（update 50）：平均 51.6%，w = ½ 53.3%，相加 55.3%，函数上平均和完整 batch 的 cosine 0.75、大小之比 0.43。</p>
+<p class="f-data" lang="en"><b class="f-k">Data</b>GSM8K real (update 100): one worker on average 61.2%, the average 63.9%, w = ½ 64.8%, the sum 61.3%, one full-batch run 65.6%, in function space the average has cosine 0.59 with the full-batch run and size ratio 0.36. KodCode real (update 50): the average 51.6%, w = ½ 53.3%, the sum 55.3%, in function space the average has cosine 0.75 with the full-batch run and size ratio 0.43.</p>
+<figure class="fig" id="fig-par" aria-labelledby="figt-par"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5</span><span lang="en">Figure C5</span></div><h4 class="fig-title" id="figt-par"><span lang="zh">并行 RL：4 个 worker 合并 vs 一个完整 batch 的 run</span><span lang="en">Parallel RL: 4 merged workers vs one full-batch run</span></h4><p class="fig-q"><span lang="zh">把一个 batch 拆开并行训练再合并，能代替一起训练吗？</span><span lang="en">Can a batch split over parallel workers and merged replace training on it together?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 842 264" role="img" aria-label="parallel RL" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">单个 worker（4 个的平均）</text>
+<rect x="210.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="231.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">平均（w = ¼）</text>
+<rect x="335.8" y="8" width="8" height="8" fill="var(--c-third)" stroke="var(--c-third)" stroke-width="1.6"/><text x="356.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">w = ½</text>
+<rect x="414.8" y="8" width="8" height="8" fill="var(--c-ctrl)" stroke="var(--c-ctrl)" stroke-width="1.6"/><text x="435.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">相加（w = 1）</text>
+<rect x="539.8" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="560.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">一个 run，完整 batch（蓝 real，橙 linear）</text>
+<line x1="62" x2="392" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="392" y1="162.5" y2="162.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="166.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">20</text>
+<line x1="62" x2="392" y1="125.0" y2="125.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="128.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="62" x2="392" y1="87.5" y2="87.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="91.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="62" x2="392" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
+<line x1="62" x2="392" y1="200" y2="200" stroke="var(--axis)"/>
+<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">准确率 (%)</text>
+<rect x="75.5" y="85.2" width="52.1" height="114.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real update 100 · 单个 worker（4 个的平均）: 61.2</title></rect>
+<rect x="141.5" y="80.2" width="52.1" height="119.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real update 100 · 平均（w = ¼）: 63.9</title></rect>
+<rect x="207.5" y="78.5" width="52.1" height="121.5" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K real update 100 · w = ½: 64.8</title></rect>
+<rect x="273.5" y="85.1" width="52.1" height="114.9" rx="2" fill="var(--c-ctrl)" fill-opacity="0.85" stroke="var(--c-ctrl)" stroke-width="1.5"><title>GSM8K real update 100 · 相加（w = 1）: 61.3</title></rect>
+<rect x="339.5" y="77.0" width="52.1" height="123.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K real update 100 · 一个 run，完整 batch: 65.6</title></rect>
+<text x="233.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<text x="233.6" y="227.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">update 100</text>
+<line x1="62" x2="392" y1="117.7" y2="117.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
+<line x1="452" x2="782" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="452" x2="782" y1="162.5" y2="162.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="166.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">20</text>
+<line x1="452" x2="782" y1="125.0" y2="125.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="128.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="452" x2="782" y1="87.5" y2="87.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="91.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="452" x2="782" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
+<line x1="452" x2="782" y1="200" y2="200" stroke="var(--axis)"/>
+<text x="452" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<rect x="531.5" y="103.2" width="52.1" height="96.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode real update 50 · 平均（w = ¼）: 51.6</title></rect>
+<rect x="597.5" y="100.1" width="52.1" height="99.9" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode real update 50 · w = ½: 53.3</title></rect>
+<rect x="663.5" y="96.3" width="52.1" height="103.7" rx="2" fill="var(--c-ctrl)" fill-opacity="0.85" stroke="var(--c-ctrl)" stroke-width="1.5"><title>KodCode real update 50 · 相加（w = 1）: 55.3</title></rect>
+<text x="623.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<text x="623.6" y="227.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">update 50</text>
+<line x1="452" x2="782" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 842 264" role="img" aria-label="parallel RL" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">one worker (mean of 4)</text>
+<rect x="199.4" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="220.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">average (w = ¼)</text>
+<rect x="340.4" y="8" width="8" height="8" fill="var(--c-third)" stroke="var(--c-third)" stroke-width="1.6"/><text x="361.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">w = ½</text>
+<rect x="419.4" y="8" width="8" height="8" fill="var(--c-ctrl)" stroke="var(--c-ctrl)" stroke-width="1.6"/><text x="440.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">sum (w = 1)</text>
+<rect x="535.6" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="556.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">one run, full batch (blue real, orange linear)</text>
+<line x1="62" x2="392" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="392" y1="162.5" y2="162.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="166.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">20</text>
+<line x1="62" x2="392" y1="125.0" y2="125.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="128.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="62" x2="392" y1="87.5" y2="87.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="91.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="62" x2="392" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
+<line x1="62" x2="392" y1="200" y2="200" stroke="var(--axis)"/>
+<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">accuracy (%)</text>
+<rect x="75.5" y="85.2" width="52.1" height="114.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real update 100 · one worker (mean of 4): 61.2</title></rect>
+<rect x="141.5" y="80.2" width="52.1" height="119.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real update 100 · average (w = ¼): 63.9</title></rect>
+<rect x="207.5" y="78.5" width="52.1" height="121.5" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K real update 100 · w = ½: 64.8</title></rect>
+<rect x="273.5" y="85.1" width="52.1" height="114.9" rx="2" fill="var(--c-ctrl)" fill-opacity="0.85" stroke="var(--c-ctrl)" stroke-width="1.5"><title>GSM8K real update 100 · sum (w = 1): 61.3</title></rect>
+<rect x="339.5" y="77.0" width="52.1" height="123.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K real update 100 · one run, full batch: 65.6</title></rect>
+<text x="233.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<text x="233.6" y="227.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">update 100</text>
+<line x1="62" x2="392" y1="117.7" y2="117.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
+<line x1="452" x2="782" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="452" x2="782" y1="162.5" y2="162.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="166.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">20</text>
+<line x1="452" x2="782" y1="125.0" y2="125.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="128.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
+<line x1="452" x2="782" y1="87.5" y2="87.5" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="91.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">60</text>
+<line x1="452" x2="782" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="446" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
+<line x1="452" x2="782" y1="200" y2="200" stroke="var(--axis)"/>
+<text x="452" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<rect x="531.5" y="103.2" width="52.1" height="96.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode real update 50 · average (w = ¼): 51.6</title></rect>
+<rect x="597.5" y="100.1" width="52.1" height="99.9" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode real update 50 · w = ½: 53.3</title></rect>
+<rect x="663.5" y="96.3" width="52.1" height="103.7" rx="2" fill="var(--c-ctrl)" fill-opacity="0.85" stroke="var(--c-ctrl)" stroke-width="1.5"><title>KodCode real update 50 · sum (w = 1): 55.3</title></rect>
+<text x="623.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<text x="623.6" y="227.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">update 50</text>
+<line x1="452" x2="782" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">任务自己的题集，128 题 × 4 个样本；虚线是 <span class="tex" data-tex="\theta _{0}">θ₀</span>。灰空心 = 单个 worker（4 个的平均）；绿空心 = 平均（w = ¼）；绿实心 = w = ½；深灰 = 相加（w = 1）；蓝/橙 = 完整 batch 的一个 run（real/linear）。</p><p lang="en">The task's own set, 128 problems × 4 samples; the dashed line is <span class="tex" data-tex="\theta _{0}">θ₀</span>. Grey open = one worker (mean of 4); green open = the average (w = ¼); green filled = w = ½; dark grey = the sum (w = 1); blue/orange = one full-batch run (real/linear).</p></figcaption></figure>
 <p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这是 11-18 的“并行 RL”问题在同一个任务上的版本；C4 是跨任务的版本（混合数据训练 t 步 ≈ 各训练 t/2 步再相加），C6 的 seed soup 是 2 个 worker、各用完整 batch 的特例（平均不比单个差；相加时 real 在 KodCode 上掉 6 点，linear 不掉）。</p>
 <p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This is the “parallel RL” question of 11-18 on a single task; C4 is the cross-task version (mixed-data training for t updates ≈ each task for t/2 updates, then added), and the seed soups of C6 are the special case of 2 workers with full batches each (the average is no worse than either; the sum costs real 6 points on KodCode and linear nothing).</p>
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>进行中：只有一个 seed 的 4 个 worker；worker 的数据是不同的打乱顺序，不是一个 batch 的严格切分（代码里还没有切分数据的选项）。KodCode 慢，update 100 的合并在开会后才有。</p>
