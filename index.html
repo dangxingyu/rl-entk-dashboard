@@ -583,7 +583,6 @@ details.live-group[open] > summary { margin-bottom: 6px; }
     </div>
   </div>
   <h1><span lang="zh">RL 为什么是 lazy 的？</span><span lang="en">Why is RL lazy?</span></h1>
-  <p class="meta"><span lang="zh">rl-entk 分析（Claude），写给项目组</span><span lang="en">rl-entk analysis (Claude), for the project team</span></p>
 </header>
 <div class="tabs" role="tablist" aria-label="Updates / 更新">
 <button type="button" role="tab" id="tab-n1124" aria-controls="pane-n1124" aria-selected="true" data-tab="n1124"><span lang="zh">11-24 组合</span><span lang="en">11-24 composition</span></button>
@@ -591,7 +590,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 09:09 PST</span><span lang="en">Numbers read 11-24 09:09 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 09:16 PST</span><span lang="en">Numbers read 11-24 09:16 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -620,10 +619,10 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 09:09 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 09:16 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 09:09 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 09:16 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
