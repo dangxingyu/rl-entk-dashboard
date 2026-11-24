@@ -593,7 +593,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 10:52 PST</span><span lang="en">Numbers read 11-24 10:52 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 11:24 PST</span><span lang="en">Numbers read 11-24 11:24 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -623,10 +623,10 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 10:52 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 11:24 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 10:52 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 11:24 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
@@ -655,22 +655,22 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">准确率 (%)</text>
 <rect x="66.0" y="92.4" width="10.8" height="107.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 57.4</title></rect>
 <rect x="81.6" y="119.4" width="10.8" height="80.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 43.0</title></rect>
-<text x="79.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="-130.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="109.7" y="146.9" width="10.8" height="53.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 28.3</title></rect>
 <rect x="125.3" y="194.2" width="10.8" height="5.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 3.1</title></rect>
-<foreignObject x="-87.1" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="-87.1" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="153.5" y="183.9" width="10.8" height="16.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 8.6</title></rect>
 <rect x="169.1" y="198.5" width="10.8" height="1.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 0.8</title></rect>
-<foreignObject x="-43.3" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="-43.3" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="197.2" y="67.8" width="10.8" height="132.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 70.5</title></rect>
 <rect x="212.8" y="73.2" width="10.8" height="126.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 67.6</title></rect>
-<text x="210.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="0.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="241.0" y="68.2" width="10.8" height="131.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 70.3</title></rect>
 <rect x="256.6" y="72.1" width="10.8" height="127.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−½K · linear: 68.2</title></rect>
-<foreignObject x="44.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
+<foreignObject x="44.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
 <rect x="284.7" y="70.1" width="10.8" height="129.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−K · real: 69.3</title></rect>
 <rect x="300.3" y="75.9" width="10.8" height="124.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−K · linear: 66.2</title></rect>
-<foreignObject x="87.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="87.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="62" x2="312" y1="117.7" y2="117.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="352" x2="602" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="346" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -686,19 +686,19 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="352" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
 <rect x="356.0" y="70.8" width="10.8" height="129.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 68.9</title></rect>
 <rect x="371.6" y="80.2" width="10.8" height="119.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 63.9</title></rect>
-<text x="369.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="159.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="399.7" y="70.4" width="10.8" height="129.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 69.1</title></rect>
 <rect x="415.3" y="79.8" width="10.8" height="120.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 64.1</title></rect>
-<foreignObject x="202.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="202.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="443.5" y="72.5" width="10.8" height="127.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 68.0</title></rect>
 <rect x="459.1" y="82.1" width="10.8" height="117.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 62.9</title></rect>
-<foreignObject x="246.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="246.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="487.2" y="140.4" width="10.8" height="59.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 31.8</title></rect>
 <rect x="502.8" y="138.9" width="10.8" height="61.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 32.6</title></rect>
-<text x="500.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="290.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="531.0" y="156.9" width="10.8" height="43.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 23.0</title></rect>
-<foreignObject x="334.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
-<foreignObject x="377.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="334.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
+<foreignObject x="377.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="352" x2="602" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="642" x2="892" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="636" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -714,21 +714,21 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="642" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
 <rect x="646.0" y="127.1" width="10.8" height="72.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 38.9</title></rect>
 <rect x="661.6" y="125.8" width="10.8" height="74.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 39.6</title></rect>
-<text x="659.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="449.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="689.7" y="142.1" width="10.8" height="57.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 30.9</title></rect>
 <rect x="705.3" y="172.2" width="10.8" height="27.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 14.8</title></rect>
-<foreignObject x="492.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="492.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="733.5" y="170.8" width="10.8" height="29.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 15.6</title></rect>
 <rect x="749.1" y="191.6" width="10.8" height="8.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 4.5</title></rect>
-<foreignObject x="536.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="536.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="777.2" y="98.2" width="10.8" height="101.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 54.3</title></rect>
 <rect x="792.8" y="108.9" width="10.8" height="91.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 48.6</title></rect>
-<text x="790.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="580.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="821.0" y="103.6" width="10.8" height="96.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 51.4</title></rect>
 <rect x="836.6" y="110.6" width="10.8" height="89.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−½K · linear: 47.7</title></rect>
-<foreignObject x="624.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
+<foreignObject x="624.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
 <rect x="864.7" y="110.0" width="10.8" height="90.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−K · real: 48.0</title></rect>
-<foreignObject x="667.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="667.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="642" x2="892" y1="131.2" y2="131.2" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 932 264" role="img" aria-label="negation" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="62" x2="312" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
@@ -746,22 +746,22 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">accuracy (%)</text>
 <rect x="66.0" y="92.4" width="10.8" height="107.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 57.4</title></rect>
 <rect x="81.6" y="119.4" width="10.8" height="80.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 43.0</title></rect>
-<text x="79.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="-130.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="109.7" y="146.9" width="10.8" height="53.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 28.3</title></rect>
 <rect x="125.3" y="194.2" width="10.8" height="5.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 3.1</title></rect>
-<foreignObject x="-87.1" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="-87.1" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="153.5" y="183.9" width="10.8" height="16.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 8.6</title></rect>
 <rect x="169.1" y="198.5" width="10.8" height="1.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 0.8</title></rect>
-<foreignObject x="-43.3" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="-43.3" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="197.2" y="67.8" width="10.8" height="132.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 70.5</title></rect>
 <rect x="212.8" y="73.2" width="10.8" height="126.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 67.6</title></rect>
-<text x="210.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="0.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="241.0" y="68.2" width="10.8" height="131.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 70.3</title></rect>
 <rect x="256.6" y="72.1" width="10.8" height="127.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−½K · linear: 68.2</title></rect>
-<foreignObject x="44.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
+<foreignObject x="44.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
 <rect x="284.7" y="70.1" width="10.8" height="129.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−K · real: 69.3</title></rect>
 <rect x="300.3" y="75.9" width="10.8" height="124.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−K · linear: 66.2</title></rect>
-<foreignObject x="87.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="87.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="62" x2="312" y1="117.7" y2="117.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="352" x2="602" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="346" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -777,19 +777,19 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="352" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
 <rect x="356.0" y="70.8" width="10.8" height="129.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 68.9</title></rect>
 <rect x="371.6" y="80.2" width="10.8" height="119.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 63.9</title></rect>
-<text x="369.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="159.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="399.7" y="70.4" width="10.8" height="129.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 69.1</title></rect>
 <rect x="415.3" y="79.8" width="10.8" height="120.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 64.1</title></rect>
-<foreignObject x="202.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="202.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="443.5" y="72.5" width="10.8" height="127.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 68.0</title></rect>
 <rect x="459.1" y="82.1" width="10.8" height="117.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 62.9</title></rect>
-<foreignObject x="246.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="246.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="487.2" y="140.4" width="10.8" height="59.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 31.8</title></rect>
 <rect x="502.8" y="138.9" width="10.8" height="61.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 32.6</title></rect>
-<text x="500.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="290.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="531.0" y="156.9" width="10.8" height="43.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 23.0</title></rect>
-<foreignObject x="334.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
-<foreignObject x="377.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="334.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
+<foreignObject x="377.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="352" x2="602" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="642" x2="892" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="636" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -805,21 +805,21 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="642" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">MATH-500</text>
 <rect x="646.0" y="127.1" width="10.8" height="72.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K · real: 38.9</title></rect>
 <rect x="661.6" y="125.8" width="10.8" height="74.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K · linear: 39.6</title></rect>
-<text x="659.2" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">K</text>
+<foreignObject x="449.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K">K</span></div></foreignObject>
 <rect x="689.7" y="142.1" width="10.8" height="57.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−½G · real: 30.9</title></rect>
 <rect x="705.3" y="172.2" width="10.8" height="27.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−½G · linear: 14.8</title></rect>
-<foreignObject x="492.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -\tfrac{1}{2} G ">K−½G</span></div></foreignObject>
+<foreignObject x="492.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - \tfrac{1}{2}G">K−½G</span></div></foreignObject>
 <rect x="733.5" y="170.8" width="10.8" height="29.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>K−G · real: 15.6</title></rect>
 <rect x="749.1" y="191.6" width="10.8" height="8.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>K−G · linear: 4.5</title></rect>
-<foreignObject x="536.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K -G ">K−G</span></div></foreignObject>
+<foreignObject x="536.7" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="K - G">K−G</span></div></foreignObject>
 <rect x="777.2" y="98.2" width="10.8" height="101.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G · real: 54.3</title></rect>
 <rect x="792.8" y="108.9" width="10.8" height="91.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G · linear: 48.6</title></rect>
-<text x="790.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G</text>
+<foreignObject x="580.4" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G">G</span></div></foreignObject>
 <rect x="821.0" y="103.6" width="10.8" height="96.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−½K · real: 51.4</title></rect>
 <rect x="836.6" y="110.6" width="10.8" height="89.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G−½K · linear: 47.7</title></rect>
-<foreignObject x="624.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -\tfrac{1}{2} K ">G−½K</span></div></foreignObject>
+<foreignObject x="624.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - \tfrac{1}{2}K">G−½K</span></div></foreignObject>
 <rect x="864.7" y="110.0" width="10.8" height="90.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G−K · real: 48.0</title></rect>
-<foreignObject x="667.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G -K ">G−K</span></div></foreignObject>
+<foreignObject x="667.9" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G - K">G−K</span></div></foreignObject>
 <line x1="642" x2="892" y1="131.2" y2="131.2" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">实心 = real（网络在 <span class="tex" data-tex="\theta _{0} + \textstyle\sum c\,\Delta">θ₀ + Σ c Δ</span>）；空心虚线 = linear（linear 模型在 <span class="tex" data-tex="\textstyle\sum c\,\Delta">Σ c Δ</span>）。虚线是 <span class="tex" data-tex="\theta _{0}">θ₀</span>。每个 seed 0 的 update；每组 128 题 × 4 个样本，T=0.6。缺的柱子是还没算完的点。</p><p lang="en">Filled = real (the network at <span class="tex" data-tex="\theta _{0} + \textstyle\sum c\,\Delta">θ₀ + Σ c Δ</span>); open dashed = linear (the linear model at <span class="tex" data-tex="\textstyle\sum c\,\Delta">Σ c Δ</span>). The dashed line is <span class="tex" data-tex="\theta _{0}">θ₀</span>. Seed-0 updates; 128 problems × 4 samples per set, T=0.6. A missing bar is a point still running.</p></figcaption></figure>
 <p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这是 Chat Vector / task arithmetic（arXiv 2310.04799, 2212.04089）在 RL update 上的版本，11-18 会上提到过。linear 模型里 logit 严格相加，它和网络的行为相同，所以这个现象在 eNTK 的 regime 里就已经存在，不需要网络的非线性。</p>
 <p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This is task arithmetic (Chat Vector, arXiv 2310.04799; 2212.04089) for RL updates, raised in the 11-18 meeting. The linear model, where logits add exactly, behaves the same way as the network, so the effect already exists in the eNTK regime and does not need the network's nonlinearity.</p>
@@ -986,26 +986,26 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="62" x2="582" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
 <line x1="62" x2="582" y1="200" y2="200" stroke="var(--axis)"/>
-<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">|f(Δ_A + Δ_B) − f(Δ_A) − f(Δ_B)| / |f(Δ_A) + f(Δ_B)|</text>
+<foreignObject x="62.0" y="27.8" width="420" height="22.8" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:12.0px;color:var(--ink-2);text-align:left;font-weight:600;"><span class="tex" data-tex="\lVert f(\Delta_A + \Delta_B) - f(\Delta_A) - f(\Delta_B) \rVert \,/\, \lVert f(\Delta_A) + f(\Delta_B) \rVert">|f(Δ_A + Δ_B) − f(Δ_A) − f(Δ_B)| / |f(Δ_A) + f(Δ_B)|</span></div></foreignObject>
 <text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">相对误差</text>
 <rect x="69.2" y="132.8" width="24.7" height="67.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G+K · real: 0.4</title></rect>
 <rect x="101.7" y="182.3" width="24.7" height="17.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G+K · linear: 0.1</title></rect>
-<foreignObject x="-112.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G +K ">G+K</span></div></foreignObject>
+<foreignObject x="-112.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G + K">G+K</span></div></foreignObject>
 <rect x="160.2" y="155.6" width="24.7" height="44.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>N+K · real: 0.3</title></rect>
 <rect x="192.7" y="165.2" width="24.7" height="34.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>N+K · linear: 0.2</title></rect>
-<text x="188.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">N+K</text>
+<foreignObject x="-21.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="N + K">N+K</span></div></foreignObject>
 <rect x="251.2" y="160.7" width="24.7" height="39.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>D+K · real: 0.3</title></rect>
 <rect x="283.7" y="170.6" width="24.6" height="29.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>D+K · linear: 0.2</title></rect>
-<text x="279.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">D+K</text>
+<foreignObject x="69.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="D + K">D+K</span></div></foreignObject>
 <rect x="342.2" y="134.9" width="24.6" height="65.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G+D · real: 0.4</title></rect>
 <rect x="374.7" y="159.2" width="24.6" height="40.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G+D · linear: 0.3</title></rect>
-<text x="370.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G+D</text>
+<foreignObject x="160.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G + D">G+D</span></div></foreignObject>
 <rect x="433.2" y="136.4" width="24.7" height="63.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>N+Ph · real: 0.4</title></rect>
 <rect x="465.7" y="137.8" width="24.7" height="62.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>N+Ph · linear: 0.4</title></rect>
-<text x="461.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">N+Ph</text>
+<foreignObject x="251.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="N + \mathrm{Ph}">N+Ph</span></div></foreignObject>
 <rect x="524.2" y="145.4" width="24.6" height="54.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Pe+D · real: 0.4</title></rect>
 <rect x="556.7" y="137.1" width="24.7" height="62.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Pe+D · linear: 0.4</title></rect>
-<text x="552.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pe+D</text>
+<foreignObject x="342.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="\mathrm{Pe} + D">Pe+D</span></div></foreignObject>
 <line x1="62" x2="582" y1="87.7" y2="87.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 640 264" role="img" aria-label="additivity" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="62" x2="582" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
@@ -1021,26 +1021,26 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="62" x2="582" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
 <line x1="62" x2="582" y1="200" y2="200" stroke="var(--axis)"/>
-<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">|f(Δ_A + Δ_B) − f(Δ_A) − f(Δ_B)| / |f(Δ_A) + f(Δ_B)|</text>
+<foreignObject x="62.0" y="27.8" width="420" height="22.8" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:12.0px;color:var(--ink-2);text-align:left;font-weight:600;"><span class="tex" data-tex="\lVert f(\Delta_A + \Delta_B) - f(\Delta_A) - f(\Delta_B) \rVert \,/\, \lVert f(\Delta_A) + f(\Delta_B) \rVert">|f(Δ_A + Δ_B) − f(Δ_A) − f(Δ_B)| / |f(Δ_A) + f(Δ_B)|</span></div></foreignObject>
 <text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">relative error</text>
 <rect x="69.2" y="132.8" width="24.7" height="67.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G+K · real: 0.4</title></rect>
 <rect x="101.7" y="182.3" width="24.7" height="17.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G+K · linear: 0.1</title></rect>
-<foreignObject x="-112.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G +K ">G+K</span></div></foreignObject>
+<foreignObject x="-112.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G + K">G+K</span></div></foreignObject>
 <rect x="160.2" y="155.6" width="24.7" height="44.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>N+K · real: 0.3</title></rect>
 <rect x="192.7" y="165.2" width="24.7" height="34.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>N+K · linear: 0.2</title></rect>
-<text x="188.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">N+K</text>
+<foreignObject x="-21.2" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="N + K">N+K</span></div></foreignObject>
 <rect x="251.2" y="160.7" width="24.7" height="39.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>D+K · real: 0.3</title></rect>
 <rect x="283.7" y="170.6" width="24.6" height="29.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>D+K · linear: 0.2</title></rect>
-<text x="279.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">D+K</text>
+<foreignObject x="69.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="D + K">D+K</span></div></foreignObject>
 <rect x="342.2" y="134.9" width="24.6" height="65.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>G+D · real: 0.4</title></rect>
 <rect x="374.7" y="159.2" width="24.6" height="40.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>G+D · linear: 0.3</title></rect>
-<text x="370.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">G+D</text>
+<foreignObject x="160.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="G + D">G+D</span></div></foreignObject>
 <rect x="433.2" y="136.4" width="24.7" height="63.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>N+Ph · real: 0.4</title></rect>
 <rect x="465.7" y="137.8" width="24.7" height="62.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>N+Ph · linear: 0.4</title></rect>
-<text x="461.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">N+Ph</text>
+<foreignObject x="251.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="N + \mathrm{Ph}">N+Ph</span></div></foreignObject>
 <rect x="524.2" y="145.4" width="24.6" height="54.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Pe+D · real: 0.4</title></rect>
 <rect x="556.7" y="137.1" width="24.7" height="62.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Pe+D · linear: 0.4</title></rect>
-<text x="552.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pe+D</text>
+<foreignObject x="342.8" y="202.6" width="420" height="19.9" pointer-events="none"><div xmlns="http://www.w3.org/1999/xhtml" class="svgm" style="font-size:10.5px;color:var(--ink-3);text-align:center;"><span class="tex" data-tex="\mathrm{Pe} + D">Pe+D</span></div></foreignObject>
 <line x1="62" x2="582" y1="87.7" y2="87.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">f 是固定文本上的函数向量（C3）。每组是一对任务的 update（系数 1, 1），两个 seed 平均。实心 = 网络，空心虚线 = linear 模型。虚线是参照：同一任务两个 seed 的函数之间的相对差。G/N/D/Pe/Ph/K = GSM8K/NuminaMath/DAPO/Polaris easy/Polaris hard/KodCode。</p><p lang="en">f is the function vector on the fixed text (C3). Each group is one pair of tasks' updates (coefficients 1, 1), mean of two seeds. Filled = network, open dashed = linear model. The dashed line is the reference: the relative difference between two seeds' functions for one task. G/N/D/Pe/Ph/K = GSM8K/NuminaMath/DAPO/Polaris easy/Polaris hard/KodCode.</p></figcaption></figure>
 <p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>11-18 会上 Yihe 预计 linear 时组合会更容易。数据上两个 arm 在加法上一样好；减法时 linear 更彻底（C1）。</p>
 <p class="f-thought" lang="en"><b class="f-k">Earlier results</b>In the 11-18 meeting Yihe expected composition to be easier when the learned function is linear. On addition both arms do equally well; on subtraction linear is more thorough (C1).</p>
@@ -2914,7 +2914,211 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="729.5" y="83.2" width="52.1" height="116.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode real update 100 · one run, full batch: 62.3</title></rect>
 <text x="623.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
 <text x="623.6" y="227.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">update 100</text>
-<line x1="452" x2="782" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">任务自己的题集，128 题 × 4 个样本；虚线是 <span class="tex" data-tex="\theta _{0}">θ₀</span>。灰空心 = 单个 worker（4 个的平均）；绿空心 = 平均（w = ¼）；绿实心 = w = ½；深灰 = 相加（w = 1）；蓝/橙 = 完整 batch 的一个 run（real/linear）。</p><p lang="en">The task's own set, 128 problems × 4 samples; the dashed line is <span class="tex" data-tex="\theta _{0}">θ₀</span>. Grey open = one worker (mean of 4); green open = the average (w = ¼); green filled = w = ½; dark grey = the sum (w = 1); blue/orange = one full-batch run (real/linear).</p></figcaption></figure>
+<line x1="452" x2="782" y1="146.9" y2="146.9" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">任务自己的题集，128 题 × 4 个样本；虚线是 <span class="tex" data-tex="\theta _{0}">θ₀</span>。灰空心 = 单个 worker（4 个的平均）；绿空心 = 平均（w = ¼）；绿实心 = w = ½；深灰 = 相加（w = 1）；蓝/橙 = 完整 batch 的一个 run（real/linear）。</p><p lang="en">The task's own set, 128 problems × 4 samples; the dashed line is <span class="tex" data-tex="\theta _{0}">θ₀</span>. Grey open = one worker (mean of 4); green open = the average (w = ¼); green filled = w = ½; dark grey = the sum (w = 1); blue/orange = one full-batch run (real/linear).</p></figcaption></figure><figure class="fig" id="fig-pargap" aria-labelledby="figt-pargap"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5b</span><span lang="en">Figure C5b</span></div><h4 class="fig-title" id="figt-pargap"><span lang="zh">real vs linear：合并比完整 batch 差多少</span><span lang="en">Real vs linear: how far the merge falls from the full batch</span></h4><p class="fig-q"><span lang="zh">哪种模型更经得起合并？</span><span lang="en">Which model takes merging better?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1032 250" role="img" aria-label="parallel RL merge gap" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<line x1="80.8" x2="102.8" y1="12" y2="12" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3"/><rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
+<line x1="62" x2="242" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="62" x2="242" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="62" x2="242" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="62" x2="242" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="242" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="82.8" x2="82.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="82.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="152.0" x2="152.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="152.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="221.2" x2="221.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="221.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="242" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K · update 50</text>
+<text x="152.0" y="218" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">合并权重 w</text>
+<text transform="translate(24,116.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">合并 − 完整 batch（点）</text>
+<line x1="62" x2="242" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M82.8,86.4 L152.0,73.2 L221.2,73.2" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="82.8" cy="86.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → 0.80</title></circle>
+<circle cx="152.0" cy="73.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → 2.50</title></circle>
+<circle cx="221.2" cy="73.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → 2.50</title></circle>
+<path d="M82.8,84.9 L152.0,78.7 L221.2,141.7" fill="none" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="78.7" y="80.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0 → 1.00</title></rect>
+<rect x="147.9" y="74.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0.5 → 1.80</title></rect>
+<rect x="217.2" y="137.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 1 → -6.3</title></rect>
+<line x1="302" x2="482" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="302" x2="482" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="302" x2="482" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="302" x2="482" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="302" x2="482" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="322.8" x2="322.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="322.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="392.0" x2="392.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="392.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="461.2" x2="461.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="461.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="302" x2="482" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="302" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K · update 100</text>
+<line x1="302" x2="482" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M322.8,105.9 L392.0,98.9 L461.2,126.1" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="322.8" cy="105.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -1.70</title></circle>
+<circle cx="392.0" cy="98.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -0.80</title></circle>
+<circle cx="461.2" cy="126.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -4.30</title></circle>
+<path d="M322.8,77.1 L392.0,63.1" fill="none" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="318.7" y="73.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0 → 2.00</title></rect>
+<rect x="387.9" y="59.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0.5 → 3.80</title></rect>
+<line x1="542" x2="722" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="542" x2="722" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="542" x2="722" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="542" x2="722" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="542" x2="722" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="562.8" x2="562.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="562.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="632.0" x2="632.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="632.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="701.2" x2="701.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="701.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="542" x2="722" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="542" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode · update 50</text>
+<line x1="542" x2="722" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M562.8,159.6 L632.0,146.3 L701.2,130.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="562.8" cy="159.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -8.6</title></circle>
+<circle cx="632.0" cy="146.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -6.9</title></circle>
+<circle cx="701.2" cy="130.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -4.90</title></circle>
+<line x1="782" x2="962" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="782" x2="962" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="782" x2="962" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="782" x2="962" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="782" x2="962" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="802.8" x2="802.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="802.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="872.0" x2="872.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="872.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="941.2" x2="941.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="941.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="782" x2="962" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="782" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode · update 100</text>
+<line x1="782" x2="962" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M802.8,129.2 L872.0,119.9 L941.2,145.6" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="802.8" cy="129.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -4.70</title></circle>
+<circle cx="872.0" cy="119.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -3.50</title></circle>
+<circle cx="941.2" cy="145.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -6.8</title></circle></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1032 250" role="img" aria-label="parallel RL merge gap" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<line x1="80.8" x2="102.8" y1="12" y2="12" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3"/><rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
+<line x1="62" x2="242" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="62" x2="242" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="62" x2="242" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="62" x2="242" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="242" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="82.8" x2="82.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="82.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="152.0" x2="152.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="152.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="221.2" x2="221.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="221.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="242" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="62" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K · update 50</text>
+<text x="152.0" y="218" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">merge weight w</text>
+<text transform="translate(24,116.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">merged − full batch (points)</text>
+<line x1="62" x2="242" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M82.8,86.4 L152.0,73.2 L221.2,73.2" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="82.8" cy="86.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → 0.80</title></circle>
+<circle cx="152.0" cy="73.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → 2.50</title></circle>
+<circle cx="221.2" cy="73.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → 2.50</title></circle>
+<path d="M82.8,84.9 L152.0,78.7 L221.2,141.7" fill="none" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="78.7" y="80.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0 → 1.00</title></rect>
+<rect x="147.9" y="74.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0.5 → 1.80</title></rect>
+<rect x="217.2" y="137.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 1 → -6.3</title></rect>
+<line x1="302" x2="482" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="302" x2="482" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="302" x2="482" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="302" x2="482" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="302" x2="482" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="296" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="322.8" x2="322.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="322.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="392.0" x2="392.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="392.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="461.2" x2="461.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="461.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="302" x2="482" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="302" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K · update 100</text>
+<line x1="302" x2="482" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M322.8,105.9 L392.0,98.9 L461.2,126.1" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="322.8" cy="105.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -1.70</title></circle>
+<circle cx="392.0" cy="98.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -0.80</title></circle>
+<circle cx="461.2" cy="126.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -4.30</title></circle>
+<path d="M322.8,77.1 L392.0,63.1" fill="none" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<rect x="318.7" y="73.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0 → 2.00</title></rect>
+<rect x="387.9" y="59.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear: 0.5 → 3.80</title></rect>
+<line x1="542" x2="722" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="542" x2="722" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="542" x2="722" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="542" x2="722" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="542" x2="722" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="536" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="562.8" x2="562.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="562.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="632.0" x2="632.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="632.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="701.2" x2="701.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="701.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="542" x2="722" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="542" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode · update 50</text>
+<line x1="542" x2="722" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M562.8,159.6 L632.0,146.3 L701.2,130.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="562.8" cy="159.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -8.6</title></circle>
+<circle cx="632.0" cy="146.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -6.9</title></circle>
+<circle cx="701.2" cy="130.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -4.90</title></circle>
+<line x1="782" x2="962" y1="186.0" y2="186.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="189.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-12</text>
+<line x1="782" x2="962" y1="154.9" y2="154.9" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="158.4" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-8</text>
+<line x1="782" x2="962" y1="123.8" y2="123.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="127.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-4</text>
+<line x1="782" x2="962" y1="92.7" y2="92.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="96.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="782" x2="962" y1="61.6" y2="61.6" stroke="var(--grid)" stroke-width="1"/>
+<text x="776" y="65.1" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">4</text>
+<line x1="802.8" x2="802.8" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="802.8" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">¼</text>
+<line x1="872.0" x2="872.0" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="872.0" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">½</text>
+<line x1="941.2" x2="941.2" y1="186" y2="190" stroke="var(--axis)"/>
+<text x="941.2" y="202" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="782" x2="962" y1="186" y2="186" stroke="var(--axis)"/>
+<text x="782" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode · update 100</text>
+<line x1="782" x2="962" y1="92.7" y2="92.7" stroke="var(--axis)" stroke-dasharray="None"/>
+<path d="M802.8,129.2 L872.0,119.9 L941.2,145.6" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="802.8" cy="129.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0 → -4.70</title></circle>
+<circle cx="872.0" cy="119.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 0.5 → -3.50</title></circle>
+<circle cx="941.2" cy="145.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>real: 1 → -6.8</title></circle></svg></div></div><figcaption class="fig-cap"><p lang="zh">y：合并后的准确率减去同一个 arm 完整 batch 的 run（任务自己的题集）；0 = 和完整 batch 一样。x：每个 worker 的权重 w（¼ 是平均，1 是相加）。蓝实线 = real，橙虚线 = linear。差值的 s.e. 约 3 点。</p><p lang="en">y: the merge's accuracy minus the same arm's full-batch run (the task's own set); 0 = as good as the full batch. x: the weight w on each worker (¼ is the average, 1 the sum). Blue solid = real, orange dashed = linear. A difference has an s.e. of about 3 points.</p></figcaption></figure>
 <p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这是 11-18 的“并行 RL”问题在同一个任务上的版本；C4 是跨任务的版本（混合数据训练 t 步 ≈ 各训练 t/2 步再相加），C6 的 seed soup 是 2 个 worker、各用完整 batch 的特例（平均不比单个差；相加时 real 在 KodCode 上掉 6 点，linear 不掉）。</p>
 <p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This is the “parallel RL” question of 11-18 on a single task; C4 is the cross-task version (mixed-data training for t updates ≈ each task for t/2 updates, then added), and the seed soups of C6 are the special case of 2 workers with full batches each (the average is no worse than either; the sum costs real 6 points on KodCode and linear nothing).</p>
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>进行中：只有一个 seed 的 4 个 worker；worker 的数据是不同的打乱顺序，不是一个 batch 的严格切分（代码里还没有切分数据的选项）。KodCode 慢，update 100 的合并在开会后才有。</p>
@@ -4966,7 +5170,97 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="793.0" y="62.5" width="16.1" height="0.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>≥ 0.9 · network: 0.0</title></rect>
 <rect x="815.1" y="62.7" width="16.1" height="0.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>≥ 0.9 · linear model: 0.0</title></rect>
 <text x="812.1" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">≥ 0.9</text>
-<line x1="602" x2="832" y1="62.7" y2="62.7" stroke="var(--axis)" stroke-dasharray="None"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">固定文本上的 token 按 <span class="tex" data-tex="\theta _{0}">θ₀</span> 给参考 token 的概率分成 4 组（677、1,078、1,711、7,190 个）；y 是该组 log p 变化的平均。real 的 update 500，两个 seed 的平均。</p><p lang="en">Tokens of the fixed text grouped by <span class="tex" data-tex="\theta _{0}">θ₀</span>'s probability of the reference token (677, 1,078, 1,711 and 7,190 tokens); y is the mean change in log p in the group. Real updates at 500, mean of two seeds.</p></figcaption></figure>
+<line x1="602" x2="832" y1="62.7" y2="62.7" stroke="var(--axis)" stroke-dasharray="None"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">固定文本上的 token 按 <span class="tex" data-tex="\theta _{0}">θ₀</span> 给参考 token 的概率分成 4 组（677、1,078、1,711、7,190 个）；y 是该组 log p 变化的平均。real 的 update 500，两个 seed 的平均。</p><p lang="en">Tokens of the fixed text grouped by <span class="tex" data-tex="\theta _{0}">θ₀</span>'s probability of the reference token (677, 1,078, 1,711 and 7,190 tokens); y is the mean change in log p in the group. Real updates at 500, mean of two seeds.</p></figcaption></figure><figure class="fig" id="fig-rlcos" aria-labelledby="figt-rlcos"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C10d</span><span lang="en">Figure C10d</span></div><h4 class="fig-title" id="figt-rlcos"><span lang="zh">real 和 linear 学到的是同一个函数吗</span><span lang="en">Do real and linear learn the same function?</span></h4><p class="fig-q"><span lang="zh">同一个任务的 real run 和 linear run，函数有多像？</span><span lang="en">How alike are the functions of a task's real run and linear run?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1020 264" role="img" aria-label="real vs linear cosine" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-third)" stroke="var(--c-third)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real vs linear，seed 0</text>
+<rect x="198.5" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="219.5" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real vs linear，seed 1</text>
+<rect x="382.0" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="403.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">两个 real seed</text>
+<rect x="515.0" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="536.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">两个 linear seed</text>
+<line x1="62" x2="962" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="962" y1="170.0" y2="170.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="173.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="962" y1="140.0" y2="140.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="143.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="962" y1="110.0" y2="110.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="113.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="962" y1="80.0" y2="80.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="83.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="962" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="962" y1="200" y2="200" stroke="var(--axis)"/>
+<text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">函数 cosine</text>
+<rect x="69.1" y="88.1" width="24.4" height="111.9" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K · real vs linear，seed 0: 0.7</title></rect>
+<rect x="101.2" y="93.1" width="24.4" height="106.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · real vs linear，seed 1: 0.7</title></rect>
+<rect x="133.4" y="99.9" width="24.4" height="100.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K · 两个 real seed: 0.7</title></rect>
+<rect x="165.5" y="77.9" width="24.4" height="122.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · 两个 linear seed: 0.8</title></rect>
+<text x="129.5" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<rect x="223.4" y="94.6" width="24.4" height="105.4" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>NuminaMath · real vs linear，seed 0: 0.7</title></rect>
+<rect x="255.5" y="82.8" width="24.4" height="117.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · real vs linear，seed 1: 0.8</title></rect>
+<rect x="287.7" y="96.4" width="24.4" height="103.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath · 两个 real seed: 0.7</title></rect>
+<rect x="319.8" y="76.8" width="24.4" height="123.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · 两个 linear seed: 0.8</title></rect>
+<text x="283.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">NuminaMath</text>
+<rect x="409.8" y="78.5" width="24.4" height="121.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO · real vs linear，seed 1: 0.8</title></rect>
+<rect x="442.0" y="95.3" width="24.4" height="104.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO · 两个 real seed: 0.7</title></rect>
+<text x="438.1" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="532.0" y="77.6" width="24.4" height="122.4" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris easy · real vs linear，seed 0: 0.8</title></rect>
+<rect x="564.1" y="89.3" width="24.4" height="110.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy · real vs linear，seed 1: 0.7</title></rect>
+<rect x="596.2" y="83.9" width="24.4" height="116.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy · 两个 real seed: 0.8</title></rect>
+<rect x="628.4" y="75.2" width="24.4" height="124.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy · 两个 linear seed: 0.8</title></rect>
+<text x="592.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="686.3" y="134.3" width="24.4" height="65.7" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris hard · real vs linear，seed 0: 0.4</title></rect>
+<rect x="718.4" y="135.6" width="24.4" height="64.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard · real vs linear，seed 1: 0.4</title></rect>
+<rect x="750.5" y="129.7" width="24.4" height="70.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard · 两个 real seed: 0.5</title></rect>
+<rect x="782.7" y="156.6" width="24.4" height="43.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard · 两个 linear seed: 0.3</title></rect>
+<text x="746.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="840.5" y="91.0" width="24.4" height="109.0" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode · real vs linear，seed 0: 0.7</title></rect>
+<rect x="872.7" y="67.2" width="24.4" height="132.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · real vs linear，seed 1: 0.9</title></rect>
+<rect x="904.8" y="62.1" width="24.4" height="137.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode · 两个 real seed: 0.9</title></rect>
+<rect x="937.0" y="80.8" width="24.4" height="119.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · 两个 linear seed: 0.8</title></rect>
+<text x="900.9" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1020 264" role="img" aria-label="real vs linear cosine" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-third)" stroke="var(--c-third)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real vs linear, seed 0</text>
+<rect x="199.4" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="220.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real vs linear, seed 1</text>
+<rect x="383.8" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="404.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">two real seeds</text>
+<rect x="518.6" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="539.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">two linear seeds</text>
+<line x1="62" x2="962" y1="200.0" y2="200.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="203.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="962" y1="170.0" y2="170.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="173.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="962" y1="140.0" y2="140.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="143.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="962" y1="110.0" y2="110.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="113.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="962" y1="80.0" y2="80.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="83.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="962" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="962" y1="200" y2="200" stroke="var(--axis)"/>
+<text transform="translate(24,125.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">function cosine</text>
+<rect x="69.1" y="88.1" width="24.4" height="111.9" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K · real vs linear, seed 0: 0.7</title></rect>
+<rect x="101.2" y="93.1" width="24.4" height="106.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · real vs linear, seed 1: 0.7</title></rect>
+<rect x="133.4" y="99.9" width="24.4" height="100.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K · two real seeds: 0.7</title></rect>
+<rect x="165.5" y="77.9" width="24.4" height="122.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · two linear seeds: 0.8</title></rect>
+<text x="129.5" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<rect x="223.4" y="94.6" width="24.4" height="105.4" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>NuminaMath · real vs linear, seed 0: 0.7</title></rect>
+<rect x="255.5" y="82.8" width="24.4" height="117.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · real vs linear, seed 1: 0.8</title></rect>
+<rect x="287.7" y="96.4" width="24.4" height="103.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath · two real seeds: 0.7</title></rect>
+<rect x="319.8" y="76.8" width="24.4" height="123.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · two linear seeds: 0.8</title></rect>
+<text x="283.8" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">NuminaMath</text>
+<rect x="409.8" y="78.5" width="24.4" height="121.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO · real vs linear, seed 1: 0.8</title></rect>
+<rect x="442.0" y="95.3" width="24.4" height="104.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO · two real seeds: 0.7</title></rect>
+<text x="438.1" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="532.0" y="77.6" width="24.4" height="122.4" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris easy · real vs linear, seed 0: 0.8</title></rect>
+<rect x="564.1" y="89.3" width="24.4" height="110.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy · real vs linear, seed 1: 0.7</title></rect>
+<rect x="596.2" y="83.9" width="24.4" height="116.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy · two real seeds: 0.8</title></rect>
+<rect x="628.4" y="75.2" width="24.4" height="124.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy · two linear seeds: 0.8</title></rect>
+<text x="592.4" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="686.3" y="134.3" width="24.4" height="65.7" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris hard · real vs linear, seed 0: 0.4</title></rect>
+<rect x="718.4" y="135.6" width="24.4" height="64.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard · real vs linear, seed 1: 0.4</title></rect>
+<rect x="750.5" y="129.7" width="24.4" height="70.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard · two real seeds: 0.5</title></rect>
+<rect x="782.7" y="156.6" width="24.4" height="43.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard · two linear seeds: 0.3</title></rect>
+<text x="746.6" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="840.5" y="91.0" width="24.4" height="109.0" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode · real vs linear, seed 0: 0.7</title></rect>
+<rect x="872.7" y="67.2" width="24.4" height="132.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · real vs linear, seed 1: 0.9</title></rect>
+<rect x="904.8" y="62.1" width="24.4" height="137.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode · two real seeds: 0.9</title></rect>
+<rect x="937.0" y="80.8" width="24.4" height="119.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · two linear seeds: 0.8</title></rect>
+<text x="900.9" y="215.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text></svg></div></div><figcaption class="fig-cap"><p lang="zh">update 500 时固定文本上函数向量的 cosine（各自的 way 读）。绿 = 同一个任务的 real run 和 linear run（实心 seed 0，空心 seed 1）；蓝/橙 = 两个 real seed / 两个 linear seed 之间（参照）。DAPO linear seed 0 没学会，不用。</p><p lang="en">Cosine of the function vectors on the fixed text at update 500 (each read by its own way). Green = a task's real run vs its linear run (filled seed 0, open seed 1); blue/orange = between two real seeds / two linear seeds (the reference). DAPO linear seed 0 did not learn and is left out.</p></figcaption></figure>
 <p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这和 11-11 的 F3（real 的 update 不是 lazy 的）一致，并给了时间：不 lazy 的部分在 run 起飞时出现（11-11 的 F5 takeoff），之后 real 沿着 eNTK 预测的方向走，只是走得更远。网络在这个方向上“放大”了 eNTK 的预测，所以 linear run 自己需要更大的方向才能达到同样的函数变化。</p>
 <p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This agrees with F3 of 11-11 (the real update is not lazy) and dates it: the non-lazy part appears when the run takes off (the takeoff of F5, 11-11); afterwards real moves along the direction the eNTK predicts, only further. The network amplifies the eNTK's prediction along that direction.</p>
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>固定文本上 teacher forcing 的 log p；单个 seed（seed 1 只有 update 500）。相对误差大不等于行为差得多：准确率由少数关键 token 决定（11-09 的 fork），这里的误差是全文本的平均。</p>
