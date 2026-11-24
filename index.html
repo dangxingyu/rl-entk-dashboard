@@ -591,7 +591,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 09:03 PST</span><span lang="en">Numbers read 11-24 09:03 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 09:09 PST</span><span lang="en">Numbers read 11-24 09:09 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -600,8 +600,8 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <div class="answers">
 <p lang="zh"><b>RL 的 update 能组合吗？</b>大体能。减去一个 update 会删掉那项能力而不碰另一项；两个任务的 update 相加，两边的提升都保留；在混合数据上训练 t 步，约等于两个任务各训练 t/2 步再相加。原因是每个 update 主要改自己领域的文本，而且在权重里几乎互相正交。</p>
 <p lang="en"><b>Can RL updates be composed?</b> Largely, yes. Subtracting an update removes its skill and leaves the other intact; adding two tasks' updates keeps both gains; training on mixed data for t updates lands about where each task trained for t/2 updates, added, does. The reason: each update changes mostly its own domain's text, and updates are nearly orthogonal in weights.</p>
-<p lang="zh"><b>eNTK 有没有用？</b>几何上有用：θ₀ 处的 eNTK 已经知道哪些方向重要（随机方向几乎不动函数），也知道哪些 update 是同一个函数（尽管它们在权重里正交）。距离上不准：它预测的变化太小，这个差距在 run 起飞时出现；起飞后重新展开能补上大小，但不能保证方向。</p>
-<p lang="en"><b>Is the eNTK useful?</b> For geometry, yes: at θ₀ it already knows which directions matter (a random direction barely moves the function) and which updates are the same function, although they are orthogonal in weights. For distance, no: it predicts too small a change, a shortfall that appears when the run takes off; re-taking it after takeoff fixes the size but not reliably the direction.</p>
+<p lang="zh"><b>eNTK 有没有用？</b>几何上有用：θ₀ 处的 eNTK 已经知道哪些方向重要（随机方向几乎不动函数），也知道哪些 update 是同一个函数（尽管它们在权重里正交）。距离上不准：它预测的变化太小，这个差距在 run 起飞时出现；起飞后重新展开能补上大小，准确率也追上 real，但函数的方向不一定对。</p>
+<p lang="en"><b>Is the eNTK useful?</b> For geometry, yes: at θ₀ it already knows which directions matter (a random direction barely moves the function) and which updates are the same function, although they are orthogonal in weights. For distance, no: it predicts too small a change, a shortfall that appears when the run takes off; re-taking it after takeoff fixes the size and matches real in accuracy, though not reliably the function's direction.</p>
 </div>
 <ol class="corelist">
 <li class="partli"><b><span lang="zh">第一部分：RL 的 update 能像向量一样组合吗？</span><span lang="en">Part 1. Can RL updates be composed like vectors?</span></b><ol>
@@ -615,15 +615,15 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <li><a href="#c7"><span lang="zh">RL 的 update 指向输出敏感的方向：同样大小的随机方向让函数变化小 200 倍以上。</span><span lang="en">RL updates point where the outputs are sensitive: a random direction of the same size moves the function over 200× less.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">|f| 差 184–306 倍，随机方向不改变准确率；两个 seed 之差在函数上约半个 update，准确率多数回到 θ₀。</span><span lang="en">184–306× in |f|, no change in accuracy; the seed difference moves the function by about half an update but mostly returns accuracy to θ₀.</span></li>
 <li><a href="#c8"><span lang="zh">eNTK 在 θ₀ 处就看得出哪些 update 是同一个函数；权重 cosine 看不出。</span><span lang="en">The eNTK at θ₀ already sees which updates are the same function; the weight cosine does not.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">253 对 update：eNTK cosine 和网络函数 cosine 的相关 0.86（平均差 0.10），权重 cosine 0.60（平均差 0.45）。</span><span lang="en">253 pairs of updates: the eNTK cosine correlates 0.86 with the network's function cosine (mean difference 0.10); the weight cosine 0.60 (mean difference 0.45).</span></li>
 <li><a href="#c9"><span lang="zh">eNTK 对 real update 的预测：方向大体对、大小偏小，误差在 run 起飞时跳上去。</span><span lang="en">The eNTK's prediction of the real update: mostly the right direction, too small; the error jumps when the run takes off.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">相对误差 update 5 时 0.02–0.11，起飞后 0.62–0.95；准确率保留 0.71–0.89。</span><span lang="en">Relative error 0.02–0.11 at update 5, 0.62–0.95 after takeoff; accuracy gain kept 0.71–0.89.</span></li>
-<li><a href="#c10"><span lang="zh">θ₀ 的 eNTK 预测得太小，是起飞造成的：起飞后重新展开，大小不再偏小；方向只在部分 run 里变准。</span><span lang="en">The θ₀ eNTK's too-small prediction comes from takeoff: re-taken after it, the size is no longer short; the direction improves only in some runs.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">大小之比：起飞前 0.39–0.65，起飞后 0.85–1.77；方向比 θ₀ 好的 8/12。</span><span lang="en">Size ratio 0.39–0.65 before takeoff, 0.85–1.77 after; direction better than θ₀ in 8 of 12.</span></li>
+<li><a href="#c10"><span lang="zh">θ₀ 的 eNTK 预测得太小，是起飞造成的：起飞后重新展开，大小不再偏小，准确率和 real 一样；函数方向只在部分 run 里变准。</span><span lang="en">The θ₀ eNTK's too-small prediction comes from takeoff: re-taken after it, the size is no longer short and accuracy matches real; the function's direction improves only in some runs.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">大小之比：起飞前 0.39–1.00，起飞后 0.85–1.79；准确率和 real 差 −1.1 到 +0.7 点（θ₀ 的 eNTK 低 4.6–10.4 点）；方向比 θ₀ 好的 12/18。</span><span lang="en">Size ratio 0.39–1.00 before takeoff, 0.85–1.79 after; accuracy within −1.1 to +0.7 points of real (θ₀ eNTK: 4.6–10.4 lower); direction better than θ₀ in 12 of 18.</span></li>
 <li><a href="#c11"><span lang="zh">失败的预测：函数相似度不比权重 cosine 更能预测迁移。</span><span lang="en">Failed prediction: function similarity does not predict transfer better than weight cosine.</span></a><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></li></ol></li>
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 09:03 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 09:09 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 09:03 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 09:09 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
@@ -2516,13 +2516,14 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <circle cx="446.5" cy="98.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
 <circle cx="494.3" cy="97.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 49.8</title></circle>
 <circle cx="542.1" cy="92.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 500 → 50.8</title></circle>
-<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5 L542.1,79.0" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
 <rect x="346.9" y="123.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 43.8</title></rect>
 <rect x="370.8" y="134.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 41.4</title></rect>
 <rect x="394.7" y="117.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 44.9</title></rect>
 <rect x="418.6" y="89.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 50.6</title></rect>
 <rect x="442.4" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 49.9</title></rect>
 <rect x="490.2" y="75.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 53.3</title></rect>
+<rect x="538.0" y="74.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 500 → 53.4</title></rect>
 <path d="M350.9,152.0 L398.7,127.2 L446.5,139.0 L494.3,121.5 L542.1,93.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
 <path d="M350.9,146.8 L356.1,152.0 L350.9,157.2 L345.8,152.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 38.8</title></path>
 <path d="M398.7,122.1 L403.9,127.2 L398.7,132.4 L393.5,127.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 43.8</title></path>
@@ -2695,13 +2696,14 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <circle cx="446.5" cy="98.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 300 → 49.6</title></circle>
 <circle cx="494.3" cy="97.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 400 → 49.8</title></circle>
 <circle cx="542.1" cy="92.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>joint: 500 → 50.8</title></circle>
-<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
+<path d="M350.9,127.2 L374.8,139.0 L398.7,121.5 L422.6,93.0 L446.5,96.5 L494.3,79.5 L542.1,79.0" fill="none" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3" stroke-linejoin="round"/>
 <rect x="346.9" y="123.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 100 → 43.8</title></rect>
 <rect x="370.8" y="134.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 150 → 41.4</title></rect>
 <rect x="394.7" y="117.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 200 → 44.9</title></rect>
 <rect x="418.6" y="89.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 250 → 50.6</title></rect>
 <rect x="442.4" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 300 → 49.9</title></rect>
 <rect x="490.2" y="75.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 400 → 53.3</title></rect>
+<rect x="538.0" y="74.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"><title>sum: 500 → 53.4</title></rect>
 <path d="M350.9,152.0 L398.7,127.2 L446.5,139.0 L494.3,121.5 L542.1,93.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3" stroke-linejoin="round"/>
 <path d="M350.9,146.8 L356.1,152.0 L350.9,157.2 L345.8,152.0 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 100 → 38.8</title></path>
 <path d="M398.7,122.1 L403.9,127.2 L398.7,132.4 L393.5,127.2 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>half: 200 → 43.8</title></path>
@@ -4854,11 +4856,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 </section>
 <section class="finding" id="c10" aria-labelledby="c10-h">
 <div class="fhead"><span class="fn">C10</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
-<h3 id="c10-h"><span lang="zh">起飞后重新展开 eNTK：预测的大小对了，方向不一定</span><span lang="en">Re-taking the eNTK after takeoff fixes the predicted size, but not reliably the direction</span></h3>
+<h3 id="c10-h"><span lang="zh">起飞后重新展开 eNTK：大小对了，准确率追上 real；函数的方向不一定对</span><span lang="en">Re-taking the eNTK after takeoff fixes the predicted size and matches real in accuracy, though not reliably the function's direction</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>把 real run 在第 T 步的权重 θ<sub>T</sub> 当作新的展开点，取那里的 eNTK（一阶展开），让它预测从 θ<sub>T</sub> 到 θ₅₀₀ 的函数变化，和网络真实的变化比较。剩下的路越短越容易预测，所以对照是 θ₀ 处的 eNTK 预测一个同样大小的函数变化（C9 里 seed 0 沿 run 或沿 αΔ 的点中 |f_net| 最接近的那个）。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>Take the real run's weights at update T, θ<sub>T</sub>, as a new expansion point, take the eNTK there (the first-order expansion), and let it predict the function change from θ<sub>T</sub> to θ₅₀₀; compare with the network's actual change. A shorter remaining path is easier to predict, so the reference is the θ₀ eNTK predicting a function change of the same size (the seed-0 point of C9, along the run or along αΔ, whose |f_net| is closest).</p>
-<p class="f-data" lang="zh"><b class="f-k">数据</b>大小：起飞前（T = 10、20）重新展开，预测的大小是网络的 0.39–0.65，和 θ₀ 一样偏小；起飞后（T = 100、250，DAPO 只取 250）是 0.85–1.77，7 个 run（任务 × seed）里没有一个偏小，有的偏大。方向：起飞后的相对误差 0.31–1.62，θ₀ 处同样大小的变化是 0.53–0.90；12 个点里 8 个比 θ₀ 好，变差的是 GSM8K s1、NuminaMath s0。检查：在 θ₁₀₀ 展开、位移为 0 时，linear 模型和网络在 θ₁₀₀ 的 log p 最大相差 < 10⁻⁴ nats（fp32 的误差）。</p>
-<p class="f-data" lang="en"><b class="f-k">Data</b>Size: re-taken before takeoff (T = 10, 20) the predicted size is 0.39–0.65 of the network's, as short as at θ₀; after takeoff (T = 100 and 250; 250 only for DAPO) it is 0.85–1.77: short in none of the 7 runs (task × seed), too large in some. Direction: after takeoff the relative error is 0.31–1.62, against 0.53–0.90 for a change of the same size at θ₀; 8 of 12 points beat θ₀, and the ones that get worse are GSM8K s1, NuminaMath s0. Check: expanded at θ₁₀₀ with zero displacement, the linear model matches the network's log p at θ₁₀₀ to < 10⁻⁴ nats (fp32 error).</p>
+<p class="f-data" lang="zh"><b class="f-k">数据</b>大小：起飞前（T = 10、20）重新展开，预测的大小是网络的 0.39–0.65，和 θ₀ 一样偏小（例外：Polaris easy s1 T = 10（1.00））；起飞后（T = 100、250，DAPO 只取 250）是 0.85–1.79，10 个 run（任务 × seed）里没有一个偏小，有的偏大。方向：起飞后的相对误差 0.28–1.62，θ₀ 处同样大小的变化是 0.53–0.90；18 个点里 12 个比 θ₀ 好，变差的是 GSM8K s1、KodCode s1、NuminaMath s0。准确率（seed 0）：起飞后重新展开、走到 θ₅₀₀ 的位移，在每个有信号的题集上和 real θ₅₀₀ 相差 −1.1 到 +0.7 点（配对 s.e. 1.2–2.0），θ₀ 的 eNTK 读同一个 real update 则低 4.6–10.4 点。GSM8K 从 θ₁₀₀ 起 real 还涨 4.9 点，重新展开的 eNTK 涨 5.5 点。KodCode 从 θ₁₀₀ 起 real 还涨 6.6 点，重新展开的 eNTK 涨 6.1 点。DAPO 在起飞前（θ₁₀₀，31.1%）展开则停在 32.6%，real 是 51.4%。检查：在 θ₁₀₀ 展开、位移为 0 时，linear 模型和网络在 θ₁₀₀ 的 log p 最大相差 < 10⁻⁴ nats（fp32 的误差）。</p>
+<p class="f-data" lang="en"><b class="f-k">Data</b>Size: re-taken before takeoff (T = 10, 20) the predicted size is 0.39–0.65 of the network's, as short as at θ₀ (exception: Polaris easy s1 at T = 10 (1.00)); after takeoff (T = 100 and 250; 250 only for DAPO) it is 0.85–1.79: short in none of the 10 runs (task × seed), too large in some. Direction: after takeoff the relative error is 0.28–1.62, against 0.53–0.90 for a change of the same size at θ₀; 12 of 18 points beat θ₀, and the ones that get worse are GSM8K s1, KodCode s1, NuminaMath s0. In accuracy (seed 0), run out to θ₅₀₀'s displacement, the eNTK re-taken after takeoff is within −1.1 to +0.7 points of real θ₅₀₀ on every set with signal (paired s.e. 1.2–2.0), while the θ₀ eNTK reading the same real update is 4.6–10.4 points lower. From θ₁₀₀, GSM8K's real run still gains 4.9 points and the re-taken eNTK 5.5. From θ₁₀₀, KodCode's real run still gains 6.6 points and the re-taken eNTK 6.1. Expanded before DAPO's takeoff (θ₁₀₀, 31.1%), it stays at 32.6% against real's 51.4%. Check: expanded at θ₁₀₀ with zero displacement, the linear model matches the network's log p at θ₁₀₀ to < 10⁻⁴ nats (fp32 error).</p>
 <figure class="fig" id="fig-relin" aria-labelledby="figt-relin"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C10</span><span lang="en">Figure C10</span></div><h4 class="fig-title" id="figt-relin"><span lang="zh">在 run 上重新展开的 eNTK</span><span lang="en">The eNTK re-taken along the run</span></h4><p class="fig-q"><span lang="zh">eNTK 是一直不准，还是在某个时刻过时了？</span><span lang="en">Is the eNTK wrong throughout, or does it go stale at some point?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 988 212" role="img" aria-label="relin rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">在第 T 步重新展开的 eNTK，预测 T → 500（细线：seed 1）</text>
 <line x1="325.6" x2="347.6" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3"/><rect x="332.6" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="353.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">θ₀ 处的 eNTK，同样大小的变化</text>
 <line x1="58" x2="208" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
@@ -4913,6 +4915,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
+<path d="M256.3,115.9 L335.4,141.0 L366.9,145.5" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="256.3" cy="115.9" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.73</title></circle>
+<circle cx="335.4" cy="141.0" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.35</title></circle>
+<circle cx="366.9" cy="145.5" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.28</title></circle>
 <path d="M256.3,115.2 L280.1,113.8 L311.6,117.7 L335.4,100.2 L366.9,95.7 L383.1,79.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="256.3" cy="115.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.74</title></circle>
 <circle cx="280.1" cy="113.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.77</title></circle>
@@ -4977,6 +4983,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<path d="M628.3,100.6 L707.4,139.1 L738.9,140.6" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="628.3" cy="100.6" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.97</title></circle>
+<circle cx="707.4" cy="139.1" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.38</title></circle>
+<circle cx="738.9" cy="140.6" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.36</title></circle>
 <path d="M628.3,117.3 L652.1,115.9 L683.6,116.7 L707.4,143.6 L738.9,131.8 L755.1,151.5" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="628.3" cy="117.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.71</title></circle>
 <circle cx="652.1" cy="115.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.73</title></circle>
@@ -5007,6 +5017,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="941.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="802" x2="952" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="802" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<path d="M814.3,114.0 L893.4,116.4 L924.9,76.5" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="814.3" cy="114.0" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.76</title></circle>
+<circle cx="893.4" cy="116.4" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.73</title></circle>
+<circle cx="924.9" cy="76.5" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 1.33</title></circle>
 <path d="M814.3,113.5 L838.1,109.2 L869.6,117.8 L893.4,132.1 L924.9,139.8 L941.1,123.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="814.3" cy="113.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.77</title></circle>
 <circle cx="838.1" cy="109.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.84</title></circle>
@@ -5079,6 +5093,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
 <line x1="244" x2="394" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M256.3,135.4 L335.4,110.2 L366.9,108.6" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="256.3" cy="135.4" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.48</title></circle>
+<circle cx="335.4" cy="110.2" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.91</title></circle>
+<circle cx="366.9" cy="108.6" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.94</title></circle>
 <path d="M256.3,136.4 L280.1,133.0 L311.6,128.7 L335.4,99.2 L366.9,105.4 L383.1,76.2" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="256.3" cy="136.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.47</title></circle>
 <circle cx="280.1" cy="133.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
@@ -5149,6 +5167,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
 <line x1="616" x2="766" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M628.3,104.8 L707.4,101.9 L738.9,108.4" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="628.3" cy="104.8" r="5" fill="transparent"><title>θ_T seed 1: 1 → 1.00</title></circle>
+<circle cx="707.4" cy="101.9" r="5" fill="transparent"><title>θ_T seed 1: 2 → 1.05</title></circle>
+<circle cx="738.9" cy="108.4" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.94</title></circle>
 <path d="M628.3,133.7 L652.1,132.8 L683.6,107.3 L707.4,114.0 L738.9,95.1 L755.1,106.9" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="628.3" cy="133.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.51</title></circle>
 <circle cx="652.1" cy="132.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
@@ -5182,6 +5204,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="802" x2="952" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="802" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
 <line x1="802" x2="952" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M814.3,140.4 L893.4,90.5 L924.9,58.4" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="814.3" cy="140.4" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.40</title></circle>
+<circle cx="893.4" cy="90.5" r="5" fill="transparent"><title>θ_T seed 1: 2 → 1.25</title></circle>
+<circle cx="924.9" cy="58.4" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 1.79</title></circle>
 <path d="M814.3,140.9 L838.1,131.6 L869.6,123.4 L893.4,104.4 L924.9,110.9 L941.1,94.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="814.3" cy="140.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.39</title></circle>
 <circle cx="838.1" cy="131.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.55</title></circle>
@@ -5249,6 +5275,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
+<path d="M256.3,115.9 L335.4,141.0 L366.9,145.5" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="256.3" cy="115.9" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.73</title></circle>
+<circle cx="335.4" cy="141.0" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.35</title></circle>
+<circle cx="366.9" cy="145.5" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.28</title></circle>
 <path d="M256.3,115.2 L280.1,113.8 L311.6,117.7 L335.4,100.2 L366.9,95.7 L383.1,79.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="256.3" cy="115.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.74</title></circle>
 <circle cx="280.1" cy="113.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.77</title></circle>
@@ -5313,6 +5343,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<path d="M628.3,100.6 L707.4,139.1 L738.9,140.6" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="628.3" cy="100.6" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.97</title></circle>
+<circle cx="707.4" cy="139.1" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.38</title></circle>
+<circle cx="738.9" cy="140.6" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.36</title></circle>
 <path d="M628.3,117.3 L652.1,115.9 L683.6,116.7 L707.4,143.6 L738.9,131.8 L755.1,151.5" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="628.3" cy="117.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.71</title></circle>
 <circle cx="652.1" cy="115.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.73</title></circle>
@@ -5343,6 +5377,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="941.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
 <line x1="802" x2="952" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="802" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<path d="M814.3,114.0 L893.4,116.4 L924.9,76.5" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="814.3" cy="114.0" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.76</title></circle>
+<circle cx="893.4" cy="116.4" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.73</title></circle>
+<circle cx="924.9" cy="76.5" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 1.33</title></circle>
 <path d="M814.3,113.5 L838.1,109.2 L869.6,117.8 L893.4,132.1 L924.9,139.8 L941.1,123.8" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="814.3" cy="113.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.77</title></circle>
 <circle cx="838.1" cy="109.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.84</title></circle>
@@ -5415,6 +5453,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
 <line x1="244" x2="394" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M256.3,135.4 L335.4,110.2 L366.9,108.6" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="256.3" cy="135.4" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.48</title></circle>
+<circle cx="335.4" cy="110.2" r="5" fill="transparent"><title>θ_T seed 1: 2 → 0.91</title></circle>
+<circle cx="366.9" cy="108.6" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.94</title></circle>
 <path d="M256.3,136.4 L280.1,133.0 L311.6,128.7 L335.4,99.2 L366.9,105.4 L383.1,76.2" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="256.3" cy="136.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.47</title></circle>
 <circle cx="280.1" cy="133.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
@@ -5485,6 +5527,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
 <line x1="616" x2="766" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M628.3,104.8 L707.4,101.9 L738.9,108.4" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="628.3" cy="104.8" r="5" fill="transparent"><title>θ_T seed 1: 1 → 1.00</title></circle>
+<circle cx="707.4" cy="101.9" r="5" fill="transparent"><title>θ_T seed 1: 2 → 1.05</title></circle>
+<circle cx="738.9" cy="108.4" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 0.94</title></circle>
 <path d="M628.3,133.7 L652.1,132.8 L683.6,107.3 L707.4,114.0 L738.9,95.1 L755.1,106.9" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="628.3" cy="133.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.51</title></circle>
 <circle cx="652.1" cy="132.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
@@ -5518,6 +5564,10 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <line x1="802" x2="952" y1="164" y2="164" stroke="var(--axis)"/>
 <text x="802" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
 <line x1="802" x2="952" y1="105.0" y2="105.0" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M814.3,140.4 L893.4,90.5 L924.9,58.4" fill="none" stroke="var(--c-real)" stroke-width="1" stroke-linejoin="round"/>
+<circle cx="814.3" cy="140.4" r="5" fill="transparent"><title>θ_T seed 1: 1 → 0.40</title></circle>
+<circle cx="893.4" cy="90.5" r="5" fill="transparent"><title>θ_T seed 1: 2 → 1.25</title></circle>
+<circle cx="924.9" cy="58.4" r="5" fill="transparent"><title>θ_T seed 1: 2.39794 → 1.79</title></circle>
 <path d="M814.3,140.9 L838.1,131.6 L869.6,123.4 L893.4,104.4 L924.9,110.9 L941.1,94.0" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
 <circle cx="814.3" cy="140.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.39</title></circle>
 <circle cx="838.1" cy="131.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.55</title></circle>
@@ -5551,6 +5601,8 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text transform="translate(24,115.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">准确率 (%)</text>
 <rect x="67.6" y="73.4" width="17.7" height="106.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · θ₁₀₀: 65.6</title></rect>
 <rect x="91.6" y="77.8" width="17.7" height="102.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · θ₀ 的 eNTK: 62.9</title></rect>
+<rect x="115.6" y="64.5" width="17.7" height="115.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · θ₁₀₀ 的 eNTK: 71.1</title></rect>
+<rect x="139.6" y="65.4" width="17.7" height="114.6" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K · θ₂₅₀ 的 eNTK: 70.5</title></rect>
 <rect x="163.6" y="65.4" width="17.7" height="114.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K · real θ₅₀₀: 70.5</title></rect>
 <text x="124.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
 <line x1="62" x2="182" y1="108.7" y2="108.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
@@ -5569,6 +5621,7 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="217.6" y="78.8" width="17.7" height="101.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · θ₁₀₀: 62.3</title></rect>
 <rect x="241.6" y="75.5" width="17.7" height="104.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · θ₀ 的 eNTK: 64.3</title></rect>
 <rect x="265.6" y="68.8" width="17.7" height="111.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · θ₁₀₀ 的 eNTK: 68.4</title></rect>
+<rect x="289.6" y="69.8" width="17.7" height="110.2" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode · θ₂₅₀ 的 eNTK: 67.8</title></rect>
 <rect x="313.6" y="68.0" width="17.7" height="112.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode · real θ₅₀₀: 68.9</title></rect>
 <text x="274.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
 <line x1="212" x2="332" y1="134.0" y2="134.0" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
@@ -5584,7 +5637,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="356" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="362" x2="482" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="362" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
+<rect x="367.6" y="120.4" width="17.7" height="59.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · θ₁₀₀: 36.7</title></rect>
+<rect x="391.6" y="115.7" width="17.7" height="64.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · θ₀ 的 eNTK: 39.6</title></rect>
+<rect x="463.6" y="112.1" width="17.7" height="67.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath · real θ₅₀₀: 41.8</title></rect>
 <text x="424.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="362" x2="482" y1="139.1" y2="139.1" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="512" x2="632" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="506" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="512" x2="632" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5597,7 +5654,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="506" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="512" x2="632" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="512" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K → MATH-500</text>
+<rect x="517.6" y="96.5" width="17.7" height="83.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K → MATH-500 · θ₁₀₀: 51.4</title></rect>
+<rect x="541.6" y="107.7" width="17.7" height="72.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K → MATH-500 · θ₀ 的 eNTK: 44.5</title></rect>
+<rect x="613.6" y="91.8" width="17.7" height="88.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K → MATH-500 · real θ₅₀₀: 54.3</title></rect>
 <text x="574.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="512" x2="632" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="662" x2="782" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="656" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="662" x2="782" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5610,7 +5671,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="656" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="662" x2="782" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="662" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath → MATH-500</text>
+<rect x="667.6" y="99.1" width="17.7" height="80.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath → MATH-500 · θ₁₀₀: 49.8</title></rect>
+<rect x="691.6" y="101.4" width="17.7" height="78.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath → MATH-500 · θ₀ 的 eNTK: 48.4</title></rect>
+<rect x="763.6" y="95.5" width="17.7" height="84.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath → MATH-500 · real θ₅₀₀: 52.0</title></rect>
 <text x="724.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="662" x2="782" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="812" x2="932" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="806" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="812" x2="932" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5623,7 +5688,13 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="806" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="812" x2="932" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="812" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO → MATH-500</text>
+<rect x="817.6" y="129.5" width="17.7" height="50.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · θ₁₀₀: 31.1</title></rect>
+<rect x="841.6" y="113.4" width="17.7" height="66.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · θ₀ 的 eNTK: 41.0</title></rect>
+<rect x="865.6" y="127.0" width="17.7" height="53.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · θ₁₀₀ 的 eNTK: 32.6</title></rect>
+<rect x="889.6" y="95.3" width="17.7" height="84.7" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>DAPO → MATH-500 · θ₂₅₀ 的 eNTK: 52.1</title></rect>
+<rect x="913.6" y="96.5" width="17.7" height="83.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO → MATH-500 · real θ₅₀₀: 51.4</title></rect>
 <text x="874.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="812" x2="932" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="962" x2="1082" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="956" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="962" x2="1082" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5636,7 +5707,13 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="956" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="962" x2="1082" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="962" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy → MATH-500</text>
-<text x="1024.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1112 244" role="img" aria-label="relin accuracy" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">θ₁₀₀</text>
+<rect x="967.6" y="96.8" width="17.7" height="83.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · θ₁₀₀: 51.2</title></rect>
+<rect x="991.6" y="110.1" width="17.7" height="69.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · θ₀ 的 eNTK: 43.0</title></rect>
+<rect x="1015.6" y="97.8" width="17.7" height="82.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · θ₁₀₀ 的 eNTK: 50.6</title></rect>
+<rect x="1039.6" y="98.4" width="17.7" height="81.6" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris easy → MATH-500 · θ₂₅₀ 的 eNTK: 50.2</title></rect>
+<rect x="1063.6" y="96.8" width="17.7" height="83.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy → MATH-500 · real θ₅₀₀: 51.2</title></rect>
+<text x="1024.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="962" x2="1082" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 1112 244" role="img" aria-label="relin accuracy" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">θ₁₀₀</text>
 <rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK at θ₀</text>
 <rect x="203.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="224.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK at θ₁₀₀</text>
 <rect x="334.20000000000005" y="8" width="8" height="8" fill="var(--c-third)" stroke="var(--c-third)" stroke-width="1.6"/><text x="355.20000000000005" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK at θ₂₅₀</text>
@@ -5656,6 +5733,8 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text transform="translate(24,115.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">accuracy (%)</text>
 <rect x="67.6" y="73.4" width="17.7" height="106.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · θ₁₀₀: 65.6</title></rect>
 <rect x="91.6" y="77.8" width="17.7" height="102.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · eNTK at θ₀: 62.9</title></rect>
+<rect x="115.6" y="64.5" width="17.7" height="115.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K · eNTK at θ₁₀₀: 71.1</title></rect>
+<rect x="139.6" y="65.4" width="17.7" height="114.6" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>GSM8K · eNTK at θ₂₅₀: 70.5</title></rect>
 <rect x="163.6" y="65.4" width="17.7" height="114.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K · real θ₅₀₀: 70.5</title></rect>
 <text x="124.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
 <line x1="62" x2="182" y1="108.7" y2="108.7" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
@@ -5674,6 +5753,7 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="217.6" y="78.8" width="17.7" height="101.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · θ₁₀₀: 62.3</title></rect>
 <rect x="241.6" y="75.5" width="17.7" height="104.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · eNTK at θ₀: 64.3</title></rect>
 <rect x="265.6" y="68.8" width="17.7" height="111.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode · eNTK at θ₁₀₀: 68.4</title></rect>
+<rect x="289.6" y="69.8" width="17.7" height="110.2" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>KodCode · eNTK at θ₂₅₀: 67.8</title></rect>
 <rect x="313.6" y="68.0" width="17.7" height="112.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode · real θ₅₀₀: 68.9</title></rect>
 <text x="274.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
 <line x1="212" x2="332" y1="134.0" y2="134.0" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
@@ -5689,7 +5769,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="356" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="362" x2="482" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="362" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath</text>
+<rect x="367.6" y="120.4" width="17.7" height="59.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · θ₁₀₀: 36.7</title></rect>
+<rect x="391.6" y="115.7" width="17.7" height="64.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath · eNTK at θ₀: 39.6</title></rect>
+<rect x="463.6" y="112.1" width="17.7" height="67.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath · real θ₅₀₀: 41.8</title></rect>
 <text x="424.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="362" x2="482" y1="139.1" y2="139.1" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="512" x2="632" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="506" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="512" x2="632" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5702,7 +5786,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="506" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="512" x2="632" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="512" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K → MATH-500</text>
+<rect x="517.6" y="96.5" width="17.7" height="83.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K → MATH-500 · θ₁₀₀: 51.4</title></rect>
+<rect x="541.6" y="107.7" width="17.7" height="72.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K → MATH-500 · eNTK at θ₀: 44.5</title></rect>
+<rect x="613.6" y="91.8" width="17.7" height="88.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K → MATH-500 · real θ₅₀₀: 54.3</title></rect>
 <text x="574.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="512" x2="632" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="662" x2="782" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="656" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="662" x2="782" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5715,7 +5803,11 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="656" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="662" x2="782" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="662" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">NuminaMath → MATH-500</text>
+<rect x="667.6" y="99.1" width="17.7" height="80.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath → MATH-500 · θ₁₀₀: 49.8</title></rect>
+<rect x="691.6" y="101.4" width="17.7" height="78.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath → MATH-500 · eNTK at θ₀: 48.4</title></rect>
+<rect x="763.6" y="95.5" width="17.7" height="84.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath → MATH-500 · real θ₅₀₀: 52.0</title></rect>
 <text x="724.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="662" x2="782" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="812" x2="932" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="806" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="812" x2="932" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5728,7 +5820,13 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="806" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="812" x2="932" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="812" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO → MATH-500</text>
+<rect x="817.6" y="129.5" width="17.7" height="50.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · θ₁₀₀: 31.1</title></rect>
+<rect x="841.6" y="113.4" width="17.7" height="66.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · eNTK at θ₀: 41.0</title></rect>
+<rect x="865.6" y="127.0" width="17.7" height="53.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO → MATH-500 · eNTK at θ₁₀₀: 32.6</title></rect>
+<rect x="889.6" y="95.3" width="17.7" height="84.7" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>DAPO → MATH-500 · eNTK at θ₂₅₀: 52.1</title></rect>
+<rect x="913.6" y="96.5" width="17.7" height="83.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO → MATH-500 · real θ₅₀₀: 51.4</title></rect>
 <text x="874.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="812" x2="932" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
 <line x1="962" x2="1082" y1="180.0" y2="180.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="956" y="183.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
 <line x1="962" x2="1082" y1="147.5" y2="147.5" stroke="var(--grid)" stroke-width="1"/>
@@ -5741,9 +5839,15 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <text x="956" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">80</text>
 <line x1="962" x2="1082" y1="180" y2="180" stroke="var(--axis)"/>
 <text x="962" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy → MATH-500</text>
-<text x="1024.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text></svg></div></div><figcaption class="fig-cap"><p lang="zh">每个 panel 一个任务在自己的题集上（或在 MATH-500 上）；虚线是 θ₀。灰空心 = θ₁₀₀；橙空心 = θ₀ 的 eNTK 读 real 的 update；绿空心/实心 = 在 θ₁₀₀/θ₂₅₀ 展开的 eNTK 走到 θ₅₀₀ 的位移；蓝 = real θ₅₀₀。seed 0。128 题 × 4 个样本，配对差 s.e. 约 2–3 点。缺的柱子还在算。</p><p lang="en">Each panel is one task on its own set (or on MATH-500); the dashed line is θ₀. Grey open = θ₁₀₀; orange open = the θ₀ eNTK reading the real update; green open/filled = the eNTK expanded at θ₁₀₀/θ₂₅₀ run to θ₅₀₀'s displacement; blue = real θ₅₀₀. Seed 0. 128 problems × 4 samples; paired differences have an s.e. of about 2–3 points. A missing bar is still running.</p></figcaption></figure>
-<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这提示了 C9 里 θ₀ 的 eNTK 为什么预测得太小：网络在起飞这一段可能对 update 方向变得更敏感（我们没有直接测），θ₀ 的 kernel 看不到这一点；在起飞后的点上展开，大小就补上了。但起飞后 run 并不普遍 lazy：NuminaMath seed 0 和 GSM8K seed 1 在 θ₁₀₀、θ₂₅₀ 展开后方向反而更差，kernel 在起飞后还在变。我们原先猜“不 lazy 的部分集中在起飞”（seed 0 的前几个任务支持），seed 1 不支持，所以这里只保留大小的结论。对方法的含义：在起飞后的 checkpoint 上做 linear 训练，应能补上大小的差距，但不保证方向。</p>
-<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This suggests why the θ₀ eNTK predicts too small a change in C9: during takeoff the network seems to become more sensitive along the update directions (not tested directly), which the kernel at θ₀ cannot see, and expanding at a point after takeoff makes up the size. But the run after takeoff is not lazy in general: NuminaMath seed 0 and GSM8K seed 1 get a worse direction when expanded at θ₁₀₀ and θ₂₅₀, so the kernel keeps changing after takeoff. We first guessed that the non-lazy part is concentrated in the takeoff (seed 0 of the first tasks supported it); seed 1 does not, so only the size result stands. For methods: linear training expanded at a checkpoint after takeoff should close the size gap, with no guarantee on direction.</p>
+<rect x="967.6" y="96.8" width="17.7" height="83.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-ref)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · θ₁₀₀: 51.2</title></rect>
+<rect x="991.6" y="110.1" width="17.7" height="69.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · eNTK at θ₀: 43.0</title></rect>
+<rect x="1015.6" y="97.8" width="17.7" height="82.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-third)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy → MATH-500 · eNTK at θ₁₀₀: 50.6</title></rect>
+<rect x="1039.6" y="98.4" width="17.7" height="81.6" rx="2" fill="var(--c-third)" fill-opacity="0.85" stroke="var(--c-third)" stroke-width="1.5"><title>Polaris easy → MATH-500 · eNTK at θ₂₅₀: 50.2</title></rect>
+<rect x="1063.6" y="96.8" width="17.7" height="83.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy → MATH-500 · real θ₅₀₀: 51.2</title></rect>
+<text x="1024.4" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)"></text>
+<line x1="962" x2="1082" y1="120.4" y2="120.4" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">每个 panel 一个任务在自己的题集上（或在 MATH-500 上）；虚线是 θ₀。灰空心 = θ₁₀₀；橙空心 = θ₀ 的 eNTK 读 real 的 update；绿空心/实心 = 在 θ₁₀₀/θ₂₅₀ 展开的 eNTK 走到 θ₅₀₀ 的位移；蓝 = real θ₅₀₀。seed 0。128 题 × 4 个样本，配对差 s.e. 约 2–3 点。缺的柱子还在算。</p><p lang="en">Each panel is one task on its own set (or on MATH-500); the dashed line is θ₀. Grey open = θ₁₀₀; orange open = the θ₀ eNTK reading the real update; green open/filled = the eNTK expanded at θ₁₀₀/θ₂₅₀ run to θ₅₀₀'s displacement; blue = real θ₅₀₀. Seed 0. 128 problems × 4 samples; paired differences have an s.e. of about 2–3 points. A missing bar is still running.</p></figcaption></figure>
+<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这提示了 C9 里 θ₀ 的 eNTK 为什么预测得太小：网络在起飞这一段可能对 update 方向变得更敏感（我们没有直接测），θ₀ 的 kernel 看不到这一点；在起飞后的点上展开，大小就补上了。但起飞后 run 并不普遍 lazy：GSM8K s1、KodCode s1、NuminaMath s0 在起飞后展开，函数方向反而比 θ₀ 差，kernel 在起飞后还在变。我们原先猜“不 lazy 的部分集中在起飞”（seed 0 的前几个任务支持），seed 1 不完全支持，所以函数上只保留大小的结论。准确率却和 real 一样；也许方向上的差别大多落在不影响答对的 token 上（C5 里误差集中在少数低概率 token），这些点上我们还没有检查。对方法的含义：在起飞后的 checkpoint 上做 linear 训练，有希望追上 real 的准确率，这是值得直接测的下一步。</p>
+<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This suggests why the θ₀ eNTK predicts too small a change in C9: during takeoff the network seems to become more sensitive along the update directions (not tested directly), which the kernel at θ₀ cannot see, and expanding at a point after takeoff makes up the size. But the run after takeoff is not lazy in general: expanded after takeoff, GSM8K s1, KodCode s1, NuminaMath s0 get a worse function direction than at θ₀, so the kernel keeps changing after takeoff. We first guessed that the non-lazy part is concentrated in the takeoff (seed 0 of the first tasks supported it); seed 1 only partly does, so in function space only the size result stands. Accuracy nevertheless matches real; perhaps the difference in direction falls mostly on tokens that do not decide the answer (in C5 the error sits on a few low-probability tokens), which we have not checked for these points. For methods: linear training expanded at a checkpoint after takeoff may reach real's accuracy, a direct next test worth running.</p>
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>两个 seed（seed 1 只有 T = 10、100、250），固定文本上的 log p。T = 400 时剩下的变化很小（|f| 只有总量的 15–40%），比例不稳定。“起飞”取自 C9 里误差跳上去的位置。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>Two seeds (seed 1 at T = 10, 100 and 250 only), log p on the fixed text. At T = 400 the remaining change is small (15–40% of the total |f|), so its ratios are unstable. “Takeoff” is where the error jumps in C9.</p>
 </section>
