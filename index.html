@@ -587,7 +587,7 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <button type="button" role="tab" id="tab-o1111" aria-controls="pane-o1111" aria-selected="false" data-tab="o1111"><span lang="zh">11-11 汇总</span><span lang="en">11-11 summary</span></button>
 </div>
 <div class="tabpane" id="pane-n1124" role="tabpanel" aria-labelledby="tab-n1124">
-<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 08:00 PST</span><span lang="en">Numbers read 11-24 08:00 PST</span></p>
+<p class="statusline"><span class="chip s-interim"><span lang="zh">中期：仍有点在算</span><span lang="en">Interim: points still running</span></span><span lang="zh">数字读到 11-24 08:16 PST</span><span lang="en">Numbers read 11-24 08:16 PST</span></p>
 <div class="n-body">
 <section id="c-summary" aria-labelledby="c-summary-h">
 <h2 id="c-summary-h"><span lang="zh">11-24 更新：RL update 的组合</span><span lang="en">11-24 update: composing RL updates</span></h2>
@@ -598,18 +598,20 @@ details.live-group[open] > summary { margin-bottom: 6px; }
 <li><a href="#c2"><span lang="zh">两个任务的 update 相加，两边的提升都保留。</span><span lang="en">Adding two tasks' updates keeps both gains.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">保留率中位数 real 0.98，linear 1.01。</span><span lang="en">Median retention: real 0.98, linear 1.01.</span></li>
 <li><a href="#c3"><span lang="zh">机制：每个 update 只改变自己领域的文本；权重里 update 几乎正交，连两个 seed 之间也是。</span><span lang="en">Mechanism: each update changes its own domain's text; in weights updates are nearly orthogonal, even between seeds.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">数学 update 在数学文本上是代码文本的 1.8–5.4 倍；两个 seed 的权重 cosine 0.05–0.28，函数 cosine 0.67–0.92。</span><span lang="en">Math updates move math text 1.8–5.4× more than code text; two seeds: weight cosine 0.05–0.28, function cosine 0.67–0.92.</span></li>
 <li><a href="#c4"><span lang="zh">RL 的 update 指向输出敏感的方向：同样大小的随机方向让函数变化小 200 倍以上。</span><span lang="en">RL updates point where the outputs are sensitive: a random direction of the same size moves the function over 200× less.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">|f| 差 184–306 倍，随机方向不改变准确率；两个 seed 之差在函数上约半个 update，准确率多数回到 θ₀。</span><span lang="en">184–306× in |f|, no change in accuracy; the seed difference moves the function by about half an update but mostly returns accuracy to θ₀.</span></li>
-<li><a href="#c5"><span lang="zh">eNTK 对 real update 的预测：方向大体对、大小偏小，误差在 run 起飞时跳上去。</span><span lang="en">The eNTK's prediction of the real update: mostly the right direction, too small; the error jumps when the run takes off.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">相对误差 update 5 时 0.02–0.11，起飞后 0.62–0.95；准确率保留 0.71–0.89。</span><span lang="en">Relative error 0.02–0.11 at update 5, 0.62–0.95 after takeoff; accuracy gain kept 0.71–0.89.</span></li>
-<li><a href="#c6"><span lang="zh">缩放 update：real 在 α ≈ ¾ 最好，linear 到 1.5 还在上升。</span><span lang="en">Scaling: real is best near α = ¾, linear keeps rising to 1.5.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
-<li><a href="#c7"><span lang="zh">两个 seed 的 update 取平均，不比任何一个差。</span><span lang="en">Averaging two seeds' updates is no worse than either.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
-<li><a href="#c8"><span lang="zh">混合数据训练 t 步 ≈ 两个任务各训练 t/2 步再相加。</span><span lang="en">Mixed-data training for t updates ≈ each task for t/2 updates, then added.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">update 500 时函数 cosine 0.87/0.83，两个 seed 之间 0.81；大小是 t/2 的和的 0.72–0.95。</span><span lang="en">Function cosine 0.87/0.83 at update 500 against 0.81 between seeds; size 0.72–0.95 of the t/2 sum.</span></li>
-<li><a href="#c9"><span lang="zh">失败的预测：函数相似度不比权重 cosine 更能预测迁移。</span><span lang="en">Failed prediction: function similarity does not predict transfer better than weight cosine.</span></a><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></li>
+<li><a href="#c5"><span lang="zh">eNTK 在 θ₀ 处就看得出哪些 update 是同一个函数；权重 cosine 看不出。</span><span lang="en">The eNTK at θ₀ already sees which updates are the same function; the weight cosine does not.</span></a><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span><span lang="zh">253 对 update：eNTK cosine 和网络函数 cosine 的相关 0.86（平均差 0.10），权重 cosine 0.60（平均差 0.45）。</span><span lang="en">253 pairs of updates: the eNTK cosine correlates 0.86 with the network's function cosine (mean difference 0.10); the weight cosine 0.60 (mean difference 0.45).</span></li>
+<li><a href="#c6"><span lang="zh">eNTK 对 real update 的预测：方向大体对、大小偏小，误差在 run 起飞时跳上去。</span><span lang="en">The eNTK's prediction of the real update: mostly the right direction, too small; the error jumps when the run takes off.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">相对误差 update 5 时 0.02–0.11，起飞后 0.62–0.95；准确率保留 0.71–0.89。</span><span lang="en">Relative error 0.02–0.11 at update 5, 0.62–0.95 after takeoff; accuracy gain kept 0.71–0.89.</span></li>
+<li><a href="#c7"><span lang="zh">eNTK 在起飞时过时：起飞后重新展开，它对剩下的 run 的预测大小对了。</span><span lang="en">The eNTK goes stale at takeoff: re-taken after it, it predicts the rest of the run at the right size.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">大小之比 0.85–1.02（θ₀ 处同样大小的变化 0.44–0.83）；起飞前重新展开没有用。</span><span lang="en">Size ratio 0.85–1.02 (θ₀, same-size change: 0.44–0.83); re-taking it before takeoff does not help.</span></li>
+<li><a href="#c8"><span lang="zh">缩放 update：real 在 α ≈ ¾ 最好，linear 到 1.5 还在上升。</span><span lang="en">Scaling: real is best near α = ¾, linear keeps rising to 1.5.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
+<li><a href="#c9"><span lang="zh">两个 seed 的 update 取平均，不比任何一个差。</span><span lang="en">Averaging two seeds' updates is no worse than either.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></li>
+<li><a href="#c10"><span lang="zh">混合数据训练 t 步 ≈ 两个任务各训练 t/2 步再相加。</span><span lang="en">Mixed-data training for t updates ≈ each task for t/2 updates, then added.</span></a><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span><span lang="zh">update 500 时函数 cosine 0.87/0.83，两个 seed 之间 0.81；大小是 t/2 的和的 0.72–0.95。</span><span lang="en">Function cosine 0.87/0.83 at update 500 against 0.81 between seeds; size 0.72–0.95 of the t/2 sum.</span></li>
+<li><a href="#c11"><span lang="zh">失败的预测：函数相似度不比权重 cosine 更能预测迁移。</span><span lang="en">Failed prediction: function similarity does not predict transfer better than weight cosine.</span></a><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></li>
 </ol>
 <div class="howto"><p lang="zh"><b>怎么读：</b>24 个 run 是 11-18 N6 的 gb200-tasks：Base Qwen3-0.6B，6 个训练集（GSM8K、NuminaMath、DAPO、Polaris easy/hard、KodCode）× real/linear × 2 个 seed，都取 update 500。
 每个点在 7 个 quick set 上评测（128 题 × 4 个样本，T=0.6）；同一个题集对所有点用同样的题和同样的采样随机数，所以差值都按题配对，s.e. 约 2–3 点。DAPO 和 Polaris 的 quick set 接近地板（3–15%），信号很少。
-DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 08:00 PST。</p>
+DAPO 的 linear seed 0 没学会（训练 reward 约 3%），不用。所有点在 H100 上算，数字读自 11-24 08:16 PST。</p>
 <p lang="en"><b>How to read:</b> the 24 runs are the gb200-tasks of N6 (11-18): Base Qwen3-0.6B, six training sets (GSM8K, NuminaMath, DAPO, Polaris easy/hard, KodCode) × real/linear × 2 seeds, all at update 500.
 Each point is evaluated on seven quick sets (128 problems × 4 samples, T=0.6); a set uses the same questions and sampling seeds for every point, so differences are paired by question, with an s.e. of about 2–3 points.
-The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 08:00 PST.</p></div>
+The DAPO and Polaris quick sets are near the floor (3–15%) and carry little signal. DAPO linear seed 0 did not learn (training reward about 3%) and is left out. All points were computed on H100; numbers read 11-24 08:16 PST.</p></div>
 </section>
 <section id="c-findings" aria-labelledby="c-findings-h">
 <h2 id="c-findings-h"><span lang="zh">结果</span><span lang="en">Results</span></h2>
@@ -2636,19 +2638,356 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="930.0" y="113.7" width="17.2" height="66.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Δ₀−Δ₁ · : 40.8</title></rect>
 <text x="938.6" y="195.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Δ₀−Δ₁</text>
 <line x1="798" x2="948" y1="134.0" y2="134.0" stroke="var(--ink-2)" stroke-dasharray="4 3"/></svg></div></div><figcaption class="fig-cap"><p lang="zh">每个 panel 是一个 run 自己的题集；虚线是 θ₀。Δ = seed 0 的 update；噪声 = 每个张量上和 Δ 同范数的高斯方向；Δ₀ − Δ₁ = 两个 seed 的 update 之差。缺的柱子还在算。</p><p lang="en">Each panel is one run's own set; the dashed line is θ₀. Δ = the seed-0 update; noise = a Gaussian direction with Δ's norm in every tensor; Δ₀ − Δ₁ = the difference of the two seeds' updates. A missing bar is still running.</p></figcaption></figure>
-<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这回答了“eNTK 有没有用”的一半：SGD 的每一步是各样本梯度的组合，也就是 eNTK 大特征值的方向（Adam 按坐标重新缩放，但上面的结果说明 update 仍然在输出敏感的方向上）；随机方向几乎都落在 eNTK 接近零的方向上。所以 eNTK 正确地指出了哪些方向重要（C3 的函数 cosine 也是在这个度量下算的），它预测不准的是网络在这些方向上走得多远（C5）。两个 seed 在权重上几乎正交，却各自都在“重要”的方向里，最后到达相近的函数。它们不共享的部分在函数范数上约半个 update，但多数情况下不带来准确率：能力主要在两个 seed 共享的部分里。</p>
-<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This answers half of “is the eNTK useful”: an SGD step is a combination of per-example gradients, the directions of the eNTK's large eigenvalues (Adam rescales coordinates, yet the result above shows the update still lies where the outputs are sensitive), while a random direction lies almost entirely where the eNTK is near zero. So the eNTK correctly says which directions matter (the function cosines of C3 are measured in its metric); what it gets wrong is how far the network moves along them (C5). Two seeds are nearly orthogonal in weights yet each lies in the directions that matter, and they reach similar functions. What they do not share moves the outputs by about half an update in function norm but in most cases carries no accuracy: the skill sits mainly in what the seeds share.</p>
+<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这回答了“eNTK 有没有用”的一半：SGD 的每一步是各样本梯度的组合，也就是 eNTK 大特征值的方向（Adam 按坐标重新缩放，但上面的结果说明 update 仍然在输出敏感的方向上）；随机方向几乎都落在 eNTK 接近零的方向上。所以 eNTK 正确地指出了哪些方向重要（C5：它也看得出哪些 update 是同一个函数），它预测不准的是网络在这些方向上走得多远（C6）。两个 seed 在权重上几乎正交，却各自都在“重要”的方向里，最后到达相近的函数。它们不共享的部分在函数范数上约半个 update，但多数情况下不带来准确率：能力主要在两个 seed 共享的部分里。</p>
+<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This answers half of “is the eNTK useful”: an SGD step is a combination of per-example gradients, the directions of the eNTK's large eigenvalues (Adam rescales coordinates, yet the result above shows the update still lies where the outputs are sensitive), while a random direction lies almost entirely where the eNTK is near zero. So the eNTK correctly says which directions matter (C5: it also sees which updates are the same function); what it gets wrong is how far the network moves along them (C6). Two seeds are nearly orthogonal in weights yet each lies in the directions that matter, and they reach similar functions. What they do not share moves the outputs by about half an update in function norm but in most cases carries no accuracy: the skill sits mainly in what the seeds share.</p>
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>噪声只试了每个 update 一个方向（另一个随机种子给出同样的 |f|）。准确率的点还在算。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>One random direction per update (a second random seed gives the same |f|). The accuracy points are still running.</p>
 </section>
 <section class="finding" id="c5" aria-labelledby="c5-h">
-<div class="fhead"><span class="fn">C5</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
-<h3 id="c5-h"><span lang="zh">linear 模型读 real 的 update：方向大体对（cosine 0.7–0.8），大小偏小；误差在 run 起飞时跳上去，之后不再增长</span><span lang="en">The linear model reading the real update: mostly the right direction (cosine 0.7–0.8), too small; the error jumps when the run takes off and then stops growing</span></h3>
+<div class="fhead"><span class="fn">C5</span><span class="chip s-strong"><span lang="zh">证据强</span><span lang="en">strong</span></span></div>
+<h3 id="c5-h"><span lang="zh">eNTK 在 θ₀ 处就看得出哪些 update 是同一个函数：在它的度量下，update 之间的 cosine 和网络的函数 cosine 几乎一样，而权重 cosine 对所有对都很小</span><span lang="en">The eNTK at θ₀ already sees which updates are the same function: the cosine between updates in its metric matches the network's function cosine, while the weight cosine is small for all of them</span></h3>
+<p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>一对 update 有三种 cosine：权重里（Δ<sub>a</sub> · Δ<sub>b</sub>）；θ₀ 处 eNTK 的度量里（linear 模型读两个 update 得到的函数向量的 cosine，即 J₀Δ<sub>a</sub> 和 J₀Δ<sub>b</sub>，经过 θ₀ 的 softmax）；网络的函数里（f_net 的 cosine）。前两个只用 θ₀ 处的信息，第三个是真实的结果。</p>
+<p class="f-what" lang="en"><b class="f-k">What it means</b>A pair of updates has three cosines: in weights (Δ<sub>a</sub> · Δ<sub>b</sub>); in the metric of the eNTK at θ₀ (the cosine of the function vectors the linear model reads from the two updates, J₀Δ<sub>a</sub> and J₀Δ<sub>b</sub> through θ₀'s softmax); and in the network's function (the cosine of f_net). The first two use only θ₀; the third is what actually happens.</p>
+<p class="f-data" lang="zh"><b class="f-k">数据</b>23 个 run 两两之间共 253 对：eNTK cosine 和网络函数 cosine 的 Pearson 相关 0.86，平均差 0.10；权重 cosine 只有 0.60，平均差 0.45，因为它对所有对都在 0.04–0.28。同一任务的两个 seed：权重 0.05–0.28，eNTK 0.29–0.91，网络 0.47–0.92。偏差最大的是 DAPO real 的两个 seed（eNTK 0.33，网络 0.70）和 Polaris hard。</p>
+<p class="f-data" lang="en"><b class="f-k">Data</b>Over all 253 pairs of the 23 runs, the eNTK cosine tracks the network's function cosine with Pearson correlation 0.86 and a mean difference of 0.10; the weight cosine gives only 0.60 and a mean difference of 0.45, because it is 0.04–0.28 for every pair. Two seeds of one task: weights 0.05–0.28, eNTK 0.29–0.91, network 0.47–0.92. The largest misses are DAPO real's two seeds (eNTK 0.33, network 0.70) and Polaris hard.</p>
+<figure class="fig" id="fig-kernel" aria-labelledby="figt-kernel"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5</span><span lang="en">Figure C5</span></div><h4 class="fig-title" id="figt-kernel"><span lang="zh">三种度量下 update 之间的 cosine</span><span lang="en">Cosine between updates in three metrics</span></h4><p class="fig-q"><span lang="zh">只看 θ₀，能不能知道两个 update 会给出相似的函数？</span><span lang="en">From θ₀ alone, can one tell whether two updates give similar functions?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 962 468" role="img" aria-label="kernel geometry" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-ref)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">权重</text>
+<rect x="73.4" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="94.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">θ₀ 处的 eNTK</text>
+<rect x="189.4" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="210.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">网络</text>
+<line x1="62" x2="922" y1="190.0" y2="190.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="193.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="922" y1="162.0" y2="162.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="165.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="922" y1="134.0" y2="134.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="137.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="922" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="922" y1="78.0" y2="78.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="81.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="922" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="922" y1="190" y2="190" stroke="var(--axis)"/>
+<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">同一任务的两个 seed</text>
+<text transform="translate(24,120.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">cosine</text>
+<rect x="67.0" y="169.7" width="15.2" height="20.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K real · 权重: 0.1</title></rect>
+<rect x="88.0" y="88.6" width="15.2" height="101.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real · θ₀ 处的 eNTK: 0.7</title></rect>
+<rect x="108.9" y="96.6" width="15.2" height="93.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K real · 网络: 0.7</title></rect>
+<text x="95.6" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="95.6" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="146.7" y="174.1" width="15.2" height="15.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath real · 权重: 0.1</title></rect>
+<rect x="167.7" y="93.3" width="15.2" height="96.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath real · θ₀ 处的 eNTK: 0.7</title></rect>
+<rect x="188.6" y="93.3" width="15.2" height="96.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath real · 网络: 0.7</title></rect>
+<text x="175.3" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="175.3" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="226.4" y="182.5" width="15.2" height="7.5" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO real · 权重: 0.1</title></rect>
+<rect x="247.4" y="144.0" width="15.2" height="46.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO real · θ₀ 处的 eNTK: 0.3</title></rect>
+<rect x="268.4" y="92.3" width="15.2" height="97.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO real · 网络: 0.7</title></rect>
+<text x="255.0" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="255.0" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="306.1" y="177.8" width="15.2" height="12.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy real · 权重: 0.1</title></rect>
+<rect x="327.1" y="105.2" width="15.2" height="84.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy real · θ₀ 处的 eNTK: 0.6</title></rect>
+<rect x="348.1" y="81.7" width="15.2" height="108.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy real · 网络: 0.8</title></rect>
+<text x="334.7" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="334.7" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="385.8" y="175.8" width="15.2" height="14.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard real · 权重: 0.1</title></rect>
+<rect x="406.8" y="107.4" width="15.2" height="82.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard real · θ₀ 处的 eNTK: 0.6</title></rect>
+<rect x="427.8" y="124.4" width="15.2" height="65.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard real · 网络: 0.5</title></rect>
+<text x="414.4" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="414.4" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="465.5" y="150.5" width="15.2" height="39.5" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>KodCode real · 权重: 0.3</title></rect>
+<rect x="486.5" y="62.5" width="15.2" height="127.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode real · θ₀ 处的 eNTK: 0.9</title></rect>
+<rect x="507.5" y="61.3" width="15.2" height="128.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode real · 网络: 0.9</title></rect>
+<text x="494.1" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<text x="494.1" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="545.2" y="158.3" width="15.2" height="31.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K linear · 权重: 0.2</title></rect>
+<rect x="566.2" y="76.0" width="15.2" height="114.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K linear · θ₀ 处的 eNTK: 0.8</title></rect>
+<rect x="587.2" y="75.9" width="15.2" height="114.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K linear · 网络: 0.8</title></rect>
+<text x="573.8" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="573.8" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="624.9" y="166.1" width="15.2" height="23.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath linear · 权重: 0.2</title></rect>
+<rect x="645.9" y="75.0" width="15.2" height="115.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath linear · θ₀ 处的 eNTK: 0.8</title></rect>
+<rect x="666.9" y="68.9" width="15.2" height="121.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath linear · 网络: 0.9</title></rect>
+<text x="653.5" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="653.5" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="704.6" y="175.0" width="15.2" height="15.0" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy linear · 权重: 0.1</title></rect>
+<rect x="725.6" y="73.5" width="15.2" height="116.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy linear · θ₀ 处的 eNTK: 0.8</title></rect>
+<rect x="746.6" y="72.3" width="15.2" height="117.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy linear · 网络: 0.8</title></rect>
+<text x="733.2" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="733.2" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="784.4" y="177.6" width="15.2" height="12.4" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard linear · 权重: 0.1</title></rect>
+<rect x="805.3" y="149.5" width="15.2" height="40.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard linear · θ₀ 处的 eNTK: 0.3</title></rect>
+<rect x="826.3" y="123.4" width="15.2" height="66.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard linear · 网络: 0.5</title></rect>
+<text x="812.9" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="812.9" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="864.1" y="152.8" width="15.2" height="37.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>KodCode linear · 权重: 0.3</title></rect>
+<rect x="885.0" y="78.7" width="15.2" height="111.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode linear · θ₀ 处的 eNTK: 0.8</title></rect>
+<rect x="906.0" y="81.6" width="15.2" height="108.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode linear · 网络: 0.8</title></rect>
+<text x="892.6" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<text x="892.6" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<line x1="62" x2="922" y1="404.0" y2="404.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="407.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="922" y1="376.0" y2="376.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="379.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="922" y1="348.0" y2="348.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="351.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="922" y1="320.0" y2="320.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="323.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="922" y1="292.0" y2="292.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="295.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="922" y1="264.0" y2="264.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="267.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="922" y1="404" y2="404" stroke="var(--axis)"/>
+<text x="62" y="256" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">两个任务，real，seed 0</text>
+<text transform="translate(24,334.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">cosine</text>
+<rect x="65.9" y="392.3" width="10.5" height="11.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs NuminaMath · 权重: 0.1</title></rect>
+<rect x="81.2" y="322.2" width="10.5" height="81.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs NuminaMath · θ₀ 处的 eNTK: 0.6</title></rect>
+<rect x="96.5" y="309.5" width="10.5" height="94.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs NuminaMath · 网络: 0.7</title></rect>
+<text x="86.5" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="86.5" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<rect x="124.1" y="396.3" width="10.5" height="7.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs DAPO · 权重: 0.1</title></rect>
+<rect x="139.4" y="332.5" width="10.5" height="71.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs DAPO · θ₀ 处的 eNTK: 0.5</title></rect>
+<rect x="154.7" y="323.4" width="10.5" height="80.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs DAPO · 网络: 0.6</title></rect>
+<text x="144.6" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="144.6" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="182.2" y="395.4" width="10.5" height="8.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs Polaris easy · 权重: 0.1</title></rect>
+<rect x="197.5" y="314.3" width="10.5" height="89.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs Polaris easy · θ₀ 处的 eNTK: 0.6</title></rect>
+<rect x="212.8" y="309.8" width="10.5" height="94.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs Polaris easy · 网络: 0.7</title></rect>
+<text x="202.8" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="202.8" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="240.4" y="394.7" width="10.5" height="9.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs Polaris hard · 权重: 0.1</title></rect>
+<rect x="255.7" y="311.1" width="10.5" height="92.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs Polaris hard · θ₀ 处的 eNTK: 0.7</title></rect>
+<rect x="271.0" y="325.3" width="10.5" height="78.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs Polaris hard · 网络: 0.6</title></rect>
+<text x="260.9" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="260.9" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="298.5" y="397.1" width="10.5" height="6.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs KodCode · 权重: 0.0</title></rect>
+<rect x="313.8" y="360.9" width="10.5" height="43.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs KodCode · θ₀ 处的 eNTK: 0.3</title></rect>
+<rect x="329.1" y="365.3" width="10.5" height="38.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs KodCode · 网络: 0.3</title></rect>
+<text x="319.1" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="319.1" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="356.7" y="395.1" width="10.5" height="8.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs DAPO · 权重: 0.1</title></rect>
+<rect x="372.0" y="333.9" width="10.5" height="70.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs DAPO · θ₀ 处的 eNTK: 0.5</title></rect>
+<rect x="387.3" y="312.8" width="10.5" height="91.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs DAPO · 网络: 0.7</title></rect>
+<text x="377.2" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="377.2" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="414.8" y="393.4" width="10.5" height="10.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs Polaris easy · 权重: 0.1</title></rect>
+<rect x="430.1" y="315.5" width="10.5" height="88.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs Polaris easy · θ₀ 处的 eNTK: 0.6</title></rect>
+<rect x="445.4" y="307.5" width="10.5" height="96.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs Polaris easy · 网络: 0.7</title></rect>
+<text x="435.4" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="435.4" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="473.0" y="394.4" width="10.5" height="9.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs Polaris hard · 权重: 0.1</title></rect>
+<rect x="488.3" y="351.2" width="10.5" height="52.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs Polaris hard · θ₀ 处的 eNTK: 0.4</title></rect>
+<rect x="503.6" y="344.5" width="10.5" height="59.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs Polaris hard · 网络: 0.4</title></rect>
+<text x="493.5" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="493.5" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="531.1" y="396.7" width="10.5" height="7.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs KodCode · 权重: 0.1</title></rect>
+<rect x="546.4" y="360.7" width="10.5" height="43.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs KodCode · θ₀ 处的 eNTK: 0.3</title></rect>
+<rect x="561.7" y="356.2" width="10.5" height="47.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs KodCode · 网络: 0.3</title></rect>
+<text x="551.7" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="551.7" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="589.3" y="396.0" width="10.5" height="8.0" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs Polaris easy · 权重: 0.1</title></rect>
+<rect x="604.6" y="331.9" width="10.5" height="72.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs Polaris easy · θ₀ 处的 eNTK: 0.5</title></rect>
+<rect x="619.9" y="310.3" width="10.5" height="93.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs Polaris easy · 网络: 0.7</title></rect>
+<text x="609.8" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="609.8" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="647.4" y="395.4" width="10.5" height="8.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs Polaris hard · 权重: 0.1</title></rect>
+<rect x="662.7" y="332.8" width="10.5" height="71.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs Polaris hard · θ₀ 处的 eNTK: 0.5</title></rect>
+<rect x="678.0" y="342.6" width="10.5" height="61.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs Polaris hard · 网络: 0.4</title></rect>
+<text x="668.0" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="668.0" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="705.6" y="398.1" width="10.5" height="5.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs KodCode · 权重: 0.0</title></rect>
+<rect x="720.9" y="367.5" width="10.5" height="36.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs KodCode · θ₀ 处的 eNTK: 0.3</title></rect>
+<rect x="736.2" y="368.0" width="10.5" height="36.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs KodCode · 网络: 0.3</title></rect>
+<text x="726.1" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="726.1" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="763.7" y="394.8" width="10.5" height="9.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy vs Polaris hard · 权重: 0.1</title></rect>
+<rect x="779.0" y="353.4" width="10.5" height="50.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy vs Polaris hard · θ₀ 处的 eNTK: 0.4</title></rect>
+<rect x="794.3" y="344.3" width="10.5" height="59.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy vs Polaris hard · 网络: 0.4</title></rect>
+<text x="784.3" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="784.3" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="821.9" y="398.3" width="10.5" height="5.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy vs KodCode · 权重: 0.0</title></rect>
+<rect x="837.2" y="390.9" width="10.5" height="13.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy vs KodCode · θ₀ 处的 eNTK: 0.1</title></rect>
+<rect x="852.5" y="370.1" width="10.5" height="33.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy vs KodCode · 网络: 0.2</title></rect>
+<text x="842.4" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="842.4" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="880.0" y="397.6" width="10.5" height="6.4" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard vs KodCode · 权重: 0.0</title></rect>
+<rect x="895.3" y="332.1" width="10.5" height="71.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard vs KodCode · θ₀ 处的 eNTK: 0.5</title></rect>
+<rect x="910.6" y="357.9" width="10.5" height="46.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard vs KodCode · 网络: 0.3</title></rect>
+<text x="900.6" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="900.6" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 962 468" role="img" aria-label="kernel geometry" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-ref)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">weights</text>
+<rect x="109.4" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="130.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK at θ₀</text>
+<rect x="225.4" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="246.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">network</text>
+<line x1="62" x2="922" y1="190.0" y2="190.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="193.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="922" y1="162.0" y2="162.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="165.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="922" y1="134.0" y2="134.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="137.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="922" y1="106.0" y2="106.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="109.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="922" y1="78.0" y2="78.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="81.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="922" y1="50.0" y2="50.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="53.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="922" y1="190" y2="190" stroke="var(--axis)"/>
+<text x="62" y="42" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">two seeds of one task</text>
+<text transform="translate(24,120.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">cosine</text>
+<rect x="67.0" y="169.7" width="15.2" height="20.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K real · weights: 0.1</title></rect>
+<rect x="88.0" y="88.6" width="15.2" height="101.4" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K real · eNTK at θ₀: 0.7</title></rect>
+<rect x="108.9" y="96.6" width="15.2" height="93.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K real · network: 0.7</title></rect>
+<text x="95.6" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="95.6" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="146.7" y="174.1" width="15.2" height="15.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath real · weights: 0.1</title></rect>
+<rect x="167.7" y="93.3" width="15.2" height="96.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath real · eNTK at θ₀: 0.7</title></rect>
+<rect x="188.6" y="93.3" width="15.2" height="96.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath real · network: 0.7</title></rect>
+<text x="175.3" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="175.3" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="226.4" y="182.5" width="15.2" height="7.5" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO real · weights: 0.1</title></rect>
+<rect x="247.4" y="144.0" width="15.2" height="46.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO real · eNTK at θ₀: 0.3</title></rect>
+<rect x="268.4" y="92.3" width="15.2" height="97.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO real · network: 0.7</title></rect>
+<text x="255.0" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="255.0" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="306.1" y="177.8" width="15.2" height="12.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy real · weights: 0.1</title></rect>
+<rect x="327.1" y="105.2" width="15.2" height="84.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy real · eNTK at θ₀: 0.6</title></rect>
+<rect x="348.1" y="81.7" width="15.2" height="108.3" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy real · network: 0.8</title></rect>
+<text x="334.7" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="334.7" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="385.8" y="175.8" width="15.2" height="14.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard real · weights: 0.1</title></rect>
+<rect x="406.8" y="107.4" width="15.2" height="82.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard real · eNTK at θ₀: 0.6</title></rect>
+<rect x="427.8" y="124.4" width="15.2" height="65.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard real · network: 0.5</title></rect>
+<text x="414.4" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="414.4" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="465.5" y="150.5" width="15.2" height="39.5" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>KodCode real · weights: 0.3</title></rect>
+<rect x="486.5" y="62.5" width="15.2" height="127.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode real · eNTK at θ₀: 0.9</title></rect>
+<rect x="507.5" y="61.3" width="15.2" height="128.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode real · network: 0.9</title></rect>
+<text x="494.1" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<text x="494.1" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">real</text>
+<rect x="545.2" y="158.3" width="15.2" height="31.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K linear · weights: 0.2</title></rect>
+<rect x="566.2" y="76.0" width="15.2" height="114.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K linear · eNTK at θ₀: 0.8</title></rect>
+<rect x="587.2" y="75.9" width="15.2" height="114.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K linear · network: 0.8</title></rect>
+<text x="573.8" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="573.8" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="624.9" y="166.1" width="15.2" height="23.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath linear · weights: 0.2</title></rect>
+<rect x="645.9" y="75.0" width="15.2" height="115.0" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath linear · eNTK at θ₀: 0.8</title></rect>
+<rect x="666.9" y="68.9" width="15.2" height="121.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath linear · network: 0.9</title></rect>
+<text x="653.5" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="653.5" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="704.6" y="175.0" width="15.2" height="15.0" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy linear · weights: 0.1</title></rect>
+<rect x="725.6" y="73.5" width="15.2" height="116.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy linear · eNTK at θ₀: 0.8</title></rect>
+<rect x="746.6" y="72.3" width="15.2" height="117.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy linear · network: 0.8</title></rect>
+<text x="733.2" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="733.2" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="784.4" y="177.6" width="15.2" height="12.4" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard linear · weights: 0.1</title></rect>
+<rect x="805.3" y="149.5" width="15.2" height="40.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard linear · eNTK at θ₀: 0.3</title></rect>
+<rect x="826.3" y="123.4" width="15.2" height="66.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard linear · network: 0.5</title></rect>
+<text x="812.9" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="812.9" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<rect x="864.1" y="152.8" width="15.2" height="37.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>KodCode linear · weights: 0.3</title></rect>
+<rect x="885.0" y="78.7" width="15.2" height="111.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>KodCode linear · eNTK at θ₀: 0.8</title></rect>
+<rect x="906.0" y="81.6" width="15.2" height="108.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>KodCode linear · network: 0.8</title></rect>
+<text x="892.6" y="205.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<text x="892.6" y="217.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">linear</text>
+<line x1="62" x2="922" y1="404.0" y2="404.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="407.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="62" x2="922" y1="376.0" y2="376.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="379.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.2</text>
+<line x1="62" x2="922" y1="348.0" y2="348.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="351.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.4</text>
+<line x1="62" x2="922" y1="320.0" y2="320.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="323.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.6</text>
+<line x1="62" x2="922" y1="292.0" y2="292.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="295.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.8</text>
+<line x1="62" x2="922" y1="264.0" y2="264.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="267.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="62" x2="922" y1="404" y2="404" stroke="var(--axis)"/>
+<text x="62" y="256" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">two tasks, real, seed 0</text>
+<text transform="translate(24,334.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">cosine</text>
+<rect x="65.9" y="392.3" width="10.5" height="11.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs NuminaMath · weights: 0.1</title></rect>
+<rect x="81.2" y="322.2" width="10.5" height="81.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs NuminaMath · eNTK at θ₀: 0.6</title></rect>
+<rect x="96.5" y="309.5" width="10.5" height="94.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs NuminaMath · network: 0.7</title></rect>
+<text x="86.5" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="86.5" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<rect x="124.1" y="396.3" width="10.5" height="7.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs DAPO · weights: 0.1</title></rect>
+<rect x="139.4" y="332.5" width="10.5" height="71.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs DAPO · eNTK at θ₀: 0.5</title></rect>
+<rect x="154.7" y="323.4" width="10.5" height="80.6" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs DAPO · network: 0.6</title></rect>
+<text x="144.6" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="144.6" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="182.2" y="395.4" width="10.5" height="8.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs Polaris easy · weights: 0.1</title></rect>
+<rect x="197.5" y="314.3" width="10.5" height="89.7" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs Polaris easy · eNTK at θ₀: 0.6</title></rect>
+<rect x="212.8" y="309.8" width="10.5" height="94.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs Polaris easy · network: 0.7</title></rect>
+<text x="202.8" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="202.8" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="240.4" y="394.7" width="10.5" height="9.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs Polaris hard · weights: 0.1</title></rect>
+<rect x="255.7" y="311.1" width="10.5" height="92.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs Polaris hard · eNTK at θ₀: 0.7</title></rect>
+<rect x="271.0" y="325.3" width="10.5" height="78.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs Polaris hard · network: 0.6</title></rect>
+<text x="260.9" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="260.9" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="298.5" y="397.1" width="10.5" height="6.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>GSM8K vs KodCode · weights: 0.0</title></rect>
+<rect x="313.8" y="360.9" width="10.5" height="43.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>GSM8K vs KodCode · eNTK at θ₀: 0.3</title></rect>
+<rect x="329.1" y="365.3" width="10.5" height="38.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>GSM8K vs KodCode · network: 0.3</title></rect>
+<text x="319.1" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">GSM8K</text>
+<text x="319.1" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="356.7" y="395.1" width="10.5" height="8.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs DAPO · weights: 0.1</title></rect>
+<rect x="372.0" y="333.9" width="10.5" height="70.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs DAPO · eNTK at θ₀: 0.5</title></rect>
+<rect x="387.3" y="312.8" width="10.5" height="91.2" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs DAPO · network: 0.7</title></rect>
+<text x="377.2" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="377.2" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<rect x="414.8" y="393.4" width="10.5" height="10.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs Polaris easy · weights: 0.1</title></rect>
+<rect x="430.1" y="315.5" width="10.5" height="88.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs Polaris easy · eNTK at θ₀: 0.6</title></rect>
+<rect x="445.4" y="307.5" width="10.5" height="96.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs Polaris easy · network: 0.7</title></rect>
+<text x="435.4" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="435.4" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="473.0" y="394.4" width="10.5" height="9.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs Polaris hard · weights: 0.1</title></rect>
+<rect x="488.3" y="351.2" width="10.5" height="52.8" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs Polaris hard · eNTK at θ₀: 0.4</title></rect>
+<rect x="503.6" y="344.5" width="10.5" height="59.5" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs Polaris hard · network: 0.4</title></rect>
+<text x="493.5" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="493.5" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="531.1" y="396.7" width="10.5" height="7.3" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>NuminaMath vs KodCode · weights: 0.1</title></rect>
+<rect x="546.4" y="360.7" width="10.5" height="43.3" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>NuminaMath vs KodCode · eNTK at θ₀: 0.3</title></rect>
+<rect x="561.7" y="356.2" width="10.5" height="47.8" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>NuminaMath vs KodCode · network: 0.3</title></rect>
+<text x="551.7" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Numina</text>
+<text x="551.7" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="589.3" y="396.0" width="10.5" height="8.0" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs Polaris easy · weights: 0.1</title></rect>
+<rect x="604.6" y="331.9" width="10.5" height="72.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs Polaris easy · eNTK at θ₀: 0.5</title></rect>
+<rect x="619.9" y="310.3" width="10.5" height="93.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs Polaris easy · network: 0.7</title></rect>
+<text x="609.8" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="609.8" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<rect x="647.4" y="395.4" width="10.5" height="8.6" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs Polaris hard · weights: 0.1</title></rect>
+<rect x="662.7" y="332.8" width="10.5" height="71.2" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs Polaris hard · eNTK at θ₀: 0.5</title></rect>
+<rect x="678.0" y="342.6" width="10.5" height="61.4" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs Polaris hard · network: 0.4</title></rect>
+<text x="668.0" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="668.0" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="705.6" y="398.1" width="10.5" height="5.9" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>DAPO vs KodCode · weights: 0.0</title></rect>
+<rect x="720.9" y="367.5" width="10.5" height="36.5" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>DAPO vs KodCode · eNTK at θ₀: 0.3</title></rect>
+<rect x="736.2" y="368.0" width="10.5" height="36.0" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>DAPO vs KodCode · network: 0.3</title></rect>
+<text x="726.1" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">DAPO</text>
+<text x="726.1" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="763.7" y="394.8" width="10.5" height="9.2" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy vs Polaris hard · weights: 0.1</title></rect>
+<rect x="779.0" y="353.4" width="10.5" height="50.6" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy vs Polaris hard · eNTK at θ₀: 0.4</title></rect>
+<rect x="794.3" y="344.3" width="10.5" height="59.7" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy vs Polaris hard · network: 0.4</title></rect>
+<text x="784.3" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="784.3" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<rect x="821.9" y="398.3" width="10.5" height="5.7" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris easy vs KodCode · weights: 0.0</title></rect>
+<rect x="837.2" y="390.9" width="10.5" height="13.1" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris easy vs KodCode · eNTK at θ₀: 0.1</title></rect>
+<rect x="852.5" y="370.1" width="10.5" height="33.9" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris easy vs KodCode · network: 0.2</title></rect>
+<text x="842.4" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. easy</text>
+<text x="842.4" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text>
+<rect x="880.0" y="397.6" width="10.5" height="6.4" rx="2" fill="var(--c-ref)" fill-opacity="0.85" stroke="var(--c-ref)" stroke-width="1.5"><title>Polaris hard vs KodCode · weights: 0.0</title></rect>
+<rect x="895.3" y="332.1" width="10.5" height="71.9" rx="2" fill="none" fill-opacity="0" stroke="var(--c-linear)" stroke-width="1.5" stroke-dasharray="3 2"><title>Polaris hard vs KodCode · eNTK at θ₀: 0.5</title></rect>
+<rect x="910.6" y="357.9" width="10.5" height="46.1" rx="2" fill="var(--c-real)" fill-opacity="0.85" stroke="var(--c-real)" stroke-width="1.5"><title>Polaris hard vs KodCode · network: 0.3</title></rect>
+<text x="900.6" y="419.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">Pol. hard</text>
+<text x="900.6" y="431.0" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">KodCode</text></svg></div></div><figcaption class="fig-cap"><p lang="zh">灰 = 权重 cosine；橙色空心 = θ₀ 处 eNTK 度量下的 cosine（linear 模型读两个 update）；蓝色实心 = 网络的函数 cosine。函数都在固定文本上（10,656 个 token）。上：同一任务的两个 seed（DAPO linear 缺，seed 0 没学会）；下：两个任务的 real seed 0。</p><p lang="en">Grey = weight cosine; orange open = cosine in the metric of the eNTK at θ₀ (the linear model reading both updates); blue filled = the network's function cosine. Functions on the fixed text (10,656 tokens). Top: two seeds of one task (DAPO linear missing; its seed 0 did not learn). Bottom: two tasks, real, seed 0.</p></figcaption></figure>
+<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>C3 发现 update 在权重里几乎正交、在函数里却相近；这里说明 θ₀ 处的 eNTK 已经解释了这一点：输出敏感的方向只占参数空间的很小一部分（C4），两个几乎正交的权重向量投影到这部分上是相近的。这是“eNTK 有没有用”的另一半答案：它给出正确的几何（哪些方向重要、哪些 update 是同一个函数），C6 说明它给错的是距离。</p>
+<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>C3 found updates nearly orthogonal in weights yet alike in function; this shows the eNTK at θ₀ already accounts for it: the output-sensitive directions are a small part of parameter space (C4), and two nearly orthogonal weight vectors project onto that part alike. This is the other half of the answer to “is the eNTK useful”: it gives the right geometry (which directions matter, which updates are the same function), and C6 shows that what it gets wrong is the distance.</p>
+<p class="f-bound" lang="zh"><b class="f-k">边界</b>一段固定文本（数学和代码各 24 个解答）；eNTK 度量是 linear 模型的 log p，包含 θ₀ 的 softmax，不是裸的 J₀Δ logits。</p>
+<p class="f-bound" lang="en"><b class="f-k">Boundary</b>One fixed text (24 math and 24 code solutions); the eNTK metric is the linear model's log p, which includes θ₀'s softmax, not the raw J₀Δ logits.</p>
+</section>
+<section class="finding" id="c6" aria-labelledby="c6-h">
+<div class="fhead"><span class="fn">C6</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c6-h"><span lang="zh">linear 模型读 real 的 update：方向大体对（cosine 0.7–0.8），大小偏小；误差在 run 起飞时跳上去，之后不再增长</span><span lang="en">The linear model reading the real update: mostly the right direction (cosine 0.7–0.8), too small; the error jumps when the run takes off and then stops growing</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>同一个 real update，分别交给网络（θ₀ + Δ）和 linear 模型（Δ），比较两个函数向量。相对误差 = |f_lin − f_net| / |f_net|：0 表示 eNTK 完全预测对，1 表示和什么都不预测一样。沿两条路径看：沿 run 本身（θ_t，t = 5…500），以及沿最终 update 的直线（αΔ，α = 1/16…1）。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>Give one real update to the network (θ₀ + Δ) and to the linear model (Δ) and compare their function vectors. Relative error = |f_lin − f_net| / |f_net|: 0 means the eNTK predicts it exactly, 1 means no better than predicting no change. Two paths: along the run itself (θ_t, t = 5…500) and along the straight line to the final update (αΔ, α = 1/16…1).</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>沿 run：update 5 时相对误差 0.02–0.11。GSM8K 和 NuminaMath 在 update 20 已经到 0.57–0.67，之后 update 100–500 一直在 0.62–0.75；这两个 run 的准确率在 update 50 之前就起飞了。DAPO 慢慢上升（update 20、50、100 时 0.24、0.48、0.56），在 update 200 跳到 1.16，之后 0.83–0.95；DAPO run 的 MATH-500 正是在 update 150 到 250 之间从 34% 升到 49%。方向 cosine 保持在 0.71–0.81。沿直线：α = 1/16 时 0.09–0.12，1/8 时 0.16–0.24，大约和 α 成正比（一阶展开应有的样子），α ≥ ½ 后停在 0.6–0.8。大小：update 500 时 linear 模型给出的函数变化只有网络的 0.36–0.62 倍（Polaris hard 例外）。但在准确率上，linear 模型读 real 的 update 保留了 0.71–0.89 的提升。位置：误差平方的 0.61–0.92 集中在 1% 的 token 上，这些 token 在 θ₀ 下概率很低（中位数 0.04–0.10，全部 token 是 0.99），也就是参考解答走了模型自己不会走的方向的地方。在这些 token 上，网络把 log p 压低的幅度是 linear 模型的 1.6–2.9 倍，方向相同。linear run 自己的 update，两者读出来差不多（0.8–1.3 倍）。</p>
 <p class="f-data" lang="en"><b class="f-k">Data</b>Along the run the relative error is 0.02–0.11 at update 5. GSM8K and NuminaMath are already at 0.57–0.67 by update 20 and stay in 0.62–0.75 from update 100 to 500; both runs' accuracy takes off before update 50. DAPO rises slowly (0.24, 0.48, 0.56 at updates 20, 50, 100, still 0.58 at 150), jumps to 1.16 at update 200 and then stays at 0.83–0.95; the DAPO run's MATH-500 rises from 34% to 49% between updates 150 and 250. The direction cosine stays at 0.71–0.81. Along the straight line it is 0.09–0.12 at α = 1/16 and 0.16–0.24 at 1/8, roughly proportional to α as a first-order expansion should be, and levels off at 0.6–0.8 from α = ½. Size: at update 500 the linear model's function change is 0.36–0.62 of the network's (Polaris hard is the exception). In accuracy, the linear model reading the real update keeps 0.71–0.89 of its gain. Where: the top 1% of tokens hold 0.61–0.92 of the squared error, and they are tokens θ₀ finds unlikely (median probability 0.04–0.10, against 0.99 over all tokens), the places where the reference solution turns a way the model would not. There the network lowers log p 1.6–2.9× as much as the linear model, in the same direction. For the linear runs' own updates the two read these tokens alike (0.8–1.3×).</p>
-<figure class="fig" id="fig-ladder_t" aria-labelledby="figt-ladder_t"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5a</span><span lang="en">Figure C5a</span></div><h4 class="fig-title" id="figt-ladder_t"><span lang="zh">eNTK 预测的误差，沿 run</span><span lang="en">Error of the eNTK prediction along the run</span></h4><p class="fig-q"><span lang="zh">linear 模型对 real update 的预测，误差随训练怎么变？</span><span lang="en">How does the error of the linear model's prediction of the real update change during training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1054 212" role="img" aria-label="lazy ladder step rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<figure class="fig" id="fig-ladder_t" aria-labelledby="figt-ladder_t"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C6a</span><span lang="en">Figure C6a</span></div><h4 class="fig-title" id="figt-ladder_t"><span lang="zh">eNTK 预测的误差，沿 run</span><span lang="en">Error of the eNTK prediction along the run</span></h4><p class="fig-q"><span lang="zh">linear 模型对 real update 的预测，误差随训练怎么变？</span><span lang="en">How does the error of the linear model's prediction of the real update change during training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1054 212" role="img" aria-label="lazy ladder step rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <line x1="80.8" x2="102.8" y1="12" y2="12" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3"/><rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="58" x2="190" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -3140,7 +3479,7 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="984.5" y="95.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 2.30103 → 0.55</title></rect>
 <rect x="994.6" y="98.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 2.47712 → 0.52</title></rect>
 <rect x="1001.8" y="88.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 2.60206 → 0.61</title></rect>
-<rect x="1007.3" y="91.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 2.69897 → 0.58</title></rect></svg></div></div><figcaption class="fig-cap"><p lang="zh">x：update t（对数轴）；y：|f_lin(θ_t − θ₀) − f_net(θ_t)| / |f_net(θ_t)|，固定文本上。蓝色实线 = real run 的 θ_t；橙色虚线 = linear run 的方向，由网络和 linear 模型分别读。seed 0；细线是 seed 1（只有 update 500；DAPO linear 例外，它的 seed 0 没学会）。</p><p lang="en">x: update t (log scale); y: |f_lin(θ_t − θ₀) − f_net(θ_t)| / |f_net(θ_t)| on the fixed text. Blue solid = the real run's θ_t; orange dashed = the linear run's direction, read by the network and by the linear model. Seed 0 (thin line: seed 1, which exists at update 500 only, except DAPO linear, whose seed 0 did not learn).</p></figcaption></figure><figure class="fig" id="fig-ladder_a" aria-labelledby="figt-ladder_a"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5b</span><span lang="en">Figure C5b</span></div><h4 class="fig-title" id="figt-ladder_a"><span lang="zh">eNTK 预测的误差，沿最终 update 的直线</span><span lang="en">Error of the eNTK prediction along the straight line to the final update</span></h4><p class="fig-q"><span lang="zh">误差是不是一阶展开该有的样子（和 α 成正比）？</span><span lang="en">Does the error grow like a first-order expansion's (in proportion to α)?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1054 212" role="img" aria-label="lazy ladder alpha rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<rect x="1007.3" y="91.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 2.69897 → 0.58</title></rect></svg></div></div><figcaption class="fig-cap"><p lang="zh">x：update t（对数轴）；y：|f_lin(θ_t − θ₀) − f_net(θ_t)| / |f_net(θ_t)|，固定文本上。蓝色实线 = real run 的 θ_t；橙色虚线 = linear run 的方向，由网络和 linear 模型分别读。seed 0；细线是 seed 1（只有 update 500；DAPO linear 例外，它的 seed 0 没学会）。</p><p lang="en">x: update t (log scale); y: |f_lin(θ_t − θ₀) − f_net(θ_t)| / |f_net(θ_t)| on the fixed text. Blue solid = the real run's θ_t; orange dashed = the linear run's direction, read by the network and by the linear model. Seed 0 (thin line: seed 1, which exists at update 500 only, except DAPO linear, whose seed 0 did not learn).</p></figcaption></figure><figure class="fig" id="fig-ladder_a" aria-labelledby="figt-ladder_a"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C6b</span><span lang="en">Figure C6b</span></div><h4 class="fig-title" id="figt-ladder_a"><span lang="zh">eNTK 预测的误差，沿最终 update 的直线</span><span lang="en">Error of the eNTK prediction along the straight line to the final update</span></h4><p class="fig-q"><span lang="zh">误差是不是一阶展开该有的样子（和 α 成正比）？</span><span lang="en">Does the error grow like a first-order expansion's (in proportion to α)?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1054 212" role="img" aria-label="lazy ladder alpha rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <line x1="80.8" x2="102.8" y1="12" y2="12" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3"/><rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="58" x2="190" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -3554,7 +3893,7 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <rect x="950.0" y="127.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: -2 → 0.28</title></rect>
 <rect x="980.6" y="125.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: -1 → 0.30</title></rect>
 <rect x="998.6" y="106.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: -0.42 → 0.46</title></rect>
-<rect x="1011.3" y="91.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 0 → 0.58</title></rect></svg></div></div><figcaption class="fig-cap"><p lang="zh">x：α（对数轴），点 θ₀ + αΔ；y：同上。</p><p lang="en">x: α (log scale), the point θ₀ + αΔ; y as above.</p></figcaption></figure><figure class="fig" id="fig-forks" aria-labelledby="figt-forks"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C5c</span><span lang="en">Figure C5c</span></div><h4 class="fig-title" id="figt-forks"><span lang="zh">误差在哪里：按 θ₀ 下的概率分组的 token</span><span lang="en">Where the error sits: tokens grouped by their probability under θ₀</span></h4><p class="fig-q"><span lang="zh">eNTK 少算的是哪些 token？</span><span lang="en">Which tokens does the eNTK underestimate?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 872 254" role="img" aria-label="forks" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">网络读 real 的 update</text>
+<rect x="1011.3" y="91.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"><title>linear s0: 0 → 0.58</title></rect></svg></div></div><figcaption class="fig-cap"><p lang="zh">x：α（对数轴），点 θ₀ + αΔ；y：同上。</p><p lang="en">x: α (log scale), the point θ₀ + αΔ; y as above.</p></figcaption></figure><figure class="fig" id="fig-forks" aria-labelledby="figt-forks"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C6c</span><span lang="en">Figure C6c</span></div><h4 class="fig-title" id="figt-forks"><span lang="zh">误差在哪里：按 θ₀ 下的概率分组的 token</span><span lang="en">Where the error sits: tokens grouped by their probability under θ₀</span></h4><p class="fig-q"><span lang="zh">eNTK 少算的是哪些 token？</span><span lang="en">Which tokens does the eNTK underestimate?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 872 254" role="img" aria-label="forks" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">网络读 real 的 update</text>
 <rect x="181.4" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="202.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear 模型（eNTK）读同一个 update</text>
 <line x1="62" x2="292" y1="164.5" y2="164.5" stroke="var(--grid)" stroke-width="1"/>
 <text x="56" y="168.0" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">-2</text>
@@ -3690,14 +4029,525 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>固定文本上 teacher forcing 的 log p；单个 seed（seed 1 只有 update 500）。相对误差大不等于行为差得多：准确率由少数关键 token 决定（11-09 的 fork），这里的误差是全文本的平均。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>Teacher-forced log p on the fixed text; one seed (seed 1 at update 500 only). A large relative error does not mean a large difference in behaviour: accuracy depends on a few decisive tokens (the forks of 11-09), while this error averages over all text.</p>
 </section>
-<section class="finding" id="c6" aria-labelledby="c6-h">
-<div class="fhead"><span class="fn">C6</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
-<h3 id="c6-h"><span lang="zh">把 update 放大或缩小：real 在 α ≈ ¾ 最好，linear 到 α = 1.5 还在上升</span><span lang="en">Scaling an update: real is best near α = ¾, linear keeps rising to α = 1.5</span></h3>
+<section class="finding" id="c7" aria-labelledby="c7-h">
+<div class="fhead"><span class="fn">C7</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c7-h"><span lang="zh">eNTK 在 run 起飞时过时：起飞后重新展开，它对剩下的 run 的预测大小对了；起飞前重新展开和 θ₀ 一样</span><span lang="en">The eNTK goes stale at takeoff: re-taken after takeoff, it predicts the rest of the run at the right size; re-taken before, it does no better than at θ₀</span></h3>
+<p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>把 real run 在第 T 步的权重 θ<sub>T</sub> 当作新的展开点，取那里的 eNTK（一阶展开），让它预测从 θ<sub>T</sub> 到 θ₅₀₀ 的函数变化，和网络真实的变化比较。剩下的路越短越容易预测，所以对照是 θ₀ 处的 eNTK 预测一个同样大小的函数变化（C6 里沿 run 或沿 αΔ 的点中 |f_net| 最接近的那个）。</p>
+<p class="f-what" lang="en"><b class="f-k">What it means</b>Take the real run's weights at update T, θ<sub>T</sub>, as a new expansion point, take the eNTK there (the first-order expansion), and let it predict the function change from θ<sub>T</sub> to θ₅₀₀; compare with the network's actual change. A shorter remaining path is easier to predict, so the reference is the θ₀ eNTK predicting a function change of the same size (the point of C6, along the run or along αΔ, whose |f_net| is closest).</p>
+<p class="f-data" lang="zh"><b class="f-k">数据</b>起飞后（GSM8K、KodCode、NuminaMath、Polaris easy 在 T = 100 和 250，DAPO 在 T = 250）：相对误差 0.31–0.58，θ₀ 处同样大小的是 0.53–0.90；大小之比 0.85–1.02，θ₀ 处是 0.44–0.83；方向 cosine 0.83–0.96，θ₀ 处 0.49–0.85。起飞前（T = 10、20）重新展开和 θ₀ 一样：相对误差 0.63–0.88，大小之比 0.39–0.58。检查：在 θ₁₀₀ 展开、位移为 0 时，linear 模型和网络在 θ₁₀₀ 的 log p 最大相差 < 10⁻⁴ nats（fp32 的误差）。</p>
+<p class="f-data" lang="en"><b class="f-k">Data</b>After takeoff (T = 100 and 250 for GSM8K, KodCode, NuminaMath and Polaris easy; T = 250 for DAPO) the relative error is 0.31–0.58, against 0.53–0.90 for a change of the same size at θ₀; the size ratio is 0.85–1.02, against 0.44–0.83 at θ₀; the direction cosine 0.83–0.96, against 0.49–0.85. Re-taken before takeoff (T = 10, 20) it does as θ₀ does: relative error 0.63–0.88, size ratio 0.39–0.58. Check: expanded at θ₁₀₀ with zero displacement, the linear model matches the network's log p at θ₁₀₀ to < 10⁻⁴ nats (fp32 error).</p>
+<figure class="fig" id="fig-relin" aria-labelledby="figt-relin"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C7</span><span lang="en">Figure C7</span></div><h4 class="fig-title" id="figt-relin"><span lang="zh">在 run 上重新展开的 eNTK</span><span lang="en">The eNTK re-taken along the run</span></h4><p class="fig-q"><span lang="zh">eNTK 是一直不准，还是在某个时刻过时了？</span><span lang="en">Is the eNTK wrong throughout, or does it go stale at some point?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 802 212" role="img" aria-label="relin rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">在第 T 步重新展开的 eNTK，预测 T → 500</text>
+<line x1="246.4" x2="268.4" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3"/><rect x="253.39999999999998" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="274.4" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">θ₀ 处的 eNTK，同样大小的变化</text>
+<line x1="58" x2="208" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="58" x2="208" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="58" x2="208" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="58" x2="208" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="58" x2="208" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="70.3" x2="70.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="70.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="149.4" x2="149.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="149.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="197.1" x2="197.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="197.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="58" x2="208" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="58" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text x="133.0" y="196" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">在第 T 步重新展开</text>
+<text transform="translate(20,105.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">相对误差</text>
+<path d="M70.3,101.6 L94.1,102.1 L125.6,103.2 L149.4,127.7 L180.9,123.0 L197.1,142.1" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="70.3" cy="101.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.63</title></circle>
+<circle cx="94.1" cy="102.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.63</title></circle>
+<circle cx="125.6" cy="103.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.62</title></circle>
+<circle cx="149.4" cy="127.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.37</title></circle>
+<circle cx="180.9" cy="123.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.42</title></circle>
+<circle cx="197.1" cy="142.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.22</title></circle>
+<path d="M70.3,96.5 L94.1,96.8 L125.6,97.0 L149.4,102.7 L180.9,103.6 L197.1,120.4" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="66.2" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.69</title></rect>
+<rect x="90.0" y="92.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.68</title></rect>
+<rect x="121.5" y="93.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.68</title></rect>
+<rect x="145.4" y="98.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.62</title></rect>
+<rect x="176.8" y="99.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.61</title></rect>
+<rect x="193.0" y="116.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.44</title></rect>
+<line x1="244" x2="394" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="244" x2="394" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="244" x2="394" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="244" x2="394" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="244" x2="394" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="256.3" x2="256.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="256.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="335.4" x2="335.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="335.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="383.1" x2="383.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO</text>
+<path d="M256.3,80.4 L280.1,77.7 L311.6,51.8 L335.4,78.7 L366.9,106.5 L383.1,66.5" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="256.3" cy="80.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.85</title></circle>
+<circle cx="280.1" cy="77.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.88</title></circle>
+<circle cx="311.6" cy="51.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 1.14</title></circle>
+<circle cx="335.4" cy="78.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.87</title></circle>
+<circle cx="366.9" cy="106.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.58</title></circle>
+<circle cx="383.1" cy="66.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.99</title></circle>
+<path d="M256.3,82.0 L280.1,82.0 L311.6,82.0 L335.4,82.0 L366.9,75.5 L383.1,49.6" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="252.2" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.83</title></rect>
+<rect x="276.0" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.83</title></rect>
+<rect x="307.5" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.83</title></rect>
+<rect x="331.4" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.83</title></rect>
+<rect x="362.8" y="71.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.90</title></rect>
+<rect x="379.0" y="45.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 1.16</title></rect>
+<line x1="430" x2="580" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="430" x2="580" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="430" x2="580" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="430" x2="580" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="430" x2="580" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="442.3" x2="442.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="442.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="521.4" x2="521.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="521.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="569.1" x2="569.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="569.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="430" x2="580" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="430" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<path d="M442.3,94.0 L466.1,91.9 L497.6,93.0 L521.4,133.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="442.3" cy="94.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.71</title></circle>
+<circle cx="466.1" cy="91.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.73</title></circle>
+<circle cx="497.6" cy="93.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.72</title></circle>
+<circle cx="521.4" cy="133.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.31</title></circle>
+<path d="M442.3,93.1 L466.1,93.1 L497.6,94.1 L521.4,97.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="438.2" y="89.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.72</title></rect>
+<rect x="462.0" y="89.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.72</title></rect>
+<rect x="493.5" y="90.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.71</title></rect>
+<rect x="517.4" y="92.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.68</title></rect>
+<line x1="616" x2="766" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="766" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="616" x2="766" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="616" x2="766" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="616" x2="766" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="628.3" x2="628.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="628.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="707.4" x2="707.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="707.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="755.1" x2="755.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<path d="M628.3,88.3 L652.1,81.8 L683.6,94.7 L707.4,116.2 L738.9,127.7 L755.1,103.7" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="628.3" cy="88.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.77</title></circle>
+<circle cx="652.1" cy="81.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.84</title></circle>
+<circle cx="683.6" cy="94.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.70</title></circle>
+<circle cx="707.4" cy="116.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.49</title></circle>
+<circle cx="738.9" cy="127.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.37</title></circle>
+<circle cx="755.1" cy="103.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.61</title></circle>
+<path d="M628.3,87.3 L652.1,87.3 L683.6,94.1 L707.4,91.9 L738.9,111.4 L755.1,105.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="624.2" y="83.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.78</title></rect>
+<rect x="648.0" y="83.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.78</title></rect>
+<rect x="679.5" y="90.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.71</title></rect>
+<rect x="703.4" y="87.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.73</title></rect>
+<rect x="734.8" y="107.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.53</title></rect>
+<rect x="751.0" y="101.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.60</title></rect></svg><svg class="n-svg" viewBox="0 0 802 212" role="img" aria-label="relin ratio" preserveAspectRatio="xMidYMid meet">
+<line x1="58" x2="208" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="58" x2="208" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="58" x2="208" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="58" x2="208" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="70.3" x2="70.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="70.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="149.4" x2="149.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="149.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="197.1" x2="197.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="197.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="58" x2="208" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="58" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text x="133.0" y="196" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">在第 T 步重新展开</text>
+<text transform="translate(20,105.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">大小：linear / 网络</text>
+<line x1="58" x2="208" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M70.3,118.5 L94.1,123.3 L125.6,116.4 L149.4,85.9 L180.9,83.4 L197.1,83.9" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="70.3" cy="118.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.58</title></circle>
+<circle cx="94.1" cy="123.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.52</title></circle>
+<circle cx="125.6" cy="116.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.60</title></circle>
+<circle cx="149.4" cy="85.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.99</title></circle>
+<circle cx="180.9" cy="83.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 1.02</title></circle>
+<circle cx="197.1" cy="83.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.02</title></circle>
+<path d="M70.3,123.6 L94.1,119.7 L125.6,122.6 L149.4,107.2 L180.9,102.5 L197.1,89.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="66.2" y="119.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.51</title></rect>
+<rect x="90.0" y="115.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.56</title></rect>
+<rect x="121.5" y="118.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.53</title></rect>
+<rect x="145.4" y="103.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.72</title></rect>
+<rect x="176.8" y="98.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.78</title></rect>
+<rect x="193.0" y="85.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.95</title></rect>
+<line x1="244" x2="394" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="244" x2="394" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="244" x2="394" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="244" x2="394" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="256.3" x2="256.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="256.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="335.4" x2="335.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="335.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="383.1" x2="383.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO</text>
+<line x1="244" x2="394" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M256.3,119.6 L280.1,119.4 L311.6,95.2 L335.4,109.2 L366.9,85.3 L383.1,52.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="256.3" cy="119.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.56</title></circle>
+<circle cx="280.1" cy="119.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.57</title></circle>
+<circle cx="311.6" cy="95.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.88</title></circle>
+<circle cx="335.4" cy="109.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.70</title></circle>
+<circle cx="366.9" cy="85.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 1.00</title></circle>
+<circle cx="383.1" cy="52.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.42</title></circle>
+<path d="M256.3,120.7 L280.1,120.7 L311.6,120.7 L335.4,120.7 L366.9,108.1 L383.1,63.6" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="252.2" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.55</title></rect>
+<rect x="276.0" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.55</title></rect>
+<rect x="307.5" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.55</title></rect>
+<rect x="331.4" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.55</title></rect>
+<rect x="362.8" y="104.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.71</title></rect>
+<rect x="379.0" y="59.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 1.28</title></rect>
+<line x1="430" x2="580" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="430" x2="580" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="430" x2="580" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="430" x2="580" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="442.3" x2="442.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="442.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="521.4" x2="521.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="521.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="569.1" x2="569.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="569.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="430" x2="580" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="430" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<line x1="430" x2="580" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M442.3,123.6 L466.1,122.4 L497.6,88.4 L521.4,97.3" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="442.3" cy="123.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.51</title></circle>
+<circle cx="466.1" cy="122.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
+<circle cx="497.6" cy="88.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.96</title></circle>
+<circle cx="521.4" cy="97.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.85</title></circle>
+<path d="M442.3,123.3 L466.1,123.3 L497.6,114.7 L521.4,112.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="438.2" y="119.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.52</title></rect>
+<rect x="462.0" y="119.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.52</title></rect>
+<rect x="493.5" y="110.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.63</title></rect>
+<rect x="517.4" y="107.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.66</title></rect>
+<line x1="616" x2="766" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="766" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="616" x2="766" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="616" x2="766" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="628.3" x2="628.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="628.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="707.4" x2="707.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="707.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="755.1" x2="755.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<line x1="616" x2="766" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M628.3,133.3 L652.1,120.8 L683.6,109.9 L707.4,84.6 L738.9,93.2 L755.1,70.6" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="628.3" cy="133.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.39</title></circle>
+<circle cx="652.1" cy="120.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.55</title></circle>
+<circle cx="683.6" cy="109.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.69</title></circle>
+<circle cx="707.4" cy="84.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 1.01</title></circle>
+<circle cx="738.9" cy="93.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.90</title></circle>
+<circle cx="755.1" cy="70.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.19</title></circle>
+<path d="M628.3,135.5 L652.1,135.5 L683.6,128.2 L707.4,129.5 L738.9,98.6 L755.1,116.5" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="624.2" y="131.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.36</title></rect>
+<rect x="648.0" y="131.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.36</title></rect>
+<rect x="679.5" y="124.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.45</title></rect>
+<rect x="703.4" y="125.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.44</title></rect>
+<rect x="734.8" y="94.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.83</title></rect>
+<rect x="751.0" y="112.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.60</title></rect></svg></div><div lang="en"><svg class="n-svg" viewBox="0 0 802 212" role="img" aria-label="relin rel" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK re-taken at update T, predicting T → 500</text>
+<line x1="376.0" x2="398.0" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3"/><rect x="383.0" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="404.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">eNTK at θ₀, a change of the same size</text>
+<line x1="58" x2="208" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="58" x2="208" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="58" x2="208" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="58" x2="208" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="58" x2="208" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="70.3" x2="70.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="70.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="149.4" x2="149.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="149.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="197.1" x2="197.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="197.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="58" x2="208" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="58" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text x="133.0" y="196" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">re-taken at update T</text>
+<text transform="translate(20,105.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">relative error</text>
+<path d="M70.3,101.6 L94.1,102.1 L125.6,103.2 L149.4,127.7 L180.9,123.0 L197.1,142.1" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="70.3" cy="101.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.63</title></circle>
+<circle cx="94.1" cy="102.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.63</title></circle>
+<circle cx="125.6" cy="103.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.62</title></circle>
+<circle cx="149.4" cy="127.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.37</title></circle>
+<circle cx="180.9" cy="123.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.42</title></circle>
+<circle cx="197.1" cy="142.1" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.22</title></circle>
+<path d="M70.3,96.5 L94.1,96.8 L125.6,97.0 L149.4,102.7 L180.9,103.6 L197.1,120.4" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="66.2" y="92.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.69</title></rect>
+<rect x="90.0" y="92.8" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.68</title></rect>
+<rect x="121.5" y="93.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.68</title></rect>
+<rect x="145.4" y="98.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.62</title></rect>
+<rect x="176.8" y="99.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.61</title></rect>
+<rect x="193.0" y="116.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.44</title></rect>
+<line x1="244" x2="394" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="244" x2="394" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="244" x2="394" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="244" x2="394" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="244" x2="394" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="256.3" x2="256.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="256.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="335.4" x2="335.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="335.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="383.1" x2="383.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO</text>
+<path d="M256.3,80.4 L280.1,77.7 L311.6,51.8 L335.4,78.7 L366.9,106.5 L383.1,66.5" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="256.3" cy="80.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.85</title></circle>
+<circle cx="280.1" cy="77.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.88</title></circle>
+<circle cx="311.6" cy="51.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 1.14</title></circle>
+<circle cx="335.4" cy="78.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.87</title></circle>
+<circle cx="366.9" cy="106.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.58</title></circle>
+<circle cx="383.1" cy="66.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.99</title></circle>
+<path d="M256.3,82.0 L280.1,82.0 L311.6,82.0 L335.4,82.0 L366.9,75.5 L383.1,49.6" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="252.2" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.83</title></rect>
+<rect x="276.0" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.83</title></rect>
+<rect x="307.5" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.83</title></rect>
+<rect x="331.4" y="77.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.83</title></rect>
+<rect x="362.8" y="71.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.90</title></rect>
+<rect x="379.0" y="45.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 1.16</title></rect>
+<line x1="430" x2="580" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="430" x2="580" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="430" x2="580" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="430" x2="580" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="430" x2="580" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="442.3" x2="442.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="442.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="521.4" x2="521.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="521.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="569.1" x2="569.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="569.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="430" x2="580" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="430" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<path d="M442.3,94.0 L466.1,91.9 L497.6,93.0 L521.4,133.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="442.3" cy="94.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.71</title></circle>
+<circle cx="466.1" cy="91.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.73</title></circle>
+<circle cx="497.6" cy="93.0" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.72</title></circle>
+<circle cx="521.4" cy="133.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.31</title></circle>
+<path d="M442.3,93.1 L466.1,93.1 L497.6,94.1 L521.4,97.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="438.2" y="89.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.72</title></rect>
+<rect x="462.0" y="89.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.72</title></rect>
+<rect x="493.5" y="90.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.71</title></rect>
+<rect x="517.4" y="92.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.68</title></rect>
+<line x1="616" x2="766" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="766" y1="139.4" y2="139.4" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="142.9" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.25</text>
+<line x1="616" x2="766" y1="114.8" y2="114.8" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="118.3" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="616" x2="766" y1="90.2" y2="90.2" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="93.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.75</text>
+<line x1="616" x2="766" y1="65.7" y2="65.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="69.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="628.3" x2="628.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="628.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="707.4" x2="707.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="707.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="755.1" x2="755.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<path d="M628.3,88.3 L652.1,81.8 L683.6,94.7 L707.4,116.2 L738.9,127.7 L755.1,103.7" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="628.3" cy="88.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.77</title></circle>
+<circle cx="652.1" cy="81.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.84</title></circle>
+<circle cx="683.6" cy="94.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.70</title></circle>
+<circle cx="707.4" cy="116.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.49</title></circle>
+<circle cx="738.9" cy="127.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.37</title></circle>
+<circle cx="755.1" cy="103.7" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 0.61</title></circle>
+<path d="M628.3,87.3 L652.1,87.3 L683.6,94.1 L707.4,91.9 L738.9,111.4 L755.1,105.2" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="624.2" y="83.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.78</title></rect>
+<rect x="648.0" y="83.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.78</title></rect>
+<rect x="679.5" y="90.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.71</title></rect>
+<rect x="703.4" y="87.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.73</title></rect>
+<rect x="734.8" y="107.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.53</title></rect>
+<rect x="751.0" y="101.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.60</title></rect></svg><svg class="n-svg" viewBox="0 0 802 212" role="img" aria-label="relin ratio" preserveAspectRatio="xMidYMid meet">
+<line x1="58" x2="208" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="58" x2="208" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="58" x2="208" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="58" x2="208" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="52" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="70.3" x2="70.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="70.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="149.4" x2="149.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="149.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="197.1" x2="197.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="197.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="58" x2="208" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="58" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">GSM8K</text>
+<text x="133.0" y="196" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">re-taken at update T</text>
+<text transform="translate(20,105.0) rotate(-90)" text-anchor="middle" font-size="11" fill="var(--ink-3)" font-family="var(--sans)">size, linear / network</text>
+<line x1="58" x2="208" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M70.3,118.5 L94.1,123.3 L125.6,116.4 L149.4,85.9 L180.9,83.4 L197.1,83.9" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="70.3" cy="118.5" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.58</title></circle>
+<circle cx="94.1" cy="123.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.52</title></circle>
+<circle cx="125.6" cy="116.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.60</title></circle>
+<circle cx="149.4" cy="85.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.99</title></circle>
+<circle cx="180.9" cy="83.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 1.02</title></circle>
+<circle cx="197.1" cy="83.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.02</title></circle>
+<path d="M70.3,123.6 L94.1,119.7 L125.6,122.6 L149.4,107.2 L180.9,102.5 L197.1,89.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="66.2" y="119.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.51</title></rect>
+<rect x="90.0" y="115.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.56</title></rect>
+<rect x="121.5" y="118.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.53</title></rect>
+<rect x="145.4" y="103.1" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.72</title></rect>
+<rect x="176.8" y="98.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.78</title></rect>
+<rect x="193.0" y="85.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.95</title></rect>
+<line x1="244" x2="394" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="244" x2="394" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="244" x2="394" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="244" x2="394" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="238" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="256.3" x2="256.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="256.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="335.4" x2="335.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="335.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="383.1" x2="383.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="383.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="244" x2="394" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="244" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">DAPO</text>
+<line x1="244" x2="394" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M256.3,119.6 L280.1,119.4 L311.6,95.2 L335.4,109.2 L366.9,85.3 L383.1,52.4" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="256.3" cy="119.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.56</title></circle>
+<circle cx="280.1" cy="119.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.57</title></circle>
+<circle cx="311.6" cy="95.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.88</title></circle>
+<circle cx="335.4" cy="109.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.70</title></circle>
+<circle cx="366.9" cy="85.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 1.00</title></circle>
+<circle cx="383.1" cy="52.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.42</title></circle>
+<path d="M256.3,120.7 L280.1,120.7 L311.6,120.7 L335.4,120.7 L366.9,108.1 L383.1,63.6" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="252.2" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.55</title></rect>
+<rect x="276.0" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.55</title></rect>
+<rect x="307.5" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.55</title></rect>
+<rect x="331.4" y="116.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.55</title></rect>
+<rect x="362.8" y="104.0" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.71</title></rect>
+<rect x="379.0" y="59.6" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 1.28</title></rect>
+<line x1="430" x2="580" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="430" x2="580" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="430" x2="580" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="430" x2="580" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="424" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="442.3" x2="442.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="442.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="521.4" x2="521.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="521.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="569.1" x2="569.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="569.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="430" x2="580" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="430" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">Polaris easy</text>
+<line x1="430" x2="580" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M442.3,123.6 L466.1,122.4 L497.6,88.4 L521.4,97.3" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="442.3" cy="123.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.51</title></circle>
+<circle cx="466.1" cy="122.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.53</title></circle>
+<circle cx="497.6" cy="88.4" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.96</title></circle>
+<circle cx="521.4" cy="97.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 0.85</title></circle>
+<path d="M442.3,123.3 L466.1,123.3 L497.6,114.7 L521.4,112.0" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="438.2" y="119.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.52</title></rect>
+<rect x="462.0" y="119.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.52</title></rect>
+<rect x="493.5" y="110.7" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.63</title></rect>
+<rect x="517.4" y="107.9" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.66</title></rect>
+<line x1="616" x2="766" y1="164.0" y2="164.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="167.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
+<line x1="616" x2="766" y1="124.7" y2="124.7" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="128.2" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0.5</text>
+<line x1="616" x2="766" y1="85.3" y2="85.3" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="88.8" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1</text>
+<line x1="616" x2="766" y1="46.0" y2="46.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="610" y="49.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">1.5</text>
+<line x1="628.3" x2="628.3" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="628.3" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">10</text>
+<line x1="707.4" x2="707.4" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="707.4" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">100</text>
+<line x1="755.1" x2="755.1" y1="164" y2="168" stroke="var(--axis)"/>
+<text x="755.1" y="180" text-anchor="middle" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">400</text>
+<line x1="616" x2="766" y1="164" y2="164" stroke="var(--axis)"/>
+<text x="616" y="38" font-size="12" font-weight="600" fill="var(--ink-2)" font-family="var(--sans)">KodCode</text>
+<line x1="616" x2="766" y1="85.3" y2="85.3" stroke="var(--ink-4)" stroke-dasharray="2 3"/>
+<path d="M628.3,133.3 L652.1,120.8 L683.6,109.9 L707.4,84.6 L738.9,93.2 L755.1,70.6" fill="none" stroke="var(--c-real)" stroke-width="2" stroke-linejoin="round"/>
+<circle cx="628.3" cy="133.3" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1 → 0.39</title></circle>
+<circle cx="652.1" cy="120.8" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.30103 → 0.55</title></circle>
+<circle cx="683.6" cy="109.9" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 1.69897 → 0.69</title></circle>
+<circle cx="707.4" cy="84.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2 → 1.01</title></circle>
+<circle cx="738.9" cy="93.2" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.39794 → 0.90</title></circle>
+<circle cx="755.1" cy="70.6" r="4.5" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"><title>θ_T: 2.60206 → 1.19</title></circle>
+<path d="M628.3,135.5 L652.1,135.5 L683.6,128.2 L707.4,129.5 L738.9,98.6 L755.1,116.5" fill="none" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="4 3" stroke-linejoin="round"/>
+<rect x="624.2" y="131.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1 → 0.36</title></rect>
+<rect x="648.0" y="131.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.30103 → 0.36</title></rect>
+<rect x="679.5" y="124.2" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 1.69897 → 0.45</title></rect>
+<rect x="703.4" y="125.4" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2 → 0.44</title></rect>
+<rect x="734.8" y="94.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.39794 → 0.83</title></rect>
+<rect x="751.0" y="112.5" width="8.1" height="8.1" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"><title>θ₀: 2.60206 → 0.60</title></rect></svg></div></div><figcaption class="fig-cap"><p lang="zh">x：展开点 T（对数轴）。上：相对误差 |f_lin − f_net| / |f_net|；下：大小之比 |f_lin| / |f_net|，虚线 1 = 大小对。蓝 = 在 θ<sub>T</sub> 展开预测 θ<sub>T</sub> → θ₅₀₀；灰 = θ₀ 处的 eNTK 预测一个同样大小的变化。real，seed 0。</p><p lang="en">x: expansion point T (log scale). Top: relative error |f_lin − f_net| / |f_net|; bottom: size ratio |f_lin| / |f_net|, the dotted line at 1 = the right size. Blue = expanded at θ<sub>T</sub>, predicting θ<sub>T</sub> → θ₅₀₀; grey = the θ₀ eNTK predicting a change of the same size. Real, seed 0.</p></figcaption></figure>
+<p class="f-thought" lang="zh"><b class="f-k">和之前的结果</b>这把 C6 的“误差在起飞时跳上去、之后不再增长”解释成：eNTK 在起飞这一段变了（不 lazy），之后基本固定，run 在新的展开点附近近似 lazy。11-11 的 F3 说 real 的 update 不是 lazy 的；这里更准确的说法是：不 lazy 的部分集中在起飞这一段。对方法的含义：linear 训练如果在起飞之后的 checkpoint 上展开，应该能跟上 real 的大小，这是可以直接测的下一步。</p>
+<p class="f-thought" lang="en"><b class="f-k">Earlier results</b>This turns C6's “the error jumps at takeoff and then stops growing” into: the eNTK changes during takeoff (not lazy) and then stays mostly fixed, so the run is roughly lazy around the new expansion point. F3 of 11-11 said the real update is not lazy; the sharper statement is that the non-lazy part is concentrated in the takeoff. For methods: linear training expanded at a checkpoint after takeoff should keep up with real in size, which is a direct next test.</p>
+<p class="f-bound" lang="zh"><b class="f-k">边界</b>一个 seed，固定文本上的 log p；只算了函数，没有算准确率。T = 400 时剩下的变化很小（|f| 只有总量的 15–40%），比例不稳定。“起飞”取自 C6 里误差跳上去的位置。</p>
+<p class="f-bound" lang="en"><b class="f-k">Boundary</b>One seed, log p on the fixed text; functions only, no accuracy. At T = 400 the remaining change is small (15–40% of the total |f|), so its ratios are unstable. “Takeoff” is where the error jumps in C6.</p>
+</section>
+<section class="finding" id="c8" aria-labelledby="c8-h">
+<div class="fhead"><span class="fn">C8</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c8-h"><span lang="zh">把 update 放大或缩小：real 在 α ≈ ¾ 最好，linear 到 α = 1.5 还在上升</span><span lang="en">Scaling an update: real is best near α = ¾, linear keeps rising to α = 1.5</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>θ₀ + αΔ（real）或 αΔ（linear），α 从 ¼ 到 2，在任务自己的题集上。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>θ₀ + αΔ (real) or αΔ (linear), α from ¼ to 2, on the task's own set.</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>GSM8K real：α = ¾ 时 71.9%，α = 1 时 70.5%，α = 2 时 65.8%；linear：α = 1 时 67.6%，1.5 时 70.7%。NuminaMath real 也在 α = ¾ 最高（43.8% 对 α = 1 的 41.8%）。函数上，网络沿 αΔ 的变化是超线性的：α = ¼ 时的函数变化只有 ¼ × 完整变化的 0.35–0.60；linear 模型是 0.81–0.92（Polaris hard 除外）。</p>
 <p class="f-data" lang="en"><b class="f-k">Data</b>GSM8K real: 71.9% at α = ¾, 70.5% at α = 1, 65.8% at α = 2; linear: 67.6% at α = 1 and 70.7% at 1.5. NuminaMath real also peaks at α = ¾ (43.8% against 41.8% at α = 1). In function space the network grows superlinearly along αΔ: at α = ¼ its change is only 0.35–0.60 of ¼ of the full change; the linear model's is 0.81–0.92 (Polaris hard excepted).</p>
-<figure class="fig" id="fig-alpha" aria-labelledby="figt-alpha"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C6</span><span lang="en">Figure C6</span></div><h4 class="fig-title" id="figt-alpha"><span lang="zh">沿 update 的方向缩放</span><span lang="en">Scaling along the update</span></h4><p class="fig-q"><span lang="zh">update 的大小合适吗？</span><span lang="en">Is the update the right size?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1312 210" role="img" aria-label="alpha scan" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<figure class="fig" id="fig-alpha" aria-labelledby="figt-alpha"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C8</span><span lang="en">Figure C8</span></div><h4 class="fig-title" id="figt-alpha"><span lang="zh">沿 update 的方向缩放</span><span lang="en">Scaling along the update</span></h4><p class="fig-q"><span lang="zh">update 的大小合适吗？</span><span lang="en">Is the update the right size?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1312 210" role="img" aria-label="alpha scan" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <line x1="80.8" x2="102.8" y1="12" y2="12" stroke="var(--c-linear)" stroke-width="2" stroke-dasharray="5 3"/><rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="52" x2="202" y1="166.0" y2="166.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="46" y="169.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">40</text>
@@ -3927,14 +4777,14 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>相邻 α 的差异大多在 1–2 个 s.e. 内；结论靠的是两个任务、两个 arm 的一致形状。linear 的 run 在 update 500 还在上升（11-18 的 N2），α > 1 的提升可能只是说明它还没训练完。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>Most differences between neighbouring α are within 1–2 s.e.; the claim rests on the same shape across two tasks and two arms. The linear runs were still improving at update 500 (N2 of 11-18), so the gain at α > 1 may only mean they are not done.</p>
 </section>
-<section class="finding" id="c7" aria-labelledby="c7-h">
-<div class="fhead"><span class="fn">C7</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
-<h3 id="c7-h"><span lang="zh">两个 seed 的 update 取平均，不比任何一个差</span><span lang="en">Averaging two seeds' updates is as good as either seed, or better</span></h3>
+<section class="finding" id="c9" aria-labelledby="c9-h">
+<div class="fhead"><span class="fn">C9</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c9-h"><span lang="zh">两个 seed 的 update 取平均，不比任何一个差</span><span lang="en">Averaging two seeds' updates is as good as either seed, or better</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>½(Δ₀ + Δ₁) 是两个 seed 的 update 的平均（model soup）；Δ₀ + Δ₁ 是相加。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>½(Δ₀ + Δ₁) is the average of two seeds' updates (a model soup); Δ₀ + Δ₁ is their sum.</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>NuminaMath real：平均 45.7%，两个 seed 41.8% 和 42.0%（配对差 +3.9 ± 2.0、+3.7 ± 2.4）；GSM8K linear：71.5% 对 67.6% 和 67.6%。两个 seed 在权重里只共享很小一部分（C3），平均把不共享的部分减半。</p>
 <p class="f-data" lang="en"><b class="f-k">Data</b>NuminaMath real: the average scores 45.7% against 41.8% and 42.0% for the two seeds (paired differences +3.9 ± 2.0 and +3.7 ± 2.4); GSM8K linear: 71.5% against 67.6% and 67.6%. Two seeds share only a small part of their weight update (C3); averaging halves the part they do not share.</p>
-<figure class="fig" id="fig-soup" aria-labelledby="figt-soup"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C7</span><span lang="en">Figure C7</span></div><h4 class="fig-title" id="figt-soup"><span lang="zh">两个 seed 的平均和相加</span><span lang="en">Average and sum of two seeds' updates</span></h4><p class="fig-q"><span lang="zh">model soup 对 RL update 有用吗？</span><span lang="en">Do model soups work for RL updates?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 982 254" role="img" aria-label="soups" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
+<figure class="fig" id="fig-soup" aria-labelledby="figt-soup"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C9</span><span lang="en">Figure C9</span></div><h4 class="fig-title" id="figt-soup"><span lang="zh">两个 seed 的平均和相加</span><span lang="en">Average and sum of two seeds' updates</span></h4><p class="fig-q"><span lang="zh">model soup 对 RL update 有用吗？</span><span lang="en">Do model soups work for RL updates?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 982 254" role="img" aria-label="soups" preserveAspectRatio="xMidYMid meet"><rect x="15" y="8" width="8" height="8" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">real</text>
 <rect x="87.8" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-linear)" stroke-width="1.6"/><text x="108.8" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">linear</text>
 <line x1="62" x2="252" y1="190.0" y2="190.0" stroke="var(--grid)" stroke-width="1"/>
 <text x="56" y="193.5" text-anchor="end" font-size="10.5" fill="var(--ink-3)" font-family="var(--sans)">0</text>
@@ -4128,14 +4978,14 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>两个任务以外的差值都在 2 s.e. 以内；只有两个 seed，所以是“平均不比单个差”，不是“平均更好”。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>Outside these two cases the differences are within 2 s.e.; with only two seeds the claim is “the average is no worse”, not “the average is better”.</p>
 </section>
-<section class="finding" id="c8" aria-labelledby="c8-h">
-<div class="fhead"><span class="fn">C8</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
-<h3 id="c8-h"><span lang="zh">在混合数据上训练 t 步，约等于两个任务各自训练 t/2 步再把 update 相加；函数上和两个 seed 一样接近</span><span lang="en">Training on mixed data for t updates is about each task trained for t/2 updates, then added; in function space the two are as alike as two seeds</span></h3>
+<section class="finding" id="c10" aria-labelledby="c10-h">
+<div class="fhead"><span class="fn">C10</span><span class="chip s-moderate"><span lang="zh">证据中等</span><span lang="en">moderate</span></span></div>
+<h3 id="c10-h"><span lang="zh">在混合数据上训练 t 步，约等于两个任务各自训练 t/2 步再把 update 相加；函数上和两个 seed 一样接近</span><span lang="en">Training on mixed data for t updates is about each task trained for t/2 updates, then added; in function space the two are as alike as two seeds</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>混合 run：同一个 Base 0.6B 在 DAPO 和 KodCode 交替的数据上做 real RL（H100，seed 0）。和它比的是 DAPO run 和 KodCode run 的 update 之和，取同一步数 t 和 t/2（混合 run 每步只有一半数据来自每个任务）。每条“和”的线是两个 seed 的平均。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>Mixed run: the same Base 0.6B trained with real RL on interleaved DAPO and KodCode data (H100, seed 0). It is compared with the sum of the DAPO run's and the KodCode run's updates at the same update t and at t/2 (each update of the mixed run takes half its data from each task). Each sum line is the mean over the two seeds.</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>函数上，update 500 时混合 run 和同步数的和的 cosine 是 0.87（seed 0）和 0.83（seed 1），两个 seed 的和之间是 0.81；从 update 250 起一直如此。大小上，混合 run 的函数变化是同步数的和的 0.52–0.73，是 t/2 的和的 0.72–0.95：混合 run 每个任务走了大约一半的路。准确率上，KodCode 在 t ≤ 200 时混合 run 比同步数的和低 2.4–8.0 点，和 t/2 的和一样；t ≥ 250 时差在 −1.1 到 +1.4 点之间，追上了。MATH-500 上它在两个 seed 的和之间。</p>
 <p class="f-data" lang="en"><b class="f-k">Data</b>In function space, at update 500 the cosine between the mixed run and the same-t sum is 0.87 (seed 0) and 0.83 (seed 1), against 0.81 between the two seeds' sums; this holds from update 250 on. In size, the mixed run's function change is 0.52–0.73 of the same-t sum and 0.72–0.95 of the t/2 sum: the mixed run goes about half as far on each task. In accuracy, on KodCode the mixed run is 2.4–8.0 points below the same-t sum up to t = 200, level with the t/2 sum; from t = 250 the gap is between −1.1 and +1.4 points, so it has caught up. On MATH-500 it lies between the two seeds' sums.</p>
-<figure class="fig" id="fig-joint" aria-labelledby="figt-joint"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C8</span><span lang="en">Figure C8</span></div><h4 class="fig-title" id="figt-joint"><span lang="zh">混合训练 vs 分开训练再相加</span><span lang="en">Joint training vs separate training then adding</span></h4><p class="fig-q"><span lang="zh">并行地分开训练再相加，能代替联合训练吗？</span><span lang="en">Can separate training then adding replace joint training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1128 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">混合数据 run</text>
+<figure class="fig" id="fig-joint" aria-labelledby="figt-joint"><div class="fig-head"><div class="fig-titles"><div class="fig-num"><span lang="zh">图 C10</span><span lang="en">Figure C10</span></div><h4 class="fig-title" id="figt-joint"><span lang="zh">混合训练 vs 分开训练再相加</span><span lang="en">Joint training vs separate training then adding</span></h4><p class="fig-q"><span lang="zh">并行地分开训练再相加，能代替联合训练吗？</span><span lang="en">Can separate training then adding replace joint training?</span></p></div></div><div class="fig-chart n24-chart"><div lang="zh"><svg class="n-svg" viewBox="0 0 1128 250" role="img" aria-label="joint" preserveAspectRatio="xMidYMid meet"><line x1="8" x2="30" y1="12" y2="12" stroke="var(--c-real)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="var(--c-real)" stroke="var(--c-real)" stroke-width="1.6"/><text x="36" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">混合数据 run</text>
 <line x1="109.6" x2="131.6" y1="12" y2="12" stroke="var(--c-third)" stroke-width="2" stroke-dasharray="5 3"/><rect x="116.6" y="8" width="8" height="8" fill="var(--surface)" stroke="var(--c-third)" stroke-width="1.6"/><text x="137.6" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">同一步数 t 的 Δ_DAPO + Δ_KodCode</text>
 <line x1="348.0" x2="370.0" y1="12" y2="12" stroke="var(--c-ref)" stroke-width="2" stroke-dasharray="2 3"/><path d="M359.0,7 L364.0,12 L359.0,17 L354.0,12 Z" fill="var(--surface)" stroke="var(--c-ref)" stroke-width="1.6"/><text x="376.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">t/2 时的同样的和</text>
 <line x1="464.0" x2="486.0" y1="12" y2="12" stroke="var(--ink-3)" stroke-width="2"/><path d="M471.0,8 L479.0,16 M471.0,16 L479.0,8" stroke="var(--ink-3)" stroke-width="2"/><text x="492.0" y="16" font-size="11" fill="var(--ink-2)" font-family="var(--sans)">两个 seed 的和之间的 cosine</text>
@@ -4493,9 +5343,9 @@ The DAPO and Polaris quick sets are near the floor (3–15%) and carry little si
 <p class="f-bound" lang="zh"><b class="f-k">边界</b>只有一个混合 run（seed 0），real 到 update 400。linear 的混合 run 慢（到 update 300 左右），它和和之间的 cosine 只有 0.2–0.6，而 linear 两个 seed 的和之间也只有 0.2–0.6，所以 linear 这边还说不了什么。</p>
 <p class="f-bound" lang="en"><b class="f-k">Boundary</b>One mixed run (seed 0); real to update 400. The linear mixed run is slower (about update 300); its cosine with the sums is only 0.2–0.6, but so is the cosine between the linear seeds' sums, so the linear side says little yet.</p>
 </section>
-<section class="finding" id="c9" aria-labelledby="c9-h">
-<div class="fhead"><span class="fn">C9</span><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></div>
-<h3 id="c9-h"><span lang="zh">失败的预测：函数空间（eNTK 度量下）的相似度并不比权重 cosine 更能预测迁移</span><span lang="en">Failed prediction: similarity in function space (the eNTK's metric) does not predict transfer better than weight cosine</span></h3>
+<section class="finding" id="c11" aria-labelledby="c11-h">
+<div class="fhead"><span class="fn">C11</span><span class="chip s-weak"><span lang="zh">证据弱</span><span lang="en">weak</span></span></div>
+<h3 id="c11-h"><span lang="zh">失败的预测：函数空间（eNTK 度量下）的相似度并不比权重 cosine 更能预测迁移</span><span lang="en">Failed prediction: similarity in function space (the eNTK's metric) does not predict transfer better than weight cosine</span></h3>
 <p class="f-what" lang="zh"><b class="f-k">这是什么意思</b>迁移 = 任务 A 的 update 在任务 B 题集上的提升 / B 自己的 update 的提升（都相对 θ₀）。预测量是 A 和 B 的 update 之间的函数 cosine 或权重 cosine。B 取 GSM8K、NuminaMath、KodCode。</p>
 <p class="f-what" lang="en"><b class="f-k">What it means</b>Transfer = the gain of task A's update on task B's set divided by the gain of B's own update (both over θ₀). The predictors are the function cosine or the weight cosine between A's and B's updates. B is GSM8K, NuminaMath or KodCode.</p>
 <p class="f-data" lang="zh"><b class="f-k">数据</b>42 个 (A, B, arm, seed) 上，两者的 Spearman 相关都是 0.72：都只是在区分“数学 vs 代码”。只看数学到数学（22 个），函数 cosine 是 −0.03，权重 cosine 是 0.44。</p>
